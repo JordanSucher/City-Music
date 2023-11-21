@@ -8,6 +8,10 @@ const Track = db.define('track',{
     spotify_uri: {
         type: Sequelize.STRING,
         unique: true
+    },
+    bandId: {
+        type: Sequelize.INTEGER,
+        allowNull: true
     }
 })
 

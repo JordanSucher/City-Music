@@ -6,17 +6,15 @@ const getOmrToken = require('./getOmrToken');
 let startDate = new Date();
 startDate = startDate.toLocaleDateString();
 startDate = startDate.replaceAll("/","-")
-// console.log(startDate);
 
 let endDate = new Date();
 endDate.setDate (endDate.getDate() + 7);
 endDate = endDate.toLocaleDateString();
 endDate = endDate.replaceAll("/","-")
-// console.log(endDate);
 
 
 
-const url = `https://www.ohmyrockness.com/api/shows.json?daterange%5Bfrom%5D=${startDate}&daterange%5Buntil%5D=${endDate}&index=true&per=300&regioned=1`
+const url = `https://www.ohmyrockness.com/api/shows.json?daterange%5Bfrom%5D=${startDate}&daterange%5Buntil%5D=${endDate}&index=true&per=500&regioned=1`
 
 let shows;
 
@@ -33,12 +31,13 @@ const pullShows = async function() {
     });
     
     const shows = response.data;
-    t = await db.transaction();
-
 
     for (const show of shows) {
+      let t 
       try {
+        t = await db.transaction();
         //create a show row
+        console.log("adding show: " + show.id)
         let [newShow, created] = await Show.upsert(
          {
             omr_id: show.id,
@@ -51,7 +50,7 @@ const pullShows = async function() {
             transaction: t
           }
         );
-          console.log(newShow.dataValues);
+          console.log("successfully added show: " + show.id);
 
         //grab the bands
         const bands = show.cached_bands;
@@ -69,13 +68,15 @@ const pullShows = async function() {
           //set association
           if (newShow && newBand) await newShow.addBand(newBand, { transaction: t });
         }
+
+        await t.commit();
+        console.log('changes committed for show: ' + show.id)
+
       } catch (err) {
-        console.error('Error occurred:', err);
+        console.error('Error occurred:', err, err.message);
+        if (t) await t.rollback();
       }
     }
-
-    await t.commit();
-    console.log('changes committed')
 
   } catch (err) {
     if (t) await t.rollback();

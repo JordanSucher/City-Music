@@ -1,4 +1,3 @@
-const axios = require('axios');
 const pullShows = require('./pullShows');
 const { getTokenFromRefresh, updateTracksDb, clearPlaylist, updatePlaylist } = require('./spotify');
 const { db } = require('./server/db');
@@ -35,8 +34,11 @@ exports.handler = async (event, context) => {
         await updatePlaylist(token);
         console.log('Done updating playlist');
 
+        // Return success
+        return true;
+
     } catch(e){
-        console.log(e);
+        console.error(e.stack, e.message);
         throw e; // Ensure the error is thrown so AWS Lambda is aware of the failure
     }
 };

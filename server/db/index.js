@@ -3,11 +3,11 @@ const Show = require('./Shows.js');
 const Band = require('./Bands');
 const Track = require('./Tracks');
 
-Band.belongsToMany(Show, { through: 'band_shows' });
-Show.belongsToMany(Band, { through: 'band_shows' });
+Band.belongsToMany(Show, { through: 'band_shows', constraints: false });
+Show.belongsToMany(Band, { through: 'band_shows', constraints: false });
 
-Track.belongsTo(Band);
-Band.hasMany(Track, { as: 'tracks' });
+Track.belongsTo(Band, {constraints: false});
+Band.hasMany(Track, { as: 'tracks', foreignKey: 'bandId', constraints: false });
 
 module.exports = {
     db,

@@ -11,9 +11,9 @@
     "bottleneck": "^2.19.5",
     "chrome-aws-lambda": "^10.1.0",
     "dotenv": "^16.3.1",
-    "pg": "^8.11.1",
+    "mysql2": "^3.6.3",
     "puppeteer": "^20.8.2",
     "qs": "^6.11.2",
     "sequelize": "^6.32.1"
-    }
+  }
 }
