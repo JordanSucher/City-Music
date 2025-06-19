@@ -1,0 +1,46 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model Show {
+  id         Int        @id @default(autoincrement())
+  omr_id     Int?       @unique
+  ticket_url String?
+  venue_name String?
+  latlong    String?
+  date       DateTime?
+  bandShows  BandShow[]
+}
+
+model Track {
+  id          Int     @id @default(autoincrement())
+  name        String?
+  spotify_uri String? @unique
+  preview_url String?
+  image_url   String?
+  bandId      Int?
+  band        Band?   @relation(fields: [bandId], references: [id])
+}
+
+model Band {
+  id         Int        @id @default(autoincrement())
+  name       String     @unique
+  spotify_id String?
+  tracks     Track[]
+  bandShows  BandShow[]
+}
+
+model BandShow {
+  bandId  Int
+  showId  Int
+  band    Band?   @relation(fields: [bandId], references: [id])
+  show    Show?   @relation(fields: [showId], references: [id])
+
+  @@id([bandId, showId])
+}

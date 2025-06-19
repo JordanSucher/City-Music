@@ -1,8 +1,9 @@
 const axios = require('axios');
 const qs = require('qs');
-const {Track, Band, Show} = require('./server/db');
 const Bottleneck = require("bottleneck");
-const Sequelize = require('sequelize');
+
+const prisma = require('./prisma/prismaClient.js');
+
 
 const limiter = new Bottleneck({
     minTime: 1000, // Ensure at least 1000ms between each job
@@ -35,11 +36,14 @@ const getToken = async () => {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         })
-        return data.access_token
+        console.log(data)
+        return data
     } catch (e) {
         console.log(e)
     }
 }
+
+// getToken()
 
 const getTokenFromRefresh = async () => {
     let clientId = process.env.SPOTIFY_CLIENT
@@ -73,43 +77,46 @@ const getTokenFromRefresh = async () => {
 //we want response.artists.items[0].id
 
 const getId = async (bandName, token, band) => {
+    let artistName = bandName.replaceAll(" ", "+");
+    let searchURL = `https://api.spotify.com/v1/search?q=${artistName}&type=artist`;
 
-    let artistName = bandName.replaceAll(" ", "+")
-    // console.log(artistName)
-    let searchURL = `https://api.spotify.com/v1/search?q=${artistName}&type=artist`
-
-    // let token = await getToken();
     try {
-        const {data} = await axios.get(searchURL, {
+        const { data } = await axios.get(searchURL, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
-        })
-        
-        if(data.artists.items.length > 0) {
-            
-            try{
-                // console.log (`upserting ${bandName}`)
-                // console.log(data.artists.items[0].id)
-                await Band.upsert ({
-                    id: band.id,
-                    name: bandName,
-                    spotify_id: data.artists.items[0].id
-                })
-                return data.artists.items[0].id
-            } catch (e) {
-                console.log(e)
-            }
+        });
 
+        console.log("data", data)
+
+        if (data.artists.items.length > 0) {
+            try {
+                console.log(`Upserting ${bandName}`);
+                console.log(data.artists.items[0].id);
+                const updatedBand = await prisma.band.upsert({
+                    where: {
+                        id: band.id // Assuming 'id' is the unique identifier for 'Band'
+                    },
+                    update: {
+                        spotify_id: data.artists.items[0].id
+                    },
+                    create: {
+                        name: bandName,
+                        spotify_id: data.artists.items[0].id
+                    }
+                });
+                return data.artists.items[0].id;
+            } catch (e) {
+                console.error(`Error updating band: ${bandName}`, e);
+            }
         } else {
-            // console.log(
-            //     `No artists found for ${bandName}`
-            // )
+            console.log(`No artists found for ${bandName}`);
         }
     } catch (e) {
-        console.log(e)
+        console.error(`Error fetching Spotify data for ${bandName}`, e);
     }
-    }
+};
+
 
 //get top tracks
 
@@ -137,40 +144,53 @@ const getTopTracks = async (bandName, token, band) => {
 // insert tracks into db
 
 const insertTracks = async (tracks, numToAdd, band) => {
-    // console.log(tracks)
     for (let i = 0; i < numToAdd; i++) {
         if (tracks[i]) {
-            try{
-                // console.log(`upserting ${tracks[i].name}`)
-                const newTrack = await Track.upsert(
-                {
-                    name: tracks[i].name,
-                    spotify_uri: tracks[i].uri,
-                    bandId: band.id
-                }
-            )} catch (e) {
-                console.log(e)
+            try {
+                console.log(`upserting ${tracks[i].name}`);
+                const newTrack = await prisma.track.upsert({
+                    where: {
+                        // This assumes spotify_uri is a unique identifier for tracks
+                        spotify_uri: tracks[i].uri,
+                    },
+                    update: {
+                        // Assuming no fields are updated if the track already exists
+                        name: tracks[i].name,
+                        bandId: band.id,
+                    },
+                    create: {
+                        name: tracks[i].name,
+                        spotify_uri: tracks[i].uri,
+                        preview_url: tracks[i].preview_url,
+                        image_url: tracks[i].album.images[0].url,
+                        bandId: band.id,
+                    },
+                });
+            } catch (e) {
+                console.error(e);
             }
-
-            }
+        }
     }
-}
+};
 
 // now i have a bunch of helper functions, and I need to iterate through the artists and add tracks. Ideally I build this such that it only runs for artists without tracks in the db.
 
 //get artists who don't have tracks
 
 const getArtistsWithoutTracks = async () => {
-    const bandsWithoutTracks = await Band.findAll({
-        include: [{
-            model: Track,
-            as: 'tracks',
-            required: false // this makes the join a LEFT JOIN instead of an INNER JOIN
-        }],
+    const bandsWithoutTracks = await prisma.band.findMany({
+        // Include tracks to show what tracks are associated, even though they are empty
+        include: {
+          tracks: true,
+        },
         where: {
-            '$tracks.id$': null // tracks that don't exist will have null IDs
+          // Condition to check that there are no tracks associated
+          tracks: {
+            none: {}
+          }
         }
-    });
+      });
+    
 
     return bandsWithoutTracks
 
@@ -208,6 +228,7 @@ const clearPlaylist = async (token) => {
         //get snapshot ID, current length
         let tracks
         let snapshotId
+        console.log("token", token)
         try {
             let {data} = await axios.get(`https://api.spotify.com/v1/playlists/${playlistId}`, {
                 headers: {
@@ -217,21 +238,24 @@ const clearPlaylist = async (token) => {
             snapshotId = data.snapshot_id
             length = data.tracks.total;
             tracks = data.tracks
+            console.log("data", data.tracks)
 
         } catch (e) {
             console.log(e)
         }
 
         //construct a delete request
+        
+        if (!tracks) break
+
         const body = {
-            "tracks": tracks.items.map(track => {
+            "tracks": tracks.items?.slice(0, 100).map(track => {
                 return {
                     "uri": track.track.uri
                 }
             }),
             "snapshot_id": snapshotId
         }
-
 
         //delete items
         try{
@@ -254,72 +278,121 @@ const clearPlaylist = async (token) => {
 //update playlist
 
 const updatePlaylist = async (token) => {
-    
-    //get bands playing in the next 7 days;
     const oneWeekFromNow = new Date();
     oneWeekFromNow.setDate(oneWeekFromNow.getDate() + 7);
 
-    const upcomingShows = await Show.findAll({
-        where: {
-            date: {
-            [Sequelize.Op.lte]: oneWeekFromNow,
-            [Sequelize.Op.gte]: new Date()
-            }
-        },
-        include: [
-            {
-            model: Band
-            }
-        ]
-        });
+    let upcomingShows
+    try {
+        upcomingShows = await prisma.show.findMany({
+           where: {
+               date: {
+                   gte: new Date(),
+                   lte: oneWeekFromNow,
+               }
+           },
+           include: {
+               bandShows: {
+                   include: {
+                       band: true
+                   }
+               }
+           }
+       });
+    } catch (e) {
+        console.log("failed to get upcoming shows", e)
+    }
 
-    // Extract the bands from the shows
-    const bands = upcomingShows.flatMap(show => show.bands);
-
-    // Then, for each band, find all the tracks
+    const bands = upcomingShows.flatMap(show => show.bandShows.map(bs => bs.band));
     const allTracks = [];
+
     for (let band of bands) {
-    const tracks = await Track.findAll({
-        where: {
-        bandId: band.id
+        if (band) {
+            let tracks 
+            try{
+                tracks = await prisma.track.findMany({
+                where: { bandId: band.id }
+            })
+            } catch (e) {
+                console.log(`failed to get tracks for band ${band.name}`, e)
+            }
+            allTracks.push(...tracks);
         }
-    });
-    allTracks.push(...tracks);
     }
 
-    // add the tracks to the playlist
+    const playlistId = process.env.PLAYLIST_ID;
     while (allTracks.length > 0) {
-        //get the first 50 tracks
-        const first50 = allTracks.splice(0, 50);
-
-        //construct an api call
-        const playlistId = process.env.PLAYLIST_ID
+        const first25 = allTracks.splice(0, 25);
         const body = {
-            "uris": first50.map(track => {
-                return track.get('spotify_uri')
-            })
-        }
-        
-        try{
-            await axios.post(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, body, {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    "Content-Type": "application/json"
-                },
-                
-            })
-        } catch (e) {
-            console.log(e)
-        }
+            "uris": first25.map(track => track.spotify_uri).filter(uri => uri != null)
+        };
 
+        console.log("Spotify request body:", body);
+        console.log("Spotify playlist ID:", playlistId);
+        const response = await retrySpotifyRequest(token, playlistId, body);
+        console.log("Spotify response:", response);
     }
 
-    return true
+    return true;
+};
 
+async function retrySpotifyRequest(token, playlistId, body, retries = 5) {
+    const url = `https://api.spotify.com/v1/playlists/${playlistId}/tracks`;
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json"
+        }
+    };
+
+    try {
+        return await axios.post(url, body, config);
+    } catch (error) {
+        if (retries > 0 && error.response && error.response.status === 429) {
+            const retryAfter = error.response.headers['retry-after'] ? parseInt(error.response.headers['retry-after']) : 30;
+            console.log(`Rate limited. Retrying after ${retryAfter} seconds.`);
+            await new Promise(resolve => setTimeout(resolve, retryAfter * 1000));
+            return retrySpotifyRequest(token, playlistId, body, retries - 1);
+        } else {
+            console.error("Failed to update Spotify playlist:", error);
+            throw error;
+        }
+    }
 }
 
+// const addPreviewUrls = async () => {
 
+//     const tracks = await prisma.track.findMany()
 
+//     const token = await getTokenFromRefresh()
+
+//     let promises = tracks.map(async track => {
+//         let id = track.spotify_uri.split("track:")[1]
+//         try {
+//             let {data} = await axios.get(`https://api.spotify.com/v1/tracks/${id}`, {
+//                 headers: {
+//                     Authorization: `Bearer ${token}`
+//                 }
+//             })
+//             let preview_url = data.preview_url
+    
+//             await prisma.track.update({
+//                 where: {
+//                     id: track.id
+//                 },
+//                 data: {
+//                     preview_url: preview_url
+//                 }
+//             })
+//         } catch (e) {
+//             console.log(e, e.message)
+//         }
+//     })
+
+//     await Promise.all(promises)   
+
+// }
+
+// addPreviewUrls()
 
 
 module.exports = {

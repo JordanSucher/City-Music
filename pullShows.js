@@ -1,6 +1,6 @@
 let axios = require('axios');
-let sequelize = require('sequelize');
-const {db, Show, Band} = require('./server/db');
+const prisma = require('./prisma/prismaClient.js');
+
 const getOmrToken = require('./getOmrToken');
 
 let startDate = new Date();
@@ -16,73 +16,98 @@ endDate = endDate.replaceAll("/","-")
 
 const url = `https://www.ohmyrockness.com/api/shows.json?daterange%5Bfrom%5D=${startDate}&daterange%5Buntil%5D=${endDate}&index=true&per=500&regioned=1`
 
+const proxyConfig = {
+  host: 'brd.superproxy.io',
+  port: 22225,
+  auth: {
+    username: 'brd-customer-hl_ca6e7f6e-zone-residential_proxy1',  // optional if your proxy requires authentication
+    password: 'zgj0b5o9vcn5'   // optional if your proxy requires authentication
+  }
+};
+
 let shows;
 
 const pullShows = async function() {
-  let t
   try {
-
+    console.log("getting omr token");
     const omrToken = await getOmrToken();
-   
+    console.log("got token, pulling shows from omr");
     const response = await axios.get(url, {
-      headers: {
-        Authorization: omrToken
-      }
+      headers: { Authorization: omrToken}
     });
-    
     const shows = response.data;
 
     for (const show of shows) {
-      let t 
       try {
-        t = await db.transaction();
-        //create a show row
-        console.log("adding show: " + show.id)
-        let [newShow, created] = await Show.upsert(
-         {
-            omr_id: show.id,
-            ticket_url: show.tickets_url,
-            venue_name: show.venue.name,
-            date: show.starts_at
-          },
-          {
-            returning: true, // Return the created/updated row
-            transaction: t
-          }
-        );
-          console.log("successfully added show: " + show.id);
+        const result = await prisma.$transaction(async (prisma) => {
+          console.log("adding show: " + show.id);
 
-        //grab the bands
-        const bands = show.cached_bands;
-    
-        //find or create and set an association
-        for (const band of bands) {
-          const [newBand, created] = await Band.upsert({
-              name: band.name
+          const newShow = await prisma.show.upsert({
+            where: { omr_id: show.id },
+            update: {
+              ticket_url: show.tickets_url,
+              venue_name: show.venue.name,
+              latlong: `[${show.venue.latitude},${show.venue.longitude}]`,
+              date: new Date(show.starts_at),
             },
-            {
-              returning: true, // Return the created/updated row
-              transaction: t
-            }
-          );
-          //set association
-          if (newShow && newBand) await newShow.addBand(newBand, { transaction: t });
-        }
+            create: {
+              omr_id: show.id,
+              ticket_url: show.tickets_url,
+              venue_name: show.venue.name,
+              latlong: `[${show.venue.latitude},${show.venue.longitude}]`,
+              date: new Date(show.starts_at),
+            },
+          });
 
-        await t.commit();
-        console.log('changes committed for show: ' + show.id)
+          console.log("successfully added show: " + show.id);
+          console.log("show obj: " + newShow.id, newShow.omr_id);
 
+          const bands = show.cached_bands;
+
+          for (const band of bands) {
+            const newBand = await prisma.band.upsert({
+              where: { name: band.name },
+              update: {},
+              create: { name: band.name },
+            });
+
+            console.log("band added: " + newBand.id, newBand.name);
+
+            // Add relationship in the join table BandShow
+            await prisma.bandShow.upsert({
+              where: {
+                bandId_showId: {
+                  bandId: newBand.id,
+                  showId: newShow.id,
+                },
+              },
+              update: {},
+              create: {
+                bandId: newBand.id,
+                showId: newShow.id,
+              },
+            });
+          }
+        });
+
+        console.log('Transaction committed for show:', show.id);
       } catch (err) {
-        console.error('Error occurred:', err, err.message);
-        if (t) await t.rollback();
+        console.error('Transaction failed for show:', show.id, 'Error:', err.message);
+        continue 
+        // Rethrow or handle as needed
       }
     }
 
   } catch (err) {
-    if (t) await t.rollback();
-    console.error('Error occurred:', err);
+    console.error("Error:", err, err.response ? err.response.data : err.message);
   }
-}
+};
 
 module.exports = pullShows
 
+
+// let getShows = ()=>{
+//   pullShows()
+// }
+
+// getShows()

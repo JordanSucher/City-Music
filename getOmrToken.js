@@ -1,15 +1,13 @@
-const puppeteer = require('puppeteer');
-
+const puppeteer = require("puppeteer");
 let auth
+
 
 const getOmrToken = async () => {
 
-    let browserlessToken = process.env.BROWSERLESS_TOKEN
-
   try {
-    const browser =   await puppeteer.connect(
-      { browserWSEndpoint: `wss://chrome.browserless.io?token=${browserlessToken}` }
-    );
+
+    const browser = await puppeteer.launch();
+
 
     const page = await browser.newPage();
     
@@ -20,20 +18,20 @@ const getOmrToken = async () => {
         auth = request.headers()['authorization'] 
       }
     });
-  
-    await page.goto('https://ohmyrockness.com/');
+    
+    await page.goto('https://www.ohmyrockness.com/shows?all=true');
     
     await browser.close();
-
+    console.log(auth) 
     return auth
   } catch (e) {
-    console.log(e)
+    console.log(e, e.message)
   }
   }
 
 // const getToken = async () => {
-//   let token = await getOmrToken()
-//   console.log(token) 
+//   let token = await getOmrToken()  
+//  console.log(token)
 // }
 
 // getToken()
