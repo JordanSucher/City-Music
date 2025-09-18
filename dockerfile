@@ -1,11 +1,12 @@
 FROM node:18-slim
 
-# Install Chrome dependencies and other necessary packages
+# Install Chrome dependencies, xvfb and other necessary packages
 RUN apt-get update && apt-get install -y \
     wget \
     gnupg \
     ca-certificates \
     procps \
+    xvfb \
     libxss1 \
     fonts-liberation \
     libappindicator3-1 \
@@ -44,6 +45,9 @@ RUN npm install
 # Copy application code
 COPY . .
 
+# Make start script executable
+RUN chmod +x /app/start.sh
+
 # Generate Prisma client
 RUN npx prisma generate
 
@@ -63,5 +67,5 @@ ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/google-chrome-stable
 # Expose port (optional, adjust as needed)
 EXPOSE 3000
 
-# Default command - run manual.js
-CMD ["node", "manual.js"]
+# Default command - run startup script
+CMD ["/app/start.sh"]
