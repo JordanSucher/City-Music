@@ -9,7 +9,7 @@ const getOmrToken = async () => {
     console.log('Launching advanced browser with Cloudflare bypass...');
 
     const { browser, page } = await connect({
-      headless: false,
+      headless: true,
       args: [
         '--no-sandbox',
         '--disable-setuid-sandbox',
