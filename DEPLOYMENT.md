@@ -36,12 +36,12 @@
 
 5. **Build the Docker image**
    ```bash
-   docker-compose build
+   docker compose build
    ```
 
 6. **Test the setup**
    ```bash
-   docker-compose run --rm shit-patrol
+   docker compose run --rm shit-patrol
    ```
 
 7. **Set up daily cron job**
@@ -53,7 +53,7 @@
 
 **Run once manually:**
 ```bash
-docker-compose run --rm shit-patrol
+docker compose run --rm shit-patrol
 ```
 
 **View logs:**
@@ -64,7 +64,7 @@ tail -f logs/cron.log
 **Update code:**
 ```bash
 git pull  # or upload new files
-docker-compose build
+docker compose build
 ```
 
 **View cron jobs:**
