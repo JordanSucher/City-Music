@@ -10,7 +10,7 @@ CURRENT_DIR=$(pwd)
 echo "Current directory: $CURRENT_DIR"
 
 # Create the cron job entry
-CRON_JOB="0 2 * * * cd $CURRENT_DIR && docker-compose run --rm shit-patrol >> $CURRENT_DIR/logs/cron.log 2>&1"
+CRON_JOB="0 2 * * * cd $CURRENT_DIR && docker compose run --rm shit-patrol >> $CURRENT_DIR/logs/cron.log 2>&1"
 
 # Create logs directory if it doesn't exist
 mkdir -p logs
@@ -26,4 +26,4 @@ echo "To view current cron jobs: crontab -l"
 echo "To remove this cron job later: crontab -e"
 echo ""
 echo "First test run (optional):"
-echo "docker-compose run --rm shit-patrol"
+echo "docker compose run --rm shit-patrol"

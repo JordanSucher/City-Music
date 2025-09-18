@@ -4,20 +4,20 @@ const prisma = require('./prisma/prismaClient.js');
 
 const main = async () => {
     try {
-        // // Pull upcoming shows from OMR and insert into DB
-        // console.log(`Pulling shows`);
-        // await pullShows();
-        // console.log('Done pulling shows');
+        // Pull upcoming shows from OMR and insert into DB
+        console.log(`Pulling shows`);
+        await pullShows();
+        console.log('Done pulling shows');
 
         // Refresh Spotify token
         console.log('Refreshing Spotify token');
         const token = await getTokenFromRefresh();
         console.log('Done refreshing Spotify token');
 
-        // // Get artists' top tracks + insert into DB
-        // console.log(`Updating tracks db`);
-        // await updateTracksDb(token);
-        // console.log('Done updating tracks db');
+        // Get artists' top tracks + insert into DB
+        console.log(`Updating tracks db`);
+        await updateTracksDb(token);
+        console.log('Done updating tracks db');
 
         // Clear playlist
         console.log(`Clearing playlist`);
@@ -38,3 +38,4 @@ const main = async () => {
 };
 
 main().catch(console.error);
+
