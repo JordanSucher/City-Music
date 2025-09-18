@@ -1,3 +1,4 @@
+require('dotenv').config();
 const axios = require('axios');
 const qs = require('qs');
 const Bottleneck = require("bottleneck");
@@ -36,7 +37,7 @@ const getToken = async () => {
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         })
-        console.log(data)
+        console.log("data", data)
         return data
     } catch (e) {
         console.log(e)
@@ -44,6 +45,53 @@ const getToken = async () => {
 }
 
 // getToken()
+
+const getAuthUrl = () => {
+    const scopes = 'playlist-modify-public playlist-modify-private';
+    const redirectUri = 'http://localhost:3000/authorized'; // Use this one
+    const clientId = process.env.SPOTIFY_CLIENT;
+    
+    const authUrl = `https://accounts.spotify.com/authorize?` +
+        `response_type=code&` +
+        `client_id=${clientId}&` +
+        `scope=${encodeURIComponent(scopes)}&` +
+        `redirect_uri=${encodeURIComponent(redirectUri)}`;
+    
+    return authUrl;
+};
+
+// console.log(getAuthUrl())
+
+// code = "AQD60BQD_EudKVXtwY2h3T5VhrrilBb9cSDYya2cSa5nm8r0l64c5fUOVmwm1f8a2YuToS3R-O7TT2XE0qNCvyMzKcY7H5BwnEbIKdGf6nc1syPa4Ajp71pWw-iQf8UxNihS-2YjjZvMVOPXzULxWQmnvKm3h3N_SzIV52S9WzX5-vGS-YUdelYFzaNndOta4gzhCLcdSnuDZuWU7_d4hhgqe97trRTi5P1cpuAIJZvengBRVw"
+
+const getTokensFromCode = async (authCode) => {
+    const clientId = process.env.SPOTIFY_CLIENT;
+    const secret = process.env.SPOTIFY_SECRET;
+    const redirectUri = 'http://localhost:3000/authorized'; // Same as above
+    
+    const body = {
+        'grant_type': 'authorization_code',
+        'code': authCode,
+        'redirect_uri': redirectUri,
+    };
+
+    try {
+        const { data } = await axios.post('https://accounts.spotify.com/api/token', 
+            qs.stringify(body), {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Authorization': 'Basic ' + Buffer.from(clientId + ':' + secret).toString('base64')
+            }
+        });
+        
+        console.log('Refresh token:', data.refresh_token);
+        return data;
+    } catch (e) {
+        console.log(e.response?.data || e);
+    }
+};
+
+// getTokensFromCode(code)
 
 const getTokenFromRefresh = async () => {
     let clientId = process.env.SPOTIFY_CLIENT

@@ -1,21 +1,67 @@
-FROM public.ecr.aws/lambda/nodejs:18
+FROM node:18-slim
 
-# Set working directory to Lambda task root (it's where the Lambda runtime expects the code to be)
-WORKDIR ${LAMBDA_TASK_ROOT}
+# Install Chrome dependencies and other necessary packages
+RUN apt-get update && apt-get install -y \
+    wget \
+    gnupg \
+    ca-certificates \
+    procps \
+    libxss1 \
+    fonts-liberation \
+    libappindicator3-1 \
+    libasound2 \
+    libatk-bridge2.0-0 \
+    libdrm2 \
+    libgtk-3-0 \
+    libnspr4 \
+    libnss3 \
+    libxcomposite1 \
+    libxdamage1 \
+    libxrandr2 \
+    xdg-utils \
+    libgbm1 \
+    libu2f-udev \
+    libvulkan1 \
+    --no-install-recommends \
+    && rm -rf /var/lib/apt/lists/*
 
-# Copy package.json and package-lock.json
+# Install Google Chrome
+RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
+    && echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list \
+    && apt-get update \
+    && apt-get install -y google-chrome-stable \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set working directory
+WORKDIR /app
+
+# Copy package files
 COPY package.json package-lock.json ./
 
-# Install dependencies
+# Install Node.js dependencies
 RUN npm install
 
-# Copy function code
-COPY index.js pullShows.js spotify.js getOmrToken.js ./
+# Copy application code
+COPY . .
 
-COPY prisma ./prisma/
-
-# Optionally, if you have Prisma schema and migrations inside the prisma directory, you might need to install the Prisma CLI and run migrations
+# Generate Prisma client
 RUN npx prisma generate
 
-# Set the CMD to your handler (could also be done as a parameter override outside of the Dockerfile)
-CMD [ "index.handler" ]
+# Create a non-root user for security
+RUN groupadd -r appuser && useradd -r -g appuser -G audio,video appuser \
+    && mkdir -p /home/appuser/Downloads \
+    && chown -R appuser:appuser /home/appuser \
+    && chown -R appuser:appuser /app
+
+# Switch to non-root user
+USER appuser
+
+# Set environment variables for headless Chrome
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/google-chrome-stable
+
+# Expose port (optional, adjust as needed)
+EXPOSE 3000
+
+# Default command - run manual.js
+CMD ["node", "manual.js"]

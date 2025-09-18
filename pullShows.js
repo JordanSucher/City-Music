@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 let axios = require('axios');
 const prisma = require('./prisma/prismaClient.js');
 
@@ -16,29 +18,23 @@ endDate = endDate.replaceAll("/","-")
 
 const url = `https://www.ohmyrockness.com/api/shows.json?daterange%5Bfrom%5D=${startDate}&daterange%5Buntil%5D=${endDate}&index=true&per=500&regioned=1`
 
-const proxyConfig = {
-  host: 'brd.superproxy.io',
-  port: 22225,
-  auth: {
-    username: 'brd-customer-hl_ca6e7f6e-zone-residential_proxy1',  // optional if your proxy requires authentication
-    password: 'zgj0b5o9vcn5'   // optional if your proxy requires authentication
-  }
-};
-
-let shows;
-
 const pullShows = async function() {
   try {
-    console.log("getting omr token");
-    const omrToken = await getOmrToken();
-    console.log("got token, pulling shows from omr");
-    const response = await axios.get(url, {
-      headers: { Authorization: omrToken}
-    });
-    const shows = response.data;
+    console.log("getting omr token and fetching shows");
+    const result = await getOmrToken();
 
+    if (!result || !result.apiData || !result.apiData.success) {
+      console.error("Failed to get shows data:", result?.apiData?.error || "No data returned");
+      return;
+    }
+
+    const shows = result.apiData.data;
+    console.log(`Received ${shows.length} shows from API`);
+
+    console.log("Starting to process shows...");
     for (const show of shows) {
       try {
+        console.log(`Processing show ${show.id} - ${show.venue?.name}`);
         const result = await prisma.$transaction(async (prisma) => {
           console.log("adding show: " + show.id);
 

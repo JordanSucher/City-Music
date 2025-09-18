@@ -1,0 +1,462 @@
+Pulling shows
+getting omr token
+Launching advanced browser with Cloudflare bypass...
+Navigating to site with automatic Turnstile bypass...
+>>> API Request: https://www.ohmyrockness.com/shows?all=true
+>>> API Request: https://www.ohmyrockness.com/shows?all=true
+>>> API Request: https://www.ohmyrockness.com/cdn-cgi/challenge-platform/h/g/orchestrate/chl_page/v1?ray=981436452afe3788
+Page loaded, checking for Cloudflare challenge...
+>>> API Request: https://www.ohmyrockness.com/favicon.ico
+>>> API Request: https://www.ohmyrockness.com/cdn-cgi/challenge-platform/h/g/flow/ov1/1810010485:1758231017:wS0djsD4fYoIcNPiKFvjgceTZ_IDuCtbTRSrD6TklaQ/981436452afe3788/N6ezJpN0sV5ixRnoMRfV2CNRFBlYpdnl2JpZx54R67E-1758233831-1.2.1.1-WbQetMa3AbWAwYUznDKXuiUXHa4FwB.mxaPccqWV6b05WioVLtRG22C4mfF8yhhm
+>>> API Request: https://www.ohmyrockness.com/favicon.ico
+>>> API Request: https://www.ohmyrockness.com/cdn-cgi/challenge-platform/h/g/flow/ov1/1810010485:1758231017:wS0djsD4fYoIcNPiKFvjgceTZ_IDuCtbTRSrD6TklaQ/981436452afe3788/N6ezJpN0sV5ixRnoMRfV2CNRFBlYpdnl2JpZx54R67E-1758233831-1.2.1.1-WbQetMa3AbWAwYUznDKXuiUXHa4FwB.mxaPccqWV6b05WioVLtRG22C4mfF8yhhm
+>>> API Request: https://www.ohmyrockness.com/shows?all=true
+>>> API Request: https://www.ohmyrockness.com/assets/application-0c776a574162ff88f455f790cfb52723665b19861341d31e0e06905026844c09.js
+>>> API Request: https://www.ohmyrockness.com/assets/new-db67354ffa865a209c5a2b46f1eca600505600616a44bb335a1c2f29c56ff93e.js
+>>> API Request: https://www.ohmyrockness.com/assets/application-2b05529e5694ff1744c81f30fcf31d79ac462efea7ca4d96500900b558568103.css
+>>> API Request: https://www.ohmyrockness.com/assets/new-556e7ce4483783ba19f0c79bdbd4d8a0dc59343ff3fe291011a68459b080641e.css
+>>> API Request: https://www.ohmyrockness.com/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js
+>>> API Request: https://www.ohmyrockness.com/assets/v2/header-bg-0e43377cd9d00f44cb93bc0e04628befb854fad0b8fb5ba01475236dcc5bcd08.png
+>>> API Request: https://www.ohmyrockness.com/assets/sprites/header-wings-0c53fac47956d67ecdea24b7d98e17e806f4df78a4b9b80d16927a4aaa6ca3ce.png
+>>> API Request: https://www.ohmyrockness.com/assets/omr-black-logo-f92ca69c20804a23282ec46c86084801ea4cd14b32b0f557d313e4ab89cdbce6.jpg
+>>> API Request: https://www.ohmyrockness.com/assets/v2/menu-bg-e0778b42199f43921cb944ce38d499a467f979ee1c4c6821b08f990fcf41656b.png
+>>> API Request: https://www.ohmyrockness.com/assets/v2/menu-selected-bg-3f00100c4d24b1cf0b6f3b745dd62a106526625af490a5850e29d70ef01cae12.png
+>>> API Request: https://www.ohmyrockness.com/assets/v2/social-bg-995cdca3b1dfcf97bfaad697bf9463181c787a17b7801dd448e0bcb34dcbe168.png
+>>> API Request: https://www.ohmyrockness.com/assets/v2/dotted-a8f9d28e9879b5ecfe7f63fc1133713e7f93d31953bd72c14d2679e02be4e384.gif
+>>> API Request: https://www.ohmyrockness.com/assets/fontawesome-webfont-ac74cbb8412a5dfe1d390d4cab45d2cd8ff2c8cbdb4028fdbd722b8000ab02a2.woff2
+>>> API Request: https://www.ohmyrockness.com/assets/fontawesome-webfont-ac74cbb8412a5dfe1d390d4cab45d2cd8ff2c8cbdb4028fdbd722b8000ab02a2.woff2
+>>> API Request: https://www.ohmyrockness.com/cdn-cgi/challenge-platform/scripts/jsd/main.js
+>>> API Request: https://www.ohmyrockness.com/api/shows.json?index=true&regioned=1
+>>> Found authorization: Token token="3b35f8a73dabd5f14b1cac167a14c1f6"
+>>> API Request: https://cdn.usefathom.com/?h=https%3A%2F%2Fwww.ohmyrockness.com&p=%2Fshows&r=&sid=MBGTXDHS&qs=%7B%7D&cid=38522229
+>>> API Request: https://www.google-analytics.com/j/collect?v=1&_v=j102&a=1175235768&t=pageview&_s=1&dl=https%3A%2F%2Fwww.ohmyrockness.com%2Fshows%3Fall%3Dtrue&ul=en-us&dt=Concerts%20in%20New%20York%20City%20Tonight%20and%20Beyond%20-%20Oh%20My%20Rockness&sr=1710x1107&vp=1366x768&_u=YEBAAAABAAAAACgCI~&jid=918942108&gjid=930073231&cid=747870168.1758233835&tid=UA-140475-6&_gid=922654681.1758233835&_r=1&_slc=1&z=27488710
+>>> API Request: https://www.google-analytics.com/g/collect?v=2&tid=G-QXXTLGD9GS&gtm=45je59g1v899633583za200zd899633583&_p=1758233834406&gcd=13l3l3l3l1l1&npa=0&dma=0&cid=747870168.1758233835&ul=en-us&sr=1710x1107&uaa=arm&uab=64&uafvl=Chromium%3B140.0.7339.134%7CNot%253DA%253FBrand%3B24.0.0.0%7CGoogle%2520Chrome%3B140.0.7339.134&uamb=0&uam=&uap=macOS&uapv=15.5.0&uaw=0&are=1&frm=0&pscdl=noapi&_s=1&tag_exp=101509157~103116026~103200004~103233427~104527907~104528501~104684208~104684211~104948813~105359936~105367987~105367989~115480710&sid=1758233834&sct=1&seg=0&dl=https%3A%2F%2Fwww.ohmyrockness.com%2Fshows%3Fall%3Dtrue&dr=https%3A%2F%2Fwww.ohmyrockness.com%2Fshows%3Fall%3Dtrue%26__cf_chl_tk%3DmaaNYszaj8Woy7fLjBQyxZqQIY3MatXgajCrgJjVuOA-1758233831-1.0.1.1-l5Vq_TxRaOfTyMvhj8i7vNvRB16SsgsWCFlwG7k6hrc&dt=Concerts%20in%20New%20York%20City%20Tonight%20and%20Beyond%20-%20Oh%20My%20Rockness&en=page_view&_fv=1&_ss=1&_ee=1&tfd=849
+>>> API Request: https://www.google-analytics.com/g/collect?v=2&tid=G-MLF2GXDSBB&gtm=45je59g1v899633583za200zd899633583&_p=1758233834406&gcd=13l3l3l3l1l1&npa=0&dma=0&cid=747870168.1758233835&ul=en-us&sr=1710x1107&uaa=arm&uab=64&uafvl=Chromium%3B140.0.7339.134%7CNot%253DA%253FBrand%3B24.0.0.0%7CGoogle%2520Chrome%3B140.0.7339.134&uamb=0&uam=&uap=macOS&uapv=15.5.0&uaw=0&are=1&frm=0&pscdl=noapi&_s=1&tag_exp=101509157~103116026~103200004~103233427~104527907~104528501~104684208~104684211~104948813~105359936~105367987~105367989~115480710&sid=1758233834&sct=1&seg=0&dl=https%3A%2F%2Fwww.ohmyrockness.com%2Fshows%3Fall%3Dtrue&dr=https%3A%2F%2Fwww.ohmyrockness.com%2Fshows%3Fall%3Dtrue%26__cf_chl_tk%3DmaaNYszaj8Woy7fLjBQyxZqQIY3MatXgajCrgJjVuOA-1758233831-1.0.1.1-l5Vq_TxRaOfTyMvhj8i7vNvRB16SsgsWCFlwG7k6hrc&dt=Concerts%20in%20New%20York%20City%20Tonight%20and%20Beyond%20-%20Oh%20My%20Rockness&en=page_view&_fv=1&_ss=1&_ee=1&tfd=851
+>>> API Request: https://www.ohmyrockness.com/cdn-cgi/challenge-platform/h/g/scripts/jsd/f78657f80e4b/main.js?
+>>> API Request: https://www.ohmyrockness.com/cdn-cgi/challenge-platform/h/g/jsd/r/0.09037208144793248:1758231017:qh8WrESJrfmlHneof14T-lVVm_SCeRq97VBYiQod7nw/98143655efb04337
+>>> API Request: https://securepubads.g.doubleclick.net/gampad/ads?pvsid=5791554241164601&correlator=197847422647998&eid=31094356%2C95371086%2C83321072%2C95369066&output=ldjh&gdfp_req=1&vrg=202509150101&ptt=17&impl=fifs&iu_parts=1014405%2CShowlist-970&enc_prev_ius=%2F0%2F1&prev_iu_szs=970x250%7C970x90%7C728x90%7C970x120&ifi=1&dids=div-gpt-ad-1691863003843-0&adfs=3046605020&sfv=1-0-45&sc=1&cookie_enabled=1&abxe=1&dt=1758233834881&lmt=1758233834&adxs=198&adys=118&biw=1366&bih=768&scr_x=0&scr_y=0&btvi=0&ucis=1&oid=2&u_his=3&u_h=1107&u_w=1710&u_ah=1107&u_aw=1710&u_cd=30&u_sd=1&u_tz=-240&dmc=8&bc=31&nvt=1&uach=WyJtYWNPUyIsIjE1LjUuMCIsImFybSIsIiIsIjE0MC4wLjczMzkuMTM0IixudWxsLDAsbnVsbCwiNjQiLFtbIkNocm9taXVtIiwiMTQwLjAuNzMzOS4xMzQiXSxbIk5vdD1BP0JyYW5kIiwiMjQuMC4wLjAiXSxbIkdvb2dsZSBDaHJvbWUiLCIxNDAuMC43MzM5LjEzNCJdXSwwXQ..&uas=3&url=https%3A%2F%2Fwww.ohmyrockness.com%2Fshows%3Fall%3Dtrue&ref=https%3A%2F%2Fwww.ohmyrockness.com%2Fshows%3Fall%3Dtrue%26__cf_chl_tk%3DmaaNYszaj8Woy7fLjBQyxZqQIY3MatXgajCrgJjVuOA-1758233831-1.0.1.1-l5Vq_TxRaOfTyMvhj8i7vNvRB16SsgsWCFlwG7k6hrc&vis=1&psz=970x2846&msz=990x110&fws=4&ohw=1366&topics=9&tps=9&nt=1&psd=WzMxLFtdLG51bGwsM10.&dlt=1758233834324&idt=520&cust_params=City%3DNYC&adks=2381002053&frm=20&eoidce=1&td=1&egid=5768&tan=87c69fd7-25bf-47ed-8d6b-8f14320df062&tdf=2
+>>> API Request: https://securepubads.g.doubleclick.net/gampad/ads?pvsid=5791554241164601&correlator=197847422647998&eid=31094356%2C95371086%2C83321072%2C95369066&output=ldjh&gdfp_req=1&vrg=202509150101&ptt=17&impl=fifs&iu_parts=1014405%2CFeatured_Show_A&enc_prev_ius=%2F0%2F1&prev_iu_szs=300x250%7C300x300&ifi=2&dids=div-gpt-ad-1691860989307-0&adfs=3385270582&sfv=1-0-45&sc=1&cookie_enabled=1&abxe=1&dt=1758233834884&lmt=1758233834&adxs=208&adys=523&biw=1366&bih=768&scr_x=0&scr_y=0&btvi=0&ucis=2&oid=2&u_his=3&u_h=1107&u_w=1710&u_ah=1107&u_aw=1710&u_cd=30&u_sd=1&u_tz=-240&dmc=8&bc=31&nvt=1&uach=WyJtYWNPUyIsIjE1LjUuMCIsImFybSIsIiIsIjE0MC4wLjczMzkuMTM0IixudWxsLDAsbnVsbCwiNjQiLFtbIkNocm9taXVtIiwiMTQwLjAuNzMzOS4xMzQiXSxbIk5vdD1BP0JyYW5kIiwiMjQuMC4wLjAiXSxbIkdvb2dsZSBDaHJvbWUiLCIxNDAuMC43MzM5LjEzNCJdXSwwXQ..&uas=3&url=https%3A%2F%2Fwww.ohmyrockness.com%2Fshows%3Fall%3Dtrue&ref=https%3A%2F%2Fwww.ohmyrockness.com%2Fshows%3Fall%3Dtrue%26__cf_chl_tk%3DmaaNYszaj8Woy7fLjBQyxZqQIY3MatXgajCrgJjVuOA-1758233831-1.0.1.1-l5Vq_TxRaOfTyMvhj8i7vNvRB16SsgsWCFlwG7k6hrc&vis=1&psz=650x250&msz=300x250&fws=4&ohw=1366&topics=9&tps=9&nt=1&psd=WzMxLFtdLG51bGwsM10.&dlt=1758233834324&idt=520&cust_params=City%3DNYC&adks=3790014062&frm=20&eoidce=1&td=1&egid=5768&tan=87c69fd7-25bf-47ed-8d6b-8f14320df063&tdf=2
+>>> API Request: https://securepubads.g.doubleclick.net/gampad/ads?pvsid=5791554241164601&correlator=197847422647998&eid=31094356%2C95371086%2C83321072%2C95369066&output=ldjh&gdfp_req=1&vrg=202509150101&ptt=17&impl=fifs&iu_parts=1014405%2CFeatured_Show_B&enc_prev_ius=%2F0%2F1&prev_iu_szs=300x250%7C300x300&ifi=3&dids=div-gpt-ad-1691861044694-0&adfs=3713663466&sfv=1-0-45&sc=1&cookie_enabled=1&abxe=1&dt=1758233834885&lmt=1758233834&adxs=538&adys=523&biw=1366&bih=768&scr_x=0&scr_y=0&btvi=0&ucis=3&oid=2&u_his=3&u_h=1107&u_w=1710&u_ah=1107&u_aw=1710&u_cd=30&u_sd=1&u_tz=-240&dmc=8&bc=31&nvt=1&uach=WyJtYWNPUyIsIjE1LjUuMCIsImFybSIsIiIsIjE0MC4wLjczMzkuMTM0IixudWxsLDAsbnVsbCwiNjQiLFtbIkNocm9taXVtIiwiMTQwLjAuNzMzOS4xMzQiXSxbIk5vdD1BP0JyYW5kIiwiMjQuMC4wLjAiXSxbIkdvb2dsZSBDaHJvbWUiLCIxNDAuMC43MzM5LjEzNCJdXSwwXQ..&uas=3&url=https%3A%2F%2Fwww.ohmyrockness.com%2Fshows%3Fall%3Dtrue&ref=https%3A%2F%2Fwww.ohmyrockness.com%2Fshows%3Fall%3Dtrue%26__cf_chl_tk%3DmaaNYszaj8Woy7fLjBQyxZqQIY3MatXgajCrgJjVuOA-1758233831-1.0.1.1-l5Vq_TxRaOfTyMvhj8i7vNvRB16SsgsWCFlwG7k6hrc&vis=1&psz=650x250&msz=300x250&fws=4&ohw=1366&topics=9&tps=9&nt=1&psd=WzMxLFtdLG51bGwsM10.&dlt=1758233834324&idt=520&cust_params=City%3DNYC&adks=3890107287&frm=20&eoidce=1&td=1&egid=5768&tan=87c69fd7-25bf-47ed-8d6b-8f14320df064&tdf=2
+>>> API Request: https://securepubads.g.doubleclick.net/gampad/ads?pvsid=5791554241164601&correlator=197847422647998&eid=31094356%2C95371086%2C83321072%2C95369066&output=ldjh&gdfp_req=1&vrg=202509150101&ptt=17&impl=fifs&iu_parts=1014405%2CFeatured_Show_C&enc_prev_ius=%2F0%2F1&prev_iu_szs=300x300%7C300x250&ifi=4&dids=div-gpt-ad-1691861081445-0&adfs=3695349559&sfv=1-0-45&sc=1&cookie_enabled=1&abxe=1&dt=1758233834886&lmt=1758233834&adxs=208&adys=798&biw=1366&bih=768&scr_x=0&scr_y=0&btvi=1&ucis=4&oid=2&u_his=3&u_h=1107&u_w=1710&u_ah=1107&u_aw=1710&u_cd=30&u_sd=1&u_tz=-240&dmc=8&bc=31&nvt=1&uach=WyJtYWNPUyIsIjE1LjUuMCIsImFybSIsIiIsIjE0MC4wLjczMzkuMTM0IixudWxsLDAsbnVsbCwiNjQiLFtbIkNocm9taXVtIiwiMTQwLjAuNzMzOS4xMzQiXSxbIk5vdD1BP0JyYW5kIiwiMjQuMC4wLjAiXSxbIkdvb2dsZSBDaHJvbWUiLCIxNDAuMC43MzM5LjEzNCJdXSwwXQ..&uas=3&url=https%3A%2F%2Fwww.ohmyrockness.com%2Fshows%3Fall%3Dtrue&ref=https%3A%2F%2Fwww.ohmyrockness.com%2Fshows%3Fall%3Dtrue%26__cf_chl_tk%3DmaaNYszaj8Woy7fLjBQyxZqQIY3MatXgajCrgJjVuOA-1758233831-1.0.1.1-l5Vq_TxRaOfTyMvhj8i7vNvRB16SsgsWCFlwG7k6hrc&vis=1&psz=650x250&msz=300x250&fws=4&ohw=1366&topics=9&tps=9&nt=1&psd=WzMxLFtdLG51bGwsM10.&dlt=1758233834324&idt=520&cust_params=City%3DNYC&adks=2772306250&frm=20&eoidce=1&td=1&egid=5768&tan=87c69fd7-25bf-47ed-8d6b-8f14320df065&tdf=2
+>>> API Request: https://securepubads.g.doubleclick.net/gampad/ads?pvsid=5791554241164601&correlator=197847422647998&eid=31094356%2C95371086%2C83321072%2C95369066&output=ldjh&gdfp_req=1&vrg=202509150101&ptt=17&impl=fifs&iu_parts=1014405%2CFeatured_Show_D&enc_prev_ius=%2F0%2F1&prev_iu_szs=300x300%7C300x250&ifi=5&dids=div-gpt-ad-1691861111556-0&adfs=1856831829&sfv=1-0-45&sc=1&cookie_enabled=1&abxe=1&dt=1758233834887&lmt=1758233834&adxs=538&adys=798&biw=1366&bih=768&scr_x=0&scr_y=0&btvi=2&ucis=5&oid=2&u_his=3&u_h=1107&u_w=1710&u_ah=1107&u_aw=1710&u_cd=30&u_sd=1&u_tz=-240&dmc=8&bc=31&nvt=1&uach=WyJtYWNPUyIsIjE1LjUuMCIsImFybSIsIiIsIjE0MC4wLjczMzkuMTM0IixudWxsLDAsbnVsbCwiNjQiLFtbIkNocm9taXVtIiwiMTQwLjAuNzMzOS4xMzQiXSxbIk5vdD1BP0JyYW5kIiwiMjQuMC4wLjAiXSxbIkdvb2dsZSBDaHJvbWUiLCIxNDAuMC43MzM5LjEzNCJdXSwwXQ..&uas=3&url=https%3A%2F%2Fwww.ohmyrockness.com%2Fshows%3Fall%3Dtrue&ref=https%3A%2F%2Fwww.ohmyrockness.com%2Fshows%3Fall%3Dtrue%26__cf_chl_tk%3DmaaNYszaj8Woy7fLjBQyxZqQIY3MatXgajCrgJjVuOA-1758233831-1.0.1.1-l5Vq_TxRaOfTyMvhj8i7vNvRB16SsgsWCFlwG7k6hrc&vis=1&psz=650x250&msz=300x250&fws=4&ohw=1366&topics=9&tps=9&nt=1&psd=WzMxLFtdLG51bGwsM10.&dlt=1758233834324&idt=520&cust_params=City%3DNYC&adks=1283476659&frm=20&eoidce=1&td=1&egid=5768&tan=87c69fd7-25bf-47ed-8d6b-8f14320df066&tdf=2
+>>> API Request: https://securepubads.g.doubleclick.net/gampad/ads?pvsid=5791554241164601&correlator=197847422647998&eid=31094356%2C95371086%2C83321072%2C95369066&output=ldjh&gdfp_req=1&vrg=202509150101&ptt=17&impl=fifs&iu_parts=1014405%2CShowlist-300x600-Slot1&enc_prev_ius=%2F0%2F1&prev_iu_szs=300x600&ifi=6&dids=div-gpt-ad-1691862957889-0&adfs=175249922&sfv=1-0-45&sc=1&cookie_enabled=1&abxe=1&dt=1758233834887&lmt=1758233834&adxs=868&adys=238&biw=1366&bih=768&scr_x=0&scr_y=0&btvi=0&ucis=6&oid=2&u_his=3&u_h=1107&u_w=1710&u_ah=1107&u_aw=1710&u_cd=30&u_sd=1&u_tz=-240&dmc=8&bc=31&nvt=1&uach=WyJtYWNPUyIsIjE1LjUuMCIsImFybSIsIiIsIjE0MC4wLjczMzkuMTM0IixudWxsLDAsbnVsbCwiNjQiLFtbIkNocm9taXVtIiwiMTQwLjAuNzMzOS4xMzQiXSxbIk5vdD1BP0JyYW5kIiwiMjQuMC4wLjAiXSxbIkdvb2dsZSBDaHJvbWUiLCIxNDAuMC43MzM5LjEzNCJdXSwwXQ..&uas=3&url=https%3A%2F%2Fwww.ohmyrockness.com%2Fshows%3Fall%3Dtrue&ref=https%3A%2F%2Fwww.ohmyrockness.com%2Fshows%3Fall%3Dtrue%26__cf_chl_tk%3DmaaNYszaj8Woy7fLjBQyxZqQIY3MatXgajCrgJjVuOA-1758233831-1.0.1.1-l5Vq_TxRaOfTyMvhj8i7vNvRB16SsgsWCFlwG7k6hrc&vis=1&psz=300x2616&msz=300x600&fws=4&ohw=1366&topics=9&tps=9&nt=1&psd=WzMxLFtdLG51bGwsM10.&dlt=1758233834324&idt=520&cust_params=City%3DNYC&adks=3813265763&frm=20&eoidce=1&td=1&egid=5768&tan=87c69fd7-25bf-47ed-8d6b-8f14320df067&tdf=2
+>>> API Request: https://securepubads.g.doubleclick.net/gampad/ads?pvsid=5791554241164601&correlator=197847422647998&eid=31094356%2C95371086%2C83321072%2C95369066&output=ldjh&gdfp_req=1&vrg=202509150101&ptt=17&impl=fifs&iu_parts=1014405%2CShowlist-300x250-Slot1&enc_prev_ius=%2F0%2F1&prev_iu_szs=300x250&ifi=7&dids=div-gpt-ad-1691862162825-0&adfs=162148738&sfv=1-0-45&sc=1&cookie_enabled=1&abxe=1&dt=1758233834888&lmt=1758233834&adxs=868&adys=858&biw=1366&bih=768&scr_x=0&scr_y=0&btvi=3&ucis=7&oid=2&u_his=3&u_h=1107&u_w=1710&u_ah=1107&u_aw=1710&u_cd=30&u_sd=1&u_tz=-240&dmc=8&bc=31&nvt=1&uach=WyJtYWNPUyIsIjE1LjUuMCIsImFybSIsIiIsIjE0MC4wLjczMzkuMTM0IixudWxsLDAsbnVsbCwiNjQiLFtbIkNocm9taXVtIiwiMTQwLjAuNzMzOS4xMzQiXSxbIk5vdD1BP0JyYW5kIiwiMjQuMC4wLjAiXSxbIkdvb2dsZSBDaHJvbWUiLCIxNDAuMC43MzM5LjEzNCJdXSwwXQ..&uas=3&url=https%3A%2F%2Fwww.ohmyrockness.com%2Fshows%3Fall%3Dtrue&ref=https%3A%2F%2Fwww.ohmyrockness.com%2Fshows%3Fall%3Dtrue%26__cf_chl_tk%3DmaaNYszaj8Woy7fLjBQyxZqQIY3MatXgajCrgJjVuOA-1758233831-1.0.1.1-l5Vq_TxRaOfTyMvhj8i7vNvRB16SsgsWCFlwG7k6hrc&vis=1&psz=300x2616&msz=300x250&fws=4&ohw=1366&topics=9&tps=9&nt=1&psd=WzMxLFtdLG51bGwsM10.&dlt=1758233834324&idt=520&cust_params=City%3DNYC&adks=1040216405&frm=20&eoidce=1&td=1&egid=5768&tan=87c69fd7-25bf-47ed-8d6b-8f14320df068&tdf=2
+>>> API Request: https://securepubads.g.doubleclick.net/gampad/ads?pvsid=5791554241164601&correlator=197847422647998&eid=31094356%2C95371086%2C83321072%2C95369066&output=ldjh&gdfp_req=1&vrg=202509150101&ptt=17&impl=fifs&iu_parts=1014405%2CShowlist-300x250-Slot3&enc_prev_ius=%2F0%2F1&prev_iu_szs=300x250&ifi=8&dids=div-gpt-ad-1691862801096-0&adfs=782061903&sfv=1-0-45&sc=1&cookie_enabled=1&abxe=1&dt=1758233834889&lmt=1758233834&adxs=868&adys=1128&biw=1366&bih=768&scr_x=0&scr_y=0&btvi=4&ucis=8&oid=2&u_his=3&u_h=1107&u_w=1710&u_ah=1107&u_aw=1710&u_cd=30&u_sd=1&u_tz=-240&dmc=8&bc=31&nvt=1&uach=WyJtYWNPUyIsIjE1LjUuMCIsImFybSIsIiIsIjE0MC4wLjczMzkuMTM0IixudWxsLDAsbnVsbCwiNjQiLFtbIkNocm9taXVtIiwiMTQwLjAuNzMzOS4xMzQiXSxbIk5vdD1BP0JyYW5kIiwiMjQuMC4wLjAiXSxbIkdvb2dsZSBDaHJvbWUiLCIxNDAuMC43MzM5LjEzNCJdXSwwXQ..&uas=3&url=https%3A%2F%2Fwww.ohmyrockness.com%2Fshows%3Fall%3Dtrue&ref=https%3A%2F%2Fwww.ohmyrockness.com%2Fshows%3Fall%3Dtrue%26__cf_chl_tk%3DmaaNYszaj8Woy7fLjBQyxZqQIY3MatXgajCrgJjVuOA-1758233831-1.0.1.1-l5Vq_TxRaOfTyMvhj8i7vNvRB16SsgsWCFlwG7k6hrc&vis=1&psz=300x2616&msz=300x250&fws=4&ohw=1366&topics=9&tps=9&nt=1&psd=WzMxLFtdLG51bGwsM10.&dlt=1758233834324&idt=520&cust_params=City%3DNYC&adks=1481286061&frm=20&eoidce=1&td=1&egid=5768&tan=87c69fd7-25bf-47ed-8d6b-8f14320df069&tdf=2
+>>> API Request: https://securepubads.g.doubleclick.net/gampad/ads?pvsid=5791554241164601&correlator=197847422647998&eid=31094356%2C95371086%2C83321072%2C95369066&output=ldjh&gdfp_req=1&vrg=202509150101&ptt=17&impl=fifs&iu_parts=1014405%2CShowlist-300x250-Slot2&enc_prev_ius=%2F0%2F1&prev_iu_szs=300x250&ifi=9&dids=div-gpt-ad-1691864045082-0&adfs=1603062925&sfv=1-0-45&sc=1&cookie_enabled=1&abxe=1&dt=1758233834890&lmt=1758233834&adxs=868&adys=1398&biw=1366&bih=768&scr_x=0&scr_y=0&btvi=5&ucis=9&oid=2&u_his=3&u_h=1107&u_w=1710&u_ah=1107&u_aw=1710&u_cd=30&u_sd=1&u_tz=-240&dmc=8&bc=31&nvt=1&uach=WyJtYWNPUyIsIjE1LjUuMCIsImFybSIsIiIsIjE0MC4wLjczMzkuMTM0IixudWxsLDAsbnVsbCwiNjQiLFtbIkNocm9taXVtIiwiMTQwLjAuNzMzOS4xMzQiXSxbIk5vdD1BP0JyYW5kIiwiMjQuMC4wLjAiXSxbIkdvb2dsZSBDaHJvbWUiLCIxNDAuMC43MzM5LjEzNCJdXSwwXQ..&uas=3&url=https%3A%2F%2Fwww.ohmyrockness.com%2Fshows%3Fall%3Dtrue&ref=https%3A%2F%2Fwww.ohmyrockness.com%2Fshows%3Fall%3Dtrue%26__cf_chl_tk%3DmaaNYszaj8Woy7fLjBQyxZqQIY3MatXgajCrgJjVuOA-1758233831-1.0.1.1-l5Vq_TxRaOfTyMvhj8i7vNvRB16SsgsWCFlwG7k6hrc&vis=1&psz=300x2616&msz=300x250&fws=4&ohw=1366&topics=9&tps=9&nt=1&psd=WzMxLFtdLG51bGwsM10.&dlt=1758233834324&idt=520&cust_params=City%3DNYC&adks=604604323&frm=20&eoidce=1&td=1&egid=5768&tan=87c69fd7-25bf-47ed-8d6b-8f14320df06a&tdf=2
+>>> API Request: https://securepubads.g.doubleclick.net/gampad/ads?pvsid=5791554241164601&correlator=197847422647998&eid=31094356%2C95371086%2C83321072%2C95369066&output=ldjh&gdfp_req=1&vrg=202509150101&ptt=17&impl=fifs&iu_parts=1014405%2CShowlist-970-Foot&enc_prev_ius=%2F0%2F1&prev_iu_szs=728x90%7C970x120%7C970x250%7C970x90&ifi=10&dids=div-gpt-ad-1691863056209-0&adfs=1481082172&sfv=1-0-45&sc=1&cookie_enabled=1&abxe=1&dt=1758233834902&lmt=1758233834&adxs=319&adys=2865&biw=1366&bih=768&scr_x=0&scr_y=0&btvi=11&ucis=a&oid=2&u_his=3&u_h=1107&u_w=1710&u_ah=1107&u_aw=1710&u_cd=30&u_sd=1&u_tz=-240&dmc=8&bc=31&nvt=1&uach=WyJtYWNPUyIsIjE1LjUuMCIsImFybSIsIiIsIjE0MC4wLjczMzkuMTM0IixudWxsLDAsbnVsbCwiNjQiLFtbIkNocm9taXVtIiwiMTQwLjAuNzMzOS4xMzQiXSxbIk5vdD1BP0JyYW5kIiwiMjQuMC4wLjAiXSxbIkdvb2dsZSBDaHJvbWUiLCIxNDAuMC43MzM5LjEzNCJdXSwwXQ..&uas=3&url=https%3A%2F%2Fwww.ohmyrockness.com%2Fshows%3Fall%3Dtrue&ref=https%3A%2F%2Fwww.ohmyrockness.com%2Fshows%3Fall%3Dtrue%26__cf_chl_tk%3DmaaNYszaj8Woy7fLjBQyxZqQIY3MatXgajCrgJjVuOA-1758233831-1.0.1.1-l5Vq_TxRaOfTyMvhj8i7vNvRB16SsgsWCFlwG7k6hrc&vis=1&psz=970x2846&msz=990x110&fws=4&ohw=1366&topics=9&tps=9&nt=1&psd=WzMxLFtdLG51bGwsM10.&dlt=1758233834324&idt=520&cust_params=City%3DNYC&adks=902651440&frm=20&eoidce=1&td=1&egid=5768&tan=87c69fd7-25bf-47ed-8d6b-8f14320df06b&tdf=2
+>>> API Request: https://sumome.com/api/load/
+>>> API Request: https://sumome.com/api/load/
+>>> API Request: https://www.googletagservices.com/agrp/prod/model_person_country_code_US_person_region_code_50415f353034.json
+>>> API Request: https://www.googletagservices.com/agrp/prod/model_person_country_code_US_person_region_code_50415f353034.json
+>>> API Request: https://www.googletagservices.com/agrp/prod/model_person_country_code_US_person_region_code_50415f353034.json
+>>> API Request: https://www.googletagservices.com/agrp/prod/model_person_country_code_US_person_region_code_50415f353034.json
+>>> API Request: https://www.ohmyrockness.com/favicon.png
+>>> API Request: https://www.googletagservices.com/agrp/prod/model_person_country_code_US_person_region_code_50415f353034.json
+>>> API Request: https://www.googletagservices.com/agrp/prod/model_person_country_code_US_person_region_code_50415f353034.json
+>>> API Request: https://sumome.com/api/site/69c3b0b406e125630de88d63c8b1c2b21e900ac3752487cf15538e1399836681/features?site_id=69c3b0b406e125630de88d63c8b1c2b21e900ac3752487cf15538e1399836681
+>>> API Request: https://sumome.com/api/site/69c3b0b406e125630de88d63c8b1c2b21e900ac3752487cf15538e1399836681/features?site_id=69c3b0b406e125630de88d63c8b1c2b21e900ac3752487cf15538e1399836681
+>>> API Request: https://sumome.com/api/site/69c3b0b406e125630de88d63c8b1c2b21e900ac3752487cf15538e1399836681/features?site_id=69c3b0b406e125630de88d63c8b1c2b21e900ac3752487cf15538e1399836681
+>>> API Request: https://sumome.com/api/site/69c3b0b406e125630de88d63c8b1c2b21e900ac3752487cf15538e1399836681/features?site_id=69c3b0b406e125630de88d63c8b1c2b21e900ac3752487cf15538e1399836681
+Attempt 1: Concerts in New York City Tonight and Beyond - Oh My Rockness
+Successfully bypassed Cloudflare! Real content loaded.
+Proceeding with token extraction...
+>>> API Request: https://www.ohmyrockness.com/assets/v2/showSeperator-3900204eb2198808a81b10c8efaa2da660bdee96a4691f426f34d39aa54a73e6.gif
+>>> API Request: https://securepubads.g.doubleclick.net/gampad/ads?pvsid=5791554241164601&correlator=197847422647998&eid=31094356%2C95371086%2C83321072%2C95369066&output=ldjh&gdfp_req=1&vrg=202509150101&ptt=17&impl=fifs&iu_parts=1014405%2CShowlist-300x250-ListA1&enc_prev_ius=%2F0%2F1&prev_iu_szs=300x250%7C300x300&ifi=11&dids=Showlist-300x250-ListA1&adfs=2844163295&sfv=1-0-45&sc=1&cookie=ID%3D9bf4051b0ea9f4e4%3AT%3D1758233834%3ART%3D1758233834%3AS%3DALNI_MaEFyqC6QVxcdaK5WcXf5wMOXBNJg&gpic=UID%3D0000114e193de38a%3AT%3D1758233834%3ART%3D1758233834%3AS%3DALNI_MadBxMMKceVu9SuJyHrnVNgol1Weg&abxe=1&dt=1758233840079&lmt=1758233840&adxs=378&adys=978&biw=1366&bih=768&scr_x=0&scr_y=0&btvi=13&ucis=b&oid=2&u_his=3&u_h=1107&u_w=1710&u_ah=1107&u_aw=1710&u_cd=30&u_sd=1&u_tz=-240&dmc=8&bc=31&nvt=1&uach=WyJtYWNPUyIsIjE1LjUuMCIsImFybSIsIiIsIjE0MC4wLjczMzkuMTM0IixudWxsLDAsbnVsbCwiNjQiLFtbIkNocm9taXVtIiwiMTQwLjAuNzMzOS4xMzQiXSxbIk5vdD1BP0JyYW5kIiwiMjQuMC4wLjAiXSxbIkdvb2dsZSBDaHJvbWUiLCIxNDAuMC43MzM5LjEzNCJdXSwwXQ..&uas=3&url=https%3A%2F%2Fwww.ohmyrockness.com%2Fshows%3Fall%3Dtrue&ref=https%3A%2F%2Fwww.ohmyrockness.com%2Fshows%3Fall%3Dtrue%26__cf_chl_tk%3DmaaNYszaj8Woy7fLjBQyxZqQIY3MatXgajCrgJjVuOA-1758233831-1.0.1.1-l5Vq_TxRaOfTyMvhj8i7vNvRB16SsgsWCFlwG7k6hrc&vis=1&psz=630x26&msz=650x30&fws=4&ohw=1366&psts=AOrYGsmfR_-uRGqFXJUa0Mo6kQgiDfeup4Lk2OdE02BeDmTjBlBc4uq5OKAnPNmp3_B8lznSxHIfvd9zSNf36Pbgm6M6R0m4toDH%2CAOrYGskXLu5QcsBgbQYvWaIJh1JoMX7bvRTqIxhwfe9aIvyjE2HPiJxgsKXWKAVSc3oRAYezPw4tpqJSWK1vLzcsyFKFcLd0lJlx%2CAOrYGsnZf4S9CIfni-V63MP8ZHNGN1HTapQxFS7DMsiyQw-iHofFg2jtkYDbwfeDXmJP5FOjtETh9sdkIGHEotVn7Y4vuzBBU9N8%2CAOrYGslXqzWxZnMwa10HhsoG5C0a%2CAOrYGslXqzWxZnMwa10HhsoG5C0a%2CAOrYGslXqzWxZnMwa10HhsoG5C0a%2CAOrYGsmJqqRjH63C4dus8mAHhy4TZrQCqztfukknfnzxt4S1ZcNani6W5ZjvxAuqoDnwCE2Qe_iqpfHufnk5YboHwz0Dw2i7vOQ%2CAOrYGsmOV1RS6yeyn10fwpytv3PCHraGj3Yosci6XT1M9ZYh6leATRC-F-NTrZVTOrNxPT6V2uu5R9CjhD95yCALZMA49RJpzjg5%2CAOrYGskYg3Sd4ZN3iNmScbNpmId5f7B0TQfqFYQhKafiGdIeggbFlon510_d-2kNY3trfy4XFd3ht6GZwWbw4ySdOvOcSLXJcr4%2CAOrYGslXqzWxZnMwa10HhsoG5C0a&nt=1&psd=WzMxLFtdLG51bGwsM10.&dlt=1758233834324&idt=520&cust_params=City%3DNYC&adks=2517704538&frm=20&eo_id_str=ID%3Df10b35ae3c424fb5%3AT%3D1758233834%3ART%3D1758233834%3AS%3DAA-Afja80lqAWXsmZGeSHPi28cxD&td=1&egid=5768&tan=87c69fd7-25bf-47ed-8d6b-8f14320df06c&tdf=2
+>>> API Request: https://securepubads.g.doubleclick.net/gampad/ads?pvsid=5791554241164601&correlator=197847422647998&eid=31094356%2C95371086%2C83321072%2C95369066&output=ldjh&gdfp_req=1&vrg=202509150101&ptt=17&impl=fifs&iu_parts=1014405%2CShowlist-300x250-List1&enc_prev_ius=%2F0%2F1&prev_iu_szs=300x250%7C300x300&ifi=12&dids=Showlist-300x250-List1&adfs=1544825201&sfv=1-0-45&sc=1&cookie=ID%3D9bf4051b0ea9f4e4%3AT%3D1758233834%3ART%3D1758233834%3AS%3DALNI_MaEFyqC6QVxcdaK5WcXf5wMOXBNJg&gpic=UID%3D0000114e193de38a%3AT%3D1758233834%3ART%3D1758233834%3AS%3DALNI_MadBxMMKceVu9SuJyHrnVNgol1Weg&abxe=1&dt=1758233840087&lmt=1758233840&adxs=378&adys=1410&biw=1366&bih=768&scr_x=0&scr_y=0&btvi=14&ucis=c&oid=2&u_his=3&u_h=1107&u_w=1710&u_ah=1107&u_aw=1710&u_cd=30&u_sd=1&u_tz=-240&dmc=8&bc=31&nvt=1&uach=WyJtYWNPUyIsIjE1LjUuMCIsImFybSIsIiIsIjE0MC4wLjczMzkuMTM0IixudWxsLDAsbnVsbCwiNjQiLFtbIkNocm9taXVtIiwiMTQwLjAuNzMzOS4xMzQiXSxbIk5vdD1BP0JyYW5kIiwiMjQuMC4wLjAiXSxbIkdvb2dsZSBDaHJvbWUiLCIxNDAuMC43MzM5LjEzNCJdXSwwXQ..&uas=3&url=https%3A%2F%2Fwww.ohmyrockness.com%2Fshows%3Fall%3Dtrue&ref=https%3A%2F%2Fwww.ohmyrockness.com%2Fshows%3Fall%3Dtrue%26__cf_chl_tk%3DmaaNYszaj8Woy7fLjBQyxZqQIY3MatXgajCrgJjVuOA-1758233831-1.0.1.1-l5Vq_TxRaOfTyMvhj8i7vNvRB16SsgsWCFlwG7k6hrc&vis=1&psz=630x26&msz=650x30&fws=4&ohw=1366&psts=AOrYGsmfR_-uRGqFXJUa0Mo6kQgiDfeup4Lk2OdE02BeDmTjBlBc4uq5OKAnPNmp3_B8lznSxHIfvd9zSNf36Pbgm6M6R0m4toDH%2CAOrYGskXLu5QcsBgbQYvWaIJh1JoMX7bvRTqIxhwfe9aIvyjE2HPiJxgsKXWKAVSc3oRAYezPw4tpqJSWK1vLzcsyFKFcLd0lJlx%2CAOrYGsnZf4S9CIfni-V63MP8ZHNGN1HTapQxFS7DMsiyQw-iHofFg2jtkYDbwfeDXmJP5FOjtETh9sdkIGHEotVn7Y4vuzBBU9N8%2CAOrYGslXqzWxZnMwa10HhsoG5C0a%2CAOrYGslXqzWxZnMwa10HhsoG5C0a%2CAOrYGslXqzWxZnMwa10HhsoG5C0a%2CAOrYGsmJqqRjH63C4dus8mAHhy4TZrQCqztfukknfnzxt4S1ZcNani6W5ZjvxAuqoDnwCE2Qe_iqpfHufnk5YboHwz0Dw2i7vOQ%2CAOrYGsmOV1RS6yeyn10fwpytv3PCHraGj3Yosci6XT1M9ZYh6leATRC-F-NTrZVTOrNxPT6V2uu5R9CjhD95yCALZMA49RJpzjg5%2CAOrYGskYg3Sd4ZN3iNmScbNpmId5f7B0TQfqFYQhKafiGdIeggbFlon510_d-2kNY3trfy4XFd3ht6GZwWbw4ySdOvOcSLXJcr4%2CAOrYGslXqzWxZnMwa10HhsoG5C0a&nt=1&psd=WzMxLFtdLG51bGwsM10.&dlt=1758233834324&idt=520&cust_params=City%3DNYC&adks=1802229548&frm=20&eo_id_str=ID%3Df10b35ae3c424fb5%3AT%3D1758233834%3ART%3D1758233834%3AS%3DAA-Afja80lqAWXsmZGeSHPi28cxD&td=1&egid=5768&tan=87c69fd7-25bf-47ed-8d6b-8f14320df06d&tdf=2
+>>> API Request: https://securepubads.g.doubleclick.net/gampad/ads?pvsid=5791554241164601&correlator=197847422647998&eid=31094356%2C95371086%2C83321072%2C95369066&output=ldjh&gdfp_req=1&vrg=202509150101&ptt=17&impl=fifs&iu_parts=1014405%2CShowlist-300x250-ListA2&enc_prev_ius=%2F0%2F1&prev_iu_szs=300x250%7C300x300&ifi=13&dids=Showlist-300x250-ListA2&adfs=237705879&sfv=1-0-45&sc=1&cookie=ID%3D9bf4051b0ea9f4e4%3AT%3D1758233834%3ART%3D1758233834%3AS%3DALNI_MaEFyqC6QVxcdaK5WcXf5wMOXBNJg&gpic=UID%3D0000114e193de38a%3AT%3D1758233834%3ART%3D1758233834%3AS%3DALNI_MadBxMMKceVu9SuJyHrnVNgol1Weg&abxe=1&dt=1758233840172&lmt=1758233840&adxs=378&adys=1841&biw=1366&bih=768&scr_x=0&scr_y=0&btvi=17&ucis=d&oid=2&u_his=3&u_h=1107&u_w=1710&u_ah=1107&u_aw=1710&u_cd=30&u_sd=1&u_tz=-240&dmc=8&bc=31&nvt=1&uach=WyJtYWNPUyIsIjE1LjUuMCIsImFybSIsIiIsIjE0MC4wLjczMzkuMTM0IixudWxsLDAsbnVsbCwiNjQiLFtbIkNocm9taXVtIiwiMTQwLjAuNzMzOS4xMzQiXSxbIk5vdD1BP0JyYW5kIiwiMjQuMC4wLjAiXSxbIkdvb2dsZSBDaHJvbWUiLCIxNDAuMC43MzM5LjEzNCJdXSwwXQ..&uas=3&url=https%3A%2F%2Fwww.ohmyrockness.com%2Fshows%3Fall%3Dtrue&ref=https%3A%2F%2Fwww.ohmyrockness.com%2Fshows%3Fall%3Dtrue%26__cf_chl_tk%3DmaaNYszaj8Woy7fLjBQyxZqQIY3MatXgajCrgJjVuOA-1758233831-1.0.1.1-l5Vq_TxRaOfTyMvhj8i7vNvRB16SsgsWCFlwG7k6hrc&vis=1&psz=630x26&msz=650x30&fws=4&ohw=1366&psts=AOrYGsmfR_-uRGqFXJUa0Mo6kQgiDfeup4Lk2OdE02BeDmTjBlBc4uq5OKAnPNmp3_B8lznSxHIfvd9zSNf36Pbgm6M6R0m4toDH%2CAOrYGskXLu5QcsBgbQYvWaIJh1JoMX7bvRTqIxhwfe9aIvyjE2HPiJxgsKXWKAVSc3oRAYezPw4tpqJSWK1vLzcsyFKFcLd0lJlx%2CAOrYGsnZf4S9CIfni-V63MP8ZHNGN1HTapQxFS7DMsiyQw-iHofFg2jtkYDbwfeDXmJP5FOjtETh9sdkIGHEotVn7Y4vuzBBU9N8%2CAOrYGslXqzWxZnMwa10HhsoG5C0a%2CAOrYGslXqzWxZnMwa10HhsoG5C0a%2CAOrYGslXqzWxZnMwa10HhsoG5C0a%2CAOrYGsmJqqRjH63C4dus8mAHhy4TZrQCqztfukknfnzxt4S1ZcNani6W5ZjvxAuqoDnwCE2Qe_iqpfHufnk5YboHwz0Dw2i7vOQ%2CAOrYGsmOV1RS6yeyn10fwpytv3PCHraGj3Yosci6XT1M9ZYh6leATRC-F-NTrZVTOrNxPT6V2uu5R9CjhD95yCALZMA49RJpzjg5%2CAOrYGskYg3Sd4ZN3iNmScbNpmId5f7B0TQfqFYQhKafiGdIeggbFlon510_d-2kNY3trfy4XFd3ht6GZwWbw4ySdOvOcSLXJcr4%2CAOrYGslXqzWxZnMwa10HhsoG5C0a&nt=1&psd=WzMxLFtdLG51bGwsM10.&dlt=1758233834324&idt=520&cust_params=City%3DNYC&adks=4275003612&frm=20&eo_id_str=ID%3Df10b35ae3c424fb5%3AT%3D1758233834%3ART%3D1758233834%3AS%3DAA-Afja80lqAWXsmZGeSHPi28cxD&td=1&egid=5768&tan=87c69fd7-25bf-47ed-8d6b-8f14320df06e&tdf=2
+>>> API Request: https://securepubads.g.doubleclick.net/gampad/ads?pvsid=5791554241164601&correlator=197847422647998&eid=31094356%2C95371086%2C83321072%2C95369066&output=ldjh&gdfp_req=1&vrg=202509150101&ptt=17&impl=fifs&iu_parts=1014405%2CShowlist-300x250-List2&enc_prev_ius=%2F0%2F1&prev_iu_szs=300x250%7C300x300&ifi=14&dids=Showlist-300x250-List2&adfs=2230880686&sfv=1-0-45&sc=1&cookie=ID%3D9bf4051b0ea9f4e4%3AT%3D1758233834%3ART%3D1758233834%3AS%3DALNI_MaEFyqC6QVxcdaK5WcXf5wMOXBNJg&gpic=UID%3D0000114e193de38a%3AT%3D1758233834%3ART%3D1758233834%3AS%3DALNI_MadBxMMKceVu9SuJyHrnVNgol1Weg&abxe=1&dt=1758233840181&lmt=1758233840&adxs=378&adys=2294&biw=1366&bih=768&scr_x=0&scr_y=0&btvi=18&ucis=e&oid=2&u_his=3&u_h=1107&u_w=1710&u_ah=1107&u_aw=1710&u_cd=30&u_sd=1&u_tz=-240&dmc=8&bc=31&nvt=1&uach=WyJtYWNPUyIsIjE1LjUuMCIsImFybSIsIiIsIjE0MC4wLjczMzkuMTM0IixudWxsLDAsbnVsbCwiNjQiLFtbIkNocm9taXVtIiwiMTQwLjAuNzMzOS4xMzQiXSxbIk5vdD1BP0JyYW5kIiwiMjQuMC4wLjAiXSxbIkdvb2dsZSBDaHJvbWUiLCIxNDAuMC43MzM5LjEzNCJdXSwwXQ..&uas=3&url=https%3A%2F%2Fwww.ohmyrockness.com%2Fshows%3Fall%3Dtrue&ref=https%3A%2F%2Fwww.ohmyrockness.com%2Fshows%3Fall%3Dtrue%26__cf_chl_tk%3DmaaNYszaj8Woy7fLjBQyxZqQIY3MatXgajCrgJjVuOA-1758233831-1.0.1.1-l5Vq_TxRaOfTyMvhj8i7vNvRB16SsgsWCFlwG7k6hrc&vis=1&psz=630x26&msz=650x30&fws=4&ohw=1366&psts=AOrYGsmfR_-uRGqFXJUa0Mo6kQgiDfeup4Lk2OdE02BeDmTjBlBc4uq5OKAnPNmp3_B8lznSxHIfvd9zSNf36Pbgm6M6R0m4toDH%2CAOrYGskXLu5QcsBgbQYvWaIJh1JoMX7bvRTqIxhwfe9aIvyjE2HPiJxgsKXWKAVSc3oRAYezPw4tpqJSWK1vLzcsyFKFcLd0lJlx%2CAOrYGsnZf4S9CIfni-V63MP8ZHNGN1HTapQxFS7DMsiyQw-iHofFg2jtkYDbwfeDXmJP5FOjtETh9sdkIGHEotVn7Y4vuzBBU9N8%2CAOrYGslXqzWxZnMwa10HhsoG5C0a%2CAOrYGslXqzWxZnMwa10HhsoG5C0a%2CAOrYGslXqzWxZnMwa10HhsoG5C0a%2CAOrYGsmJqqRjH63C4dus8mAHhy4TZrQCqztfukknfnzxt4S1ZcNani6W5ZjvxAuqoDnwCE2Qe_iqpfHufnk5YboHwz0Dw2i7vOQ%2CAOrYGsmOV1RS6yeyn10fwpytv3PCHraGj3Yosci6XT1M9ZYh6leATRC-F-NTrZVTOrNxPT6V2uu5R9CjhD95yCALZMA49RJpzjg5%2CAOrYGskYg3Sd4ZN3iNmScbNpmId5f7B0TQfqFYQhKafiGdIeggbFlon510_d-2kNY3trfy4XFd3ht6GZwWbw4ySdOvOcSLXJcr4%2CAOrYGslXqzWxZnMwa10HhsoG5C0a&nt=1&psd=WzMxLFtdLG51bGwsM10.&dlt=1758233834324&idt=520&cust_params=City%3DNYC&adks=3721450216&frm=20&eo_id_str=ID%3Df10b35ae3c424fb5%3AT%3D1758233834%3ART%3D1758233834%3AS%3DAA-Afja80lqAWXsmZGeSHPi28cxD&td=1&egid=5768&tan=87c69fd7-25bf-47ed-8d6b-8f14320df06f&tdf=2
+>>> API Request: https://securepubads.g.doubleclick.net/gampad/ads?pvsid=5791554241164601&correlator=197847422647998&eid=31094356%2C95371086%2C83321072%2C95369066&output=ldjh&gdfp_req=1&vrg=202509150101&ptt=17&impl=fifs&iu_parts=1014405%2CShowlist-300x250-ListA3&enc_prev_ius=%2F0%2F1&prev_iu_szs=300x250%7C300x300&ifi=15&dids=Showlist-300x250-ListA3&adfs=277528243&sfv=1-0-45&sc=1&cookie=ID%3D9bf4051b0ea9f4e4%3AT%3D1758233834%3ART%3D1758233834%3AS%3DALNI_MaEFyqC6QVxcdaK5WcXf5wMOXBNJg&gpic=UID%3D0000114e193de38a%3AT%3D1758233834%3ART%3D1758233834%3AS%3DALNI_MadBxMMKceVu9SuJyHrnVNgol1Weg&abxe=1&dt=1758233840188&lmt=1758233840&adxs=378&adys=2727&biw=1366&bih=768&scr_x=0&scr_y=0&btvi=19&ucis=f&oid=2&u_his=3&u_h=1107&u_w=1710&u_ah=1107&u_aw=1710&u_cd=30&u_sd=1&u_tz=-240&dmc=8&bc=31&nvt=1&uach=WyJtYWNPUyIsIjE1LjUuMCIsImFybSIsIiIsIjE0MC4wLjczMzkuMTM0IixudWxsLDAsbnVsbCwiNjQiLFtbIkNocm9taXVtIiwiMTQwLjAuNzMzOS4xMzQiXSxbIk5vdD1BP0JyYW5kIiwiMjQuMC4wLjAiXSxbIkdvb2dsZSBDaHJvbWUiLCIxNDAuMC43MzM5LjEzNCJdXSwwXQ..&uas=3&url=https%3A%2F%2Fwww.ohmyrockness.com%2Fshows%3Fall%3Dtrue&ref=https%3A%2F%2Fwww.ohmyrockness.com%2Fshows%3Fall%3Dtrue%26__cf_chl_tk%3DmaaNYszaj8Woy7fLjBQyxZqQIY3MatXgajCrgJjVuOA-1758233831-1.0.1.1-l5Vq_TxRaOfTyMvhj8i7vNvRB16SsgsWCFlwG7k6hrc&vis=1&psz=630x26&msz=650x30&fws=4&ohw=1366&psts=AOrYGsmfR_-uRGqFXJUa0Mo6kQgiDfeup4Lk2OdE02BeDmTjBlBc4uq5OKAnPNmp3_B8lznSxHIfvd9zSNf36Pbgm6M6R0m4toDH%2CAOrYGskXLu5QcsBgbQYvWaIJh1JoMX7bvRTqIxhwfe9aIvyjE2HPiJxgsKXWKAVSc3oRAYezPw4tpqJSWK1vLzcsyFKFcLd0lJlx%2CAOrYGsnZf4S9CIfni-V63MP8ZHNGN1HTapQxFS7DMsiyQw-iHofFg2jtkYDbwfeDXmJP5FOjtETh9sdkIGHEotVn7Y4vuzBBU9N8%2CAOrYGslXqzWxZnMwa10HhsoG5C0a%2CAOrYGslXqzWxZnMwa10HhsoG5C0a%2CAOrYGslXqzWxZnMwa10HhsoG5C0a%2CAOrYGsmJqqRjH63C4dus8mAHhy4TZrQCqztfukknfnzxt4S1ZcNani6W5ZjvxAuqoDnwCE2Qe_iqpfHufnk5YboHwz0Dw2i7vOQ%2CAOrYGsmOV1RS6yeyn10fwpytv3PCHraGj3Yosci6XT1M9ZYh6leATRC-F-NTrZVTOrNxPT6V2uu5R9CjhD95yCALZMA49RJpzjg5%2CAOrYGskYg3Sd4ZN3iNmScbNpmId5f7B0TQfqFYQhKafiGdIeggbFlon510_d-2kNY3trfy4XFd3ht6GZwWbw4ySdOvOcSLXJcr4%2CAOrYGslXqzWxZnMwa10HhsoG5C0a&nt=1&psd=WzMxLFtdLG51bGwsM10.&dlt=1758233834324&idt=520&cust_params=City%3DNYC&adks=3862294317&frm=20&eo_id_str=ID%3Df10b35ae3c424fb5%3AT%3D1758233834%3ART%3D1758233834%3AS%3DAA-Afja80lqAWXsmZGeSHPi28cxD&td=1&egid=5768&tan=87c69fd7-25bf-47ed-8d6b-8f14320df070&tdf=2
+>>> API Request: https://securepubads.g.doubleclick.net/gampad/ads?pvsid=5791554241164601&correlator=197847422647998&eid=31094356%2C95371086%2C83321072%2C95369066&output=ldjh&gdfp_req=1&vrg=202509150101&ptt=17&impl=fifs&iu_parts=1014405%2CShowlist-300x250-List3&enc_prev_ius=%2F0%2F1&prev_iu_szs=300x250%7C300x300&ifi=16&dids=Showlist-300x250-List3&adfs=2628898921&sfv=1-0-45&sc=1&cookie=ID%3D9bf4051b0ea9f4e4%3AT%3D1758233834%3ART%3D1758233834%3AS%3DALNI_MaEFyqC6QVxcdaK5WcXf5wMOXBNJg&gpic=UID%3D0000114e193de38a%3AT%3D1758233834%3ART%3D1758233834%3AS%3DALNI_MadBxMMKceVu9SuJyHrnVNgol1Weg&abxe=1&dt=1758233840198&lmt=1758233840&adxs=378&adys=3174&biw=1366&bih=768&scr_x=0&scr_y=0&btvi=20&ucis=g&oid=2&u_his=3&u_h=1107&u_w=1710&u_ah=1107&u_aw=1710&u_cd=30&u_sd=1&u_tz=-240&dmc=8&bc=31&nvt=1&uach=WyJtYWNPUyIsIjE1LjUuMCIsImFybSIsIiIsIjE0MC4wLjczMzkuMTM0IixudWxsLDAsbnVsbCwiNjQiLFtbIkNocm9taXVtIiwiMTQwLjAuNzMzOS4xMzQiXSxbIk5vdD1BP0JyYW5kIiwiMjQuMC4wLjAiXSxbIkdvb2dsZSBDaHJvbWUiLCIxNDAuMC43MzM5LjEzNCJdXSwwXQ..&uas=3&url=https%3A%2F%2Fwww.ohmyrockness.com%2Fshows%3Fall%3Dtrue&ref=https%3A%2F%2Fwww.ohmyrockness.com%2Fshows%3Fall%3Dtrue%26__cf_chl_tk%3DmaaNYszaj8Woy7fLjBQyxZqQIY3MatXgajCrgJjVuOA-1758233831-1.0.1.1-l5Vq_TxRaOfTyMvhj8i7vNvRB16SsgsWCFlwG7k6hrc&vis=1&psz=630x26&msz=650x30&fws=4&ohw=1366&psts=AOrYGsmfR_-uRGqFXJUa0Mo6kQgiDfeup4Lk2OdE02BeDmTjBlBc4uq5OKAnPNmp3_B8lznSxHIfvd9zSNf36Pbgm6M6R0m4toDH%2CAOrYGskXLu5QcsBgbQYvWaIJh1JoMX7bvRTqIxhwfe9aIvyjE2HPiJxgsKXWKAVSc3oRAYezPw4tpqJSWK1vLzcsyFKFcLd0lJlx%2CAOrYGsnZf4S9CIfni-V63MP8ZHNGN1HTapQxFS7DMsiyQw-iHofFg2jtkYDbwfeDXmJP5FOjtETh9sdkIGHEotVn7Y4vuzBBU9N8%2CAOrYGslXqzWxZnMwa10HhsoG5C0a%2CAOrYGslXqzWxZnMwa10HhsoG5C0a%2CAOrYGslXqzWxZnMwa10HhsoG5C0a%2CAOrYGsmJqqRjH63C4dus8mAHhy4TZrQCqztfukknfnzxt4S1ZcNani6W5ZjvxAuqoDnwCE2Qe_iqpfHufnk5YboHwz0Dw2i7vOQ%2CAOrYGsmOV1RS6yeyn10fwpytv3PCHraGj3Yosci6XT1M9ZYh6leATRC-F-NTrZVTOrNxPT6V2uu5R9CjhD95yCALZMA49RJpzjg5%2CAOrYGskYg3Sd4ZN3iNmScbNpmId5f7B0TQfqFYQhKafiGdIeggbFlon510_d-2kNY3trfy4XFd3ht6GZwWbw4ySdOvOcSLXJcr4%2CAOrYGslXqzWxZnMwa10HhsoG5C0a&nt=1&psd=WzMxLFtdLG51bGwsM10.&dlt=1758233834324&idt=520&cust_params=City%3DNYC&adks=1018478919&frm=20&eo_id_str=ID%3Df10b35ae3c424fb5%3AT%3D1758233834%3ART%3D1758233834%3AS%3DAA-Afja80lqAWXsmZGeSHPi28cxD&td=1&egid=5768&tan=87c69fd7-25bf-47ed-8d6b-8f14320df071&tdf=2
+>>> API Request: https://securepubads.g.doubleclick.net/gampad/ads?pvsid=5791554241164601&correlator=197847422647998&eid=31094356%2C95371086%2C83321072%2C95369066&output=ldjh&gdfp_req=1&vrg=202509150101&ptt=17&impl=fifs&iu_parts=1014405%2CShowlist-300x250-ListA4&enc_prev_ius=%2F0%2F1&prev_iu_szs=300x250%7C300x300&ifi=17&dids=Showlist-300x250-ListA4&adfs=306242962&sfv=1-0-45&sc=1&cookie=ID%3D9bf4051b0ea9f4e4%3AT%3D1758233834%3ART%3D1758233834%3AS%3DALNI_MaEFyqC6QVxcdaK5WcXf5wMOXBNJg&gpic=UID%3D0000114e193de38a%3AT%3D1758233834%3ART%3D1758233834%3AS%3DALNI_MadBxMMKceVu9SuJyHrnVNgol1Weg&abxe=1&dt=1758233840210&lmt=1758233840&adxs=378&adys=3605&biw=1366&bih=768&scr_x=0&scr_y=0&btvi=21&ucis=h&oid=2&u_his=3&u_h=1107&u_w=1710&u_ah=1107&u_aw=1710&u_cd=30&u_sd=1&u_tz=-240&dmc=8&bc=31&nvt=1&uach=WyJtYWNPUyIsIjE1LjUuMCIsImFybSIsIiIsIjE0MC4wLjczMzkuMTM0IixudWxsLDAsbnVsbCwiNjQiLFtbIkNocm9taXVtIiwiMTQwLjAuNzMzOS4xMzQiXSxbIk5vdD1BP0JyYW5kIiwiMjQuMC4wLjAiXSxbIkdvb2dsZSBDaHJvbWUiLCIxNDAuMC43MzM5LjEzNCJdXSwwXQ..&uas=3&url=https%3A%2F%2Fwww.ohmyrockness.com%2Fshows%3Fall%3Dtrue&ref=https%3A%2F%2Fwww.ohmyrockness.com%2Fshows%3Fall%3Dtrue%26__cf_chl_tk%3DmaaNYszaj8Woy7fLjBQyxZqQIY3MatXgajCrgJjVuOA-1758233831-1.0.1.1-l5Vq_TxRaOfTyMvhj8i7vNvRB16SsgsWCFlwG7k6hrc&vis=1&psz=630x26&msz=650x30&fws=4&ohw=1366&psts=AOrYGsmfR_-uRGqFXJUa0Mo6kQgiDfeup4Lk2OdE02BeDmTjBlBc4uq5OKAnPNmp3_B8lznSxHIfvd9zSNf36Pbgm6M6R0m4toDH%2CAOrYGskXLu5QcsBgbQYvWaIJh1JoMX7bvRTqIxhwfe9aIvyjE2HPiJxgsKXWKAVSc3oRAYezPw4tpqJSWK1vLzcsyFKFcLd0lJlx%2CAOrYGsnZf4S9CIfni-V63MP8ZHNGN1HTapQxFS7DMsiyQw-iHofFg2jtkYDbwfeDXmJP5FOjtETh9sdkIGHEotVn7Y4vuzBBU9N8%2CAOrYGslXqzWxZnMwa10HhsoG5C0a%2CAOrYGslXqzWxZnMwa10HhsoG5C0a%2CAOrYGslXqzWxZnMwa10HhsoG5C0a%2CAOrYGsmJqqRjH63C4dus8mAHhy4TZrQCqztfukknfnzxt4S1ZcNani6W5ZjvxAuqoDnwCE2Qe_iqpfHufnk5YboHwz0Dw2i7vOQ%2CAOrYGsmOV1RS6yeyn10fwpytv3PCHraGj3Yosci6XT1M9ZYh6leATRC-F-NTrZVTOrNxPT6V2uu5R9CjhD95yCALZMA49RJpzjg5%2CAOrYGskYg3Sd4ZN3iNmScbNpmId5f7B0TQfqFYQhKafiGdIeggbFlon510_d-2kNY3trfy4XFd3ht6GZwWbw4ySdOvOcSLXJcr4%2CAOrYGslXqzWxZnMwa10HhsoG5C0a&nt=1&psd=WzMxLFtdLG51bGwsM10.&dlt=1758233834324&idt=520&cust_params=City%3DNYC&adks=419928783&frm=20&eo_id_str=ID%3Df10b35ae3c424fb5%3AT%3D1758233834%3ART%3D1758233834%3AS%3DAA-Afja80lqAWXsmZGeSHPi28cxD&td=1&egid=5768&tan=87c69fd7-25bf-47ed-8d6b-8f14320df072&tdf=2
+>>> API Request: https://securepubads.g.doubleclick.net/gampad/ads?pvsid=5791554241164601&correlator=197847422647998&eid=31094356%2C95371086%2C83321072%2C95369066&output=ldjh&gdfp_req=1&vrg=202509150101&ptt=17&impl=fifs&iu_parts=1014405%2CShowlist-300x250-List4&enc_prev_ius=%2F0%2F1&prev_iu_szs=300x250%7C300x300&ifi=18&dids=Showlist-300x250-List4&adfs=2594976610&sfv=1-0-45&sc=1&cookie=ID%3D9bf4051b0ea9f4e4%3AT%3D1758233834%3ART%3D1758233834%3AS%3DALNI_MaEFyqC6QVxcdaK5WcXf5wMOXBNJg&gpic=UID%3D0000114e193de38a%3AT%3D1758233834%3ART%3D1758233834%3AS%3DALNI_MadBxMMKceVu9SuJyHrnVNgol1Weg&abxe=1&dt=1758233840224&lmt=1758233840&adxs=378&adys=4053&biw=1366&bih=768&scr_x=0&scr_y=0&btvi=22&ucis=i&oid=2&u_his=3&u_h=1107&u_w=1710&u_ah=1107&u_aw=1710&u_cd=30&u_sd=1&u_tz=-240&dmc=8&bc=31&nvt=1&uach=WyJtYWNPUyIsIjE1LjUuMCIsImFybSIsIiIsIjE0MC4wLjczMzkuMTM0IixudWxsLDAsbnVsbCwiNjQiLFtbIkNocm9taXVtIiwiMTQwLjAuNzMzOS4xMzQiXSxbIk5vdD1BP0JyYW5kIiwiMjQuMC4wLjAiXSxbIkdvb2dsZSBDaHJvbWUiLCIxNDAuMC43MzM5LjEzNCJdXSwwXQ..&uas=3&url=https%3A%2F%2Fwww.ohmyrockness.com%2Fshows%3Fall%3Dtrue&ref=https%3A%2F%2Fwww.ohmyrockness.com%2Fshows%3Fall%3Dtrue%26__cf_chl_tk%3DmaaNYszaj8Woy7fLjBQyxZqQIY3MatXgajCrgJjVuOA-1758233831-1.0.1.1-l5Vq_TxRaOfTyMvhj8i7vNvRB16SsgsWCFlwG7k6hrc&vis=1&psz=630x26&msz=650x30&fws=4&ohw=1366&psts=AOrYGsmfR_-uRGqFXJUa0Mo6kQgiDfeup4Lk2OdE02BeDmTjBlBc4uq5OKAnPNmp3_B8lznSxHIfvd9zSNf36Pbgm6M6R0m4toDH%2CAOrYGskXLu5QcsBgbQYvWaIJh1JoMX7bvRTqIxhwfe9aIvyjE2HPiJxgsKXWKAVSc3oRAYezPw4tpqJSWK1vLzcsyFKFcLd0lJlx%2CAOrYGsnZf4S9CIfni-V63MP8ZHNGN1HTapQxFS7DMsiyQw-iHofFg2jtkYDbwfeDXmJP5FOjtETh9sdkIGHEotVn7Y4vuzBBU9N8%2CAOrYGslXqzWxZnMwa10HhsoG5C0a%2CAOrYGslXqzWxZnMwa10HhsoG5C0a%2CAOrYGslXqzWxZnMwa10HhsoG5C0a%2CAOrYGsmJqqRjH63C4dus8mAHhy4TZrQCqztfukknfnzxt4S1ZcNani6W5ZjvxAuqoDnwCE2Qe_iqpfHufnk5YboHwz0Dw2i7vOQ%2CAOrYGsmOV1RS6yeyn10fwpytv3PCHraGj3Yosci6XT1M9ZYh6leATRC-F-NTrZVTOrNxPT6V2uu5R9CjhD95yCALZMA49RJpzjg5%2CAOrYGskYg3Sd4ZN3iNmScbNpmId5f7B0TQfqFYQhKafiGdIeggbFlon510_d-2kNY3trfy4XFd3ht6GZwWbw4ySdOvOcSLXJcr4%2CAOrYGslXqzWxZnMwa10HhsoG5C0a&nt=1&psd=WzMxLFtdLG51bGwsM10.&dlt=1758233834324&idt=520&cust_params=City%3DNYC&adks=4151535958&frm=20&eo_id_str=ID%3Df10b35ae3c424fb5%3AT%3D1758233834%3ART%3D1758233834%3AS%3DAA-Afja80lqAWXsmZGeSHPi28cxD&td=1&egid=5768&tan=87c69fd7-25bf-47ed-8d6b-8f14320df073&tdf=2
+>>> API Request: https://www.google-analytics.com/g/collect?v=2&tid=G-MLF2GXDSBB&gtm=45je59g1v899633583za200zd899633583&_p=1758233834406&gcd=13l3l3l3l1l1&npa=0&dma=0&cid=747870168.1758233835&ul=en-us&sr=1710x1107&uaa=arm&uab=64&uafvl=Chromium%3B140.0.7339.134%7CNot%253DA%253FBrand%3B24.0.0.0%7CGoogle%2520Chrome%3B140.0.7339.134&uamb=0&uam=&uap=macOS&uapv=15.5.0&uaw=0&are=1&frm=0&pscdl=noapi&_eu=AEIAAAQ&tag_exp=101509157~103116026~103200004~103233427~104527907~104528501~104684208~104684211~104948813~105359936~105367987~105367989~115480710&sid=1758233834&sct=1&seg=0&dl=https%3A%2F%2Fwww.ohmyrockness.com%2Fshows%3Fall%3Dtrue&dr=https%3A%2F%2Fwww.ohmyrockness.com%2Fshows%3Fall%3Dtrue%26__cf_chl_tk%3DmaaNYszaj8Woy7fLjBQyxZqQIY3MatXgajCrgJjVuOA-1758233831-1.0.1.1-l5Vq_TxRaOfTyMvhj8i7vNvRB16SsgsWCFlwG7k6hrc&dt=Concerts%20in%20New%20York%20City%20Tonight%20and%20Beyond%20-%20Oh%20My%20Rockness&_s=2&tfd=6402
+>>> API Request: https://www.googletagservices.com/agrp/prod/model_person_country_code_US_person_region_code_50415f353034.json
+>>> API Request: https://www.googletagservices.com/agrp/prod/model_person_country_code_US_person_region_code_50415f353034.json
+>>> API Request: https://www.googletagservices.com/agrp/prod/model_person_country_code_US_person_region_code_50415f353034.json
+>>> API Request: https://www.googletagservices.com/agrp/prod/model_person_country_code_US_person_region_code_50415f353034.json
+>>> API Request: https://www.googletagservices.com/agrp/prod/model_person_country_code_US_person_region_code_50415f353034.json
+>>> API Request: https://www.googletagservices.com/agrp/prod/model_person_country_code_US_person_region_code_50415f353034.json
+>>> API Request: https://www.googletagservices.com/agrp/prod/model_person_country_code_US_person_region_code_50415f353034.json
+>>> API Request: https://www.googletagservices.com/agrp/prod/model_person_country_code_US_person_region_code_50415f353034.json
+Final auth token: Token token="3b35f8a73dabd5f14b1cac167a14c1f6"
+got token, pulling shows from omr
+Making API request to: https://www.ohmyrockness.com/api/shows.json?daterange%5Bfrom%5D=9-18-2025&daterange%5Buntil%5D=9-25-2025&index=true&per=500&regioned=1
+Error: AxiosError: Request failed with status code 403
+    at settle (/Users/jsucher/Documents/Shit-Patrol/node_modules/axios/dist/node/axios.cjs:2097:12)
+    at BrotliDecompress.handleStreamEnd (/Users/jsucher/Documents/Shit-Patrol/node_modules/axios/dist/node/axios.cjs:3305:11)
+    at BrotliDecompress.emit (node:events:525:35)
+    at endReadableNT (node:internal/streams/readable:1696:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+    at Axios.request (/Users/jsucher/Documents/Shit-Patrol/node_modules/axios/dist/node/axios.cjs:4483:41)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async pullShows (/Users/jsucher/Documents/Shit-Patrol/pullShows.js:27:22)
+    at async main (/Users/jsucher/Documents/Shit-Patrol/manual.js:9:9) {
+  code: 'ERR_BAD_REQUEST',
+  config: {
+    transitional: {
+      silentJSONParsing: true,
+      forcedJSONParsing: true,
+      clarifyTimeoutError: false
+    },
+    adapter: [ 'xhr', 'http', 'fetch' ],
+    transformRequest: [ [Function: transformRequest] ],
+    transformResponse: [ [Function: transformResponse] ],
+    timeout: 0,
+    xsrfCookieName: 'XSRF-TOKEN',
+    xsrfHeaderName: 'X-XSRF-TOKEN',
+    maxContentLength: -1,
+    maxBodyLength: -1,
+    env: { FormData: [Function [FormData]], Blob: [class Blob] },
+    validateStatus: [Function: validateStatus],
+    headers: Object [AxiosHeaders] {
+      Accept: 'application/json, text/plain, */*',
+      'Content-Type': undefined,
+      Authorization: 'Token token="3b35f8a73dabd5f14b1cac167a14c1f6"',
+      'User-Agent': 'axios/1.12.2',
+      'Accept-Encoding': 'gzip, compress, deflate, br'
+    },
+    method: 'get',
+    url: 'https://www.ohmyrockness.com/api/shows.json?daterange%5Bfrom%5D=9-18-2025&daterange%5Buntil%5D=9-25-2025&index=true&per=500&regioned=1',
+    allowAbsoluteUrls: true,
+    data: undefined
+  },
+  request: <ref *1> ClientRequest {
+    _events: [Object: null prototype] {
+      abort: [Function (anonymous)],
+      aborted: [Function (anonymous)],
+      connect: [Function (anonymous)],
+      error: [Function (anonymous)],
+      socket: [Function (anonymous)],
+      timeout: [Function (anonymous)],
+      finish: [Function: requestOnFinish]
+    },
+    _eventsCount: 7,
+    _maxListeners: undefined,
+    outputData: [],
+    outputSize: 0,
+    writable: true,
+    destroyed: true,
+    _last: true,
+    chunkedEncoding: false,
+    shouldKeepAlive: false,
+    maxRequestsOnConnectionReached: false,
+    _defaultKeepAlive: true,
+    useChunkedEncodingByDefault: false,
+    sendDate: false,
+    _removedConnection: false,
+    _removedContLen: false,
+    _removedTE: false,
+    strictContentLength: false,
+    _contentLength: 0,
+    _hasBody: true,
+    _trailer: '',
+    finished: true,
+    _headerSent: true,
+    _closed: true,
+    _header: 'GET /api/shows.json?daterange%5Bfrom%5D=9-18-2025&daterange%5Buntil%5D=9-25-2025&index=true&per=500&regioned=1 HTTP/1.1\r\n' +
+      'Accept: application/json, text/plain, */*\r\n' +
+      'Authorization: Token token="3b35f8a73dabd5f14b1cac167a14c1f6"\r\n' +
+      'User-Agent: axios/1.12.2\r\n' +
+      'Accept-Encoding: gzip, compress, deflate, br\r\n' +
+      'Host: www.ohmyrockness.com\r\n' +
+      'Connection: keep-alive\r\n' +
+      '\r\n',
+    _keepAliveTimeout: 0,
+    _onPendingData: [Function: nop],
+    agent: Agent {
+      _events: [Object: null prototype],
+      _eventsCount: 2,
+      _maxListeners: undefined,
+      defaultPort: 443,
+      protocol: 'https:',
+      options: [Object: null prototype],
+      requests: [Object: null prototype] {},
+      sockets: [Object: null prototype] {},
+      freeSockets: [Object: null prototype] {},
+      keepAliveMsecs: 1000,
+      keepAlive: true,
+      maxSockets: Infinity,
+      maxFreeSockets: 256,
+      scheduling: 'lifo',
+      maxTotalSockets: Infinity,
+      totalSocketCount: 0,
+      maxCachedSessions: 100,
+      _sessionCache: [Object],
+      [Symbol(shapeMode)]: false,
+      [Symbol(kCapture)]: false
+    },
+    socketPath: undefined,
+    method: 'GET',
+    maxHeaderSize: undefined,
+    insecureHTTPParser: undefined,
+    joinDuplicateHeaders: undefined,
+    path: '/api/shows.json?daterange%5Bfrom%5D=9-18-2025&daterange%5Buntil%5D=9-25-2025&index=true&per=500&regioned=1',
+    _ended: true,
+    res: IncomingMessage {
+      _events: [Object],
+      _readableState: [ReadableState],
+      _maxListeners: undefined,
+      socket: [TLSSocket],
+      httpVersionMajor: 1,
+      httpVersionMinor: 1,
+      httpVersion: '1.1',
+      complete: true,
+      rawHeaders: [Array],
+      rawTrailers: [],
+      joinDuplicateHeaders: undefined,
+      aborted: false,
+      upgrade: false,
+      url: '',
+      method: null,
+      statusCode: 403,
+      statusMessage: 'Forbidden',
+      client: [TLSSocket],
+      _consuming: true,
+      _dumped: false,
+      req: [Circular *1],
+      _eventsCount: 4,
+      responseUrl: 'https://www.ohmyrockness.com/api/shows.json?daterange%5Bfrom%5D=9-18-2025&daterange%5Buntil%5D=9-25-2025&index=true&per=500&regioned=1',
+      redirects: [],
+      [Symbol(shapeMode)]: true,
+      [Symbol(kCapture)]: false,
+      [Symbol(kHeaders)]: [Object],
+      [Symbol(kHeadersCount)]: 52,
+      [Symbol(kTrailers)]: null,
+      [Symbol(kTrailersCount)]: 0
+    },
+    aborted: false,
+    timeoutCb: [Function: emitRequestTimeout],
+    upgradeOrConnect: false,
+    parser: null,
+    maxHeadersCount: null,
+    reusedSocket: false,
+    host: 'www.ohmyrockness.com',
+    protocol: 'https:',
+    _redirectable: Writable {
+      _events: [Object],
+      _writableState: [WritableState],
+      _maxListeners: undefined,
+      _options: [Object],
+      _ended: true,
+      _ending: true,
+      _redirectCount: 0,
+      _redirects: [],
+      _requestBodyLength: 0,
+      _requestBodyBuffers: [],
+      _eventsCount: 3,
+      _onNativeResponse: [Function (anonymous)],
+      _currentRequest: [Circular *1],
+      _currentUrl: 'https://www.ohmyrockness.com/api/shows.json?daterange%5Bfrom%5D=9-18-2025&daterange%5Buntil%5D=9-25-2025&index=true&per=500&regioned=1',
+      [Symbol(shapeMode)]: true,
+      [Symbol(kCapture)]: false
+    },
+    [Symbol(shapeMode)]: false,
+    [Symbol(kCapture)]: false,
+    [Symbol(kBytesWritten)]: 0,
+    [Symbol(kNeedDrain)]: false,
+    [Symbol(corked)]: 0,
+    [Symbol(kChunkedBuffer)]: [],
+    [Symbol(kChunkedLength)]: 0,
+    [Symbol(kSocket)]: TLSSocket {
+      _tlsOptions: [Object],
+      _secureEstablished: true,
+      _securePending: false,
+      _newSessionPending: false,
+      _controlReleased: true,
+      secureConnecting: false,
+      _SNICallback: null,
+      servername: 'www.ohmyrockness.com',
+      alpnProtocol: false,
+      authorized: true,
+      authorizationError: null,
+      encrypted: true,
+      _events: [Object: null prototype],
+      _eventsCount: 9,
+      connecting: false,
+      _hadError: false,
+      _parent: null,
+      _host: 'www.ohmyrockness.com',
+      _closeAfterHandlingError: false,
+      _readableState: [ReadableState],
+      _writableState: [WritableState],
+      allowHalfOpen: false,
+      _maxListeners: undefined,
+      _sockname: null,
+      _pendingData: null,
+      _pendingEncoding: '',
+      server: undefined,
+      _server: null,
+      ssl: null,
+      _requestCert: true,
+      _rejectUnauthorized: true,
+      timeout: 5000,
+      parser: null,
+      _httpMessage: [Circular *1],
+      autoSelectFamilyAttemptedAddresses: [Array],
+      write: [Function: writeAfterFIN],
+      [Symbol(alpncallback)]: null,
+      [Symbol(res)]: null,
+      [Symbol(verified)]: true,
+      [Symbol(pendingSession)]: null,
+      [Symbol(async_id_symbol)]: 8261,
+      [Symbol(kHandle)]: null,
+      [Symbol(lastWriteQueueSize)]: 0,
+      [Symbol(timeout)]: Timeout {
+        _idleTimeout: -1,
+        _idlePrev: null,
+        _idleNext: null,
+        _idleStart: 13158,
+        _onTimeout: null,
+        _timerArgs: undefined,
+        _repeat: null,
+        _destroyed: true,
+        [Symbol(refed)]: false,
+        [Symbol(kHasPrimitive)]: false,
+        [Symbol(asyncId)]: 8263,
+        [Symbol(triggerId)]: 0,
+        [Symbol(kAsyncContextFrame)]: undefined
+      },
+      [Symbol(kBuffer)]: null,
+      [Symbol(kBufferCb)]: null,
+      [Symbol(kBufferGen)]: null,
+      [Symbol(shapeMode)]: true,
+      [Symbol(kCapture)]: false,
+      [Symbol(kSetNoDelay)]: false,
+      [Symbol(kSetKeepAlive)]: true,
+      [Symbol(kSetKeepAliveInitialDelay)]: 60,
+      [Symbol(kBytesRead)]: 6777,
+      [Symbol(kBytesWritten)]: 353,
+      [Symbol(connect-options)]: [Object]
+    },
+    [Symbol(kOutHeaders)]: [Object: null prototype] {
+      accept: [Array],
+      authorization: [Array],
+      'user-agent': [Array],
+      'accept-encoding': [Array],
+      host: [Array]
+    },
+    [Symbol(errored)]: null,
+    [Symbol(kHighWaterMark)]: 65536,
+    [Symbol(kRejectNonStandardBodyWrites)]: false,
+    [Symbol(kUniqueHeaders)]: null
+  },
+  response: {
+    status: 403,
+    statusText: 'Forbidden',
+    headers: Object [AxiosHeaders] {
+      date: 'Thu, 18 Sep 2025 22:17:21 GMT',
+      'content-type': 'text/html; charset=UTF-8',
+      'transfer-encoding': 'chunked',
+      connection: 'close',
+      'accept-ch': 'Sec-CH-UA-Bitness, Sec-CH-UA-Arch, Sec-CH-UA-Full-Version, Sec-CH-UA-Mobile, Sec-CH-UA-Model, Sec-CH-UA-Platform-Version, Sec-CH-UA-Full-Version-List, Sec-CH-UA-Platform, Sec-CH-UA, UA-Bitness, UA-Arch, UA-Full-Version, UA-Mobile, UA-Model, UA-Platform-Version, UA-Platform, UA',
+      'cf-mitigated': 'challenge',
+      'critical-ch': 'Sec-CH-UA-Bitness, Sec-CH-UA-Arch, Sec-CH-UA-Full-Version, Sec-CH-UA-Mobile, Sec-CH-UA-Model, Sec-CH-UA-Platform-Version, Sec-CH-UA-Full-Version-List, Sec-CH-UA-Platform, Sec-CH-UA, UA-Bitness, UA-Arch, UA-Full-Version, UA-Mobile, UA-Model, UA-Platform-Version, UA-Platform, UA',
+      'cross-origin-embedder-policy': 'require-corp',
+      'cross-origin-opener-policy': 'same-origin',
+      'cross-origin-resource-policy': 'same-origin',
+      'origin-agent-cluster': '?1',
+      'permissions-policy': 'accelerometer=(),autoplay=(),browsing-topics=(),camera=(),clipboard-read=(),clipboard-write=(),geolocation=(),gyroscope=(),hid=(),interest-cohort=(),magnetometer=(),microphone=(),payment=(),publickey-credentials-get=(),screen-wake-lock=(),serial=(),sync-xhr=(),usb=()',
+      'referrer-policy': 'same-origin',
+      'server-timing': 'chlray;desc="98143685bdc1b213", cfL4;desc="?proto=TCP&rtt=22480&min_rtt=21861&rtt_var=8640&sent=4&recv=5&lost=0&retrans=0&sent_bytes=2828&recv_bytes=833&delivery_rate=184986&cwnd=252&unsent_bytes=0&cid=91a56c1401a62aa7&ts=41&x=0"',
+      'x-content-type-options': 'nosniff',
+      'x-frame-options': 'SAMEORIGIN',
+      'cache-control': 'private, max-age=0, no-store, no-cache, must-revalidate, post-check=0, pre-check=0',
+      expires: 'Thu, 01 Jan 1970 00:00:01 GMT',
+      'report-to': '{"endpoints":[{"url":"https:\\/\\/a.nel.cloudflare.com\\/report\\/v4?s=YxCi04%2BGSLuKoQszTip5xkTjyEhYOucowLHCW8pNxp3VYxw4jWcr9y9kXFZonbNQk%2BmT3qobPSf5tss%2B9fyEMFr17bqlP0xwz60m27L6%2BQm47nhPZu2ZLJkrPX%2F6VdsRZot83WzbR7ApUJ9jeCv50WGhRw%3D%3D"}],"group":"cf-nel","max_age":604800}',
+      nel: '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}',
+      vary: 'Accept-Encoding',
+      server: 'cloudflare',
+      'cf-ray': '98143685bdc1b213-EWR',
+      'alt-svc': 'h3=":443"; ma=86400'
+    },
+    config: {
+      transitional: [Object],
+      adapter: [Array],
+      transformRequest: [Array],
+      transformResponse: [Array],
+      timeout: 0,
+      xsrfCookieName: 'XSRF-TOKEN',
+      xsrfHeaderName: 'X-XSRF-TOKEN',
+      maxContentLength: -1,
+      maxBodyLength: -1,
+      env: [Object],
+      validateStatus: [Function: validateStatus],
+      headers: [Object [AxiosHeaders]],
+      method: 'get',
+      url: 'https://www.ohmyrockness.com/api/shows.json?daterange%5Bfrom%5D=9-18-2025&daterange%5Buntil%5D=9-25-2025&index=true&per=500&regioned=1',
+      allowAbsoluteUrls: true,
+      data: undefined
+    },
+    request: <ref *1> ClientRequest {
+      _events: [Object: null prototype],
+      _eventsCount: 7,
+      _maxListeners: undefined,
+      outputData: [],
+      outputSize: 0,
+      writable: true,
+      destroyed: true,
+      _last: true,
+      chunkedEncoding: false,
+      shouldKeepAlive: false,
+      maxRequestsOnConnectionReached: false,
+      _defaultKeepAlive: true,
+      useChunkedEncodingByDefault: false,
+      sendDate: false,
+      _removedConnection: false,
+      _removedContLen: false,
+      _removedTE: false,
+      strictContentLength: false,
+      _contentLength: 0,
+      _hasBody: true,
+      _trailer: '',
+      finished: true,
+      _headerSent: true,
+      _closed: true,
+      _header: 'GET /api/shows.json?daterange%5Bfrom%5D=9-18-2025&daterange%5Buntil%5D=9-25-2025&index=true&per=500&regioned=1 HTTP/1.1\r\n' +
+        'Accept: application/json, text/plain, */*\r\n' +
+        'Authorization: Token token="3b35f8a73dabd5f14b1cac167a14c1f6"\r\n' +
+        'User-Agent: axios/1.12.2\r\n' +
+        'Accept-Encoding: gzip, compress, deflate, br\r\n' +
+        'Host: www.ohmyrockness.com\r\n' +
+        'Connection: keep-alive\r\n' +
+        '\r\n',
+      _keepAliveTimeout: 0,
+      _onPendingData: [Function: nop],
+      agent: [Agent],
+      socketPath: undefined,
+      method: 'GET',
+      maxHeaderSize: undefined,
+      insecureHTTPParser: undefined,
+      joinDuplicateHeaders: undefined,
+      path: '/api/shows.json?daterange%5Bfrom%5D=9-18-2025&daterange%5Buntil%5D=9-25-2025&index=true&per=500&regioned=1',
+      _ended: true,
+      res: [IncomingMessage],
+      aborted: false,
+      timeoutCb: [Function: emitRequestTimeout],
+      upgradeOrConnect: false,
+      parser: null,
+      maxHeadersCount: null,
+      reusedSocket: false,
+      host: 'www.ohmyrockness.com',
+      protocol: 'https:',
+      _redirectable: [Writable],
+      [Symbol(shapeMode)]: false,
+      [Symbol(kCapture)]: false,
+      [Symbol(kBytesWritten)]: 0,
+      [Symbol(kNeedDrain)]: false,
+      [Symbol(corked)]: 0,
+      [Symbol(kChunkedBuffer)]: [],
+      [Symbol(kChunkedLength)]: 0,
+      [Symbol(kSocket)]: [TLSSocket],
+      [Symbol(kOutHeaders)]: [Object: null prototype],
+      [Symbol(errored)]: null,
+      [Symbol(kHighWaterMark)]: 65536,
+      [Symbol(kRejectNonStandardBodyWrites)]: false,
+      [Symbol(kUniqueHeaders)]: null
+    },
+    data: `<!DOCTYPE html><html lang="en-US"><head><title>Just a moment...</title><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=Edge"><meta name="robots" content="noindex,nofollow"><meta name="viewport" content="width=device-width,initial-scale=1"><style>*{box-sizing:border-box;margin:0;padding:0}html{line-height:1.15;-webkit-text-size-adjust:100%;color:#313131;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"}body{display:flex;flex-direction:column;height:100vh;min-height:100vh}.main-content{margin:8rem auto;padding-left:1.5rem;max-width:60rem}@media (width <= 720px){.main-content{margin-top:4rem}}.h2{line-height:2.25rem;font-size:1.5rem;font-weight:500}@media (width <= 720px){.h2{line-height:1.5rem;font-size:1.25rem}}#challenge-error-text{background-image:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgZmlsbD0ibm9uZSI+PHBhdGggZmlsbD0iI0IyMEYwMyIgZD0iTTE2IDNhMTMgMTMgMCAxIDAgMTMgMTNBMTMuMDE1IDEzLjAxNSAwIDAgMCAxNiAzbTAgMjRhMTEgMTEgMCAxIDEgMTEtMTEgMTEuMDEgMTEuMDEgMCAwIDEtMTEgMTEiLz48cGF0aCBmaWxsPSIjQjIwRjAzIiBkPSJNMTcuMDM4IDE4LjYxNUgxNC44N0wxNC41NjMgOS41aDIuNzgzem0tMS4wODQgMS40MjdxLjY2IDAgMS4wNTcuMzg4LjQwNy4zODkuNDA3Ljk5NCAwIC41OTYtLjQwNy45ODQtLjM5Ny4zOS0xLjA1Ny4zODktLjY1IDAtMS4wNTYtLjM4OS0uMzk4LS4zODktLjM5OC0uOTg0IDAtLjU5Ny4zOTgtLjk4NS40MDYtLjM5NyAxLjA1Ni0uMzk3Ii8+PC9zdmc+");background-repeat:no-repeat;background-size:contain;padding-left:34px}@media (prefers-color-scheme: dark){body{background-color:#222;color:#d9d9d9}}</style><meta http-equiv="refresh" content="360"></head><body><div class="main-wrapper" role="main"><div class="main-content"><noscript><div class="h2"><span id="challenge-error-text">Enable JavaScript and cookies to continue</span></div></noscript></div></div><script>(function(){window._cf_chl_opt = {cvId: '3',cZone: 'www.ohmyrockness.com',cType: 'managed',cRay: '98143685bdc1b213',cH: 'JHDhILHBV4LfBUNZtEhTNtUoCVTzFDK63HSWBkfGfj0-1758233841-1.2.1.1-LoP6UL6zmZXcmnl_WtTFx07PHSp1ZWhZx18ypXFQLoopcLWp15Ok1ZY6rh6eLbiJ',cUPMDTk:"\\/api\\/shows.json?daterange%5Bfrom%5D=9-18-2025&daterange%5Buntil%5D=9-25-2025&index=true&per=500&regioned=1&__cf_chl_tk=QjFWdP3_zNShRJXqitJKNRhoY6UdJ480rE9bXUkKyek-1758233841-1.0.1.1-9X9Bp0TSIc_Dc_Csxz2YGhAhBRCHI3iMvEnHV5sBTug",cFPWv: 'g',cITimeS: '1758233841',cTplC:0,cTplV:5,cTplB: 'cf',fa:"\\/api\\/shows.json?daterange%5Bfrom%5D=9-18-2025&daterange%5Buntil%5D=9-25-2025&index=true&per=500&regioned=1&__cf_chl_f_tk=QjFWdP3_zNShRJXqitJKNRhoY6UdJ480rE9bXUkKyek-1758233841-1.0.1.1-9X9Bp0TSIc_Dc_Csxz2YGhAhBRCHI3iMvEnHV5sBTug",md: 'gB5fGB23C8fXbeVsZ.MckydXILMh3e1AMDKRPfNn0eI-1758233841-1.2.1.1-Aik.Ojhp33KQuZjFejtZAdcWQaHfw0EeBiyfSayBhJ2C7Rejc5wzEdO3R9T8DJ1v2mioacTGButnlFAUBXx9OE58isOhZsaXzfyvknmfzUbNWvGAw.RGehRrtd_bRlbgpmXsyO4GluutRS_7hBYsMAY0nh2Jazy3T2xadzXhN694SPn9Z5xRa0eCVaon2LuLLxSTN.2FpYIFIuppaa21Tk6A_5VR5SLAN6AOTMZl1LGo7cmIgtRkAfFtR_O6SIZCRmJUgy205MDSzARwgutpBi52Jqhk_atMB46UhUrWd3wu2r7wtUF7VpTTxIZXZ4cJts221c77lvfTS1T93PONAyX6T4urdD0cTiXwOI8hP_aTWzbwOSbspCvZJSeKqfY_k9nDQ9dqAz_CWqTWqEFcHoTb5wXJop_NrnpYy112iKGxg0Eix71cAVhQOPd5Nz0eSfxJ9JqNiC_ZK0Uq47SblnDpVzpB3k07TUrlxdXRABM9Fh9eUsLSowu0pqwErIN0mFzXrmxrPKuio.NtVQh.kSpU7AfKplSP5F.gOOFFlsgLOza1744xnfOtj7Xm7TX_yW7.xRuI0Wr9m_mz2AIvt6JFWtIgjKmtlx89CgTpedXV4c1ymfLvZQsIiYRuz0Wj0OVLI0AyRl3yoTZqL7u0B7PDKdwVjLtNFGz.LZvBnRYBDYu4vF9dDTa_9L8sjgHRM0HWe5b96sE.Hv_1FuZrKQaqEFsm53Mmp.wrRtQE5WrIoMNH706Dc4ZmRMJYJxXbfwYo9EQJ5pSiKcEH685uyWVZZsYFnNKZUmqVliiiyDyGkIVbku6TIDWeU3iclf_kRaDbkpcCLGM3pKY6UEseYWA_cjmahKH3hEeCWyHx_uKU2kF18.czb_q1qOcYzLha1g3bWolsGCIDFJkg13HjDuyPVDFp_8iNhqyYPLVWo4zpRbjjDC_TnyN6isGLqkLzhyr_MG8nv7Meb4JKz1SbOg',mdrd: 'D.VG_xy6HI6DCk4GKl7XmGcIbFtFOaoL9yid39F6_Fo-1758233841-1.2.1.1-w2QmQbgwuLVykhQtXe.NKtYjJ_boOzTapDYM6WV_Lg6x_qgCfOcO21R.B46qlpWRbglmro.Zx3NlJVDLK5JhFUaGF6wFBDPsonWvVXPsbQeL0fmigxhLdcQ1Qpt7mh8A2ELJYBMPIF94OndrhdX82wavSl5DXdRFjIlZmZ2Kv6rHAtNfzTN5KC1hSIOdGblkkIx1o54ulGhojAuF_h5MkLPiD_ubkYMBQSDHyL_Mb4EgyM7MzdaUaBf7lGAeRso3_ohmN75Puea9NRL._oa4Q8_xbzcIibZaKD4dQfLGNQcro1yfW_FNnbtSOrITv5f79Ajh1hrF0J5w085TJKkOGk7FnpK2wWku3fu.aWQ6P_U1Bv3A5G0TKWFJ9jIF8M.ICXtyXtu75Ng_l3VmtdmM6pdy0Q73.tx5oC70JeFipYi6VE.V88GyaTqURORxUsXD3UufiTnNZn6WlPe4tY76rOLzVnWVWV3VF7GKsS7.fvcUj623jwO0K5_fDwHlUvbJI0r4Fg5AiU82JvFoxtmkZa73dwKp1anMGObnAHPO3teUY2NAXUa.LqG.xAKau_U5aH5WXnKnhqrqU6ZAsomQisDWy8GD_W21sLCWDlvInce5BVjJc.HpR1iXcn86V_Q1pflYvnafFKd_WwQAUwsMSdlwQfoqYdPe3RCwnBqJ3iszbGLcfeMUufBY_e31_9iRVGHa2nAy.JVIvVykkPD.kwFGGU_G2fRZZEnPpp22B9GiFabWlf5n1fJRZokTU4FK7yhmB8lYcZP.IfubfLqP8Vfk0Ze1_ZY0.3qF1NYy2uCq5GZNe1KB2qDRfA.hop0g70SUU7p8tlZJ0jXRvqqio70coV.n0MJy6wQRgJ_7vIX6S7qbCpIUoLsluwKsFbdGS7H.w8g0purf6I6lHPGoORzi5zwcHdPBIQj7YyA714qEipszxxji0kqsLqR84A5E.N8qKG_JbqmdtQmvnypvT9wl2aoOXVKbwV9A_4IS1VljVZ_okdzLPfj0gl5noM_.FCET..7wd3dEA56yKo0XJWYn1MF6qFdSKCfshtBJyRZNP6fJ61mhl6a8ZB3MZnab0RQ.GfkcBXwD0C1EZ.mopYz6_TiRcw0WpYazEACcYTEqKuAMyL6bkEXXyd9.k8RbHWbcHvFTEIHjy32VaurNzAKabRCF2si8GGna7_w5wGt_dYRAoFV5zSk1_SsJUG7eIRioBZASzZC_c53WqFGW0b4MQTFxWwg6s5EA6xphigObrnPfPgje.N8cqYlLC2Nr53zG3WPm47lKlZDbKgsQwZFP9PwuzQ1vRbTxpg3BmBOLhXIIhDuJuH4zdXNhyj2ZH1FW1XexTtCrx3fpSpmMQiaZAiZ_2NU9fSF3dZfrrQdJ_TTEEva0RG8jfA9xbTvuf82RUa.LsMW0s2aTWQlhb8s7AbmSYGfOg7JngnWLfPmUm1v9HVhpRrvYZG6w8tecglTz9SbAoXyL8PSzqsRROlsVPJlF6HnMOqVmbcvcmGtMPZr_6xjYAAot99J7f82YbhrZlQ7qNJLZOxxcIVt5T.DEp6147j4HkYJAuISLugGyIE0eLifJotemhsu8GTomrGpLPwYL4rbNw9vfAXhcgdxIt1e61loDSGiE3.QpXngunwk0yejJWozxtPNBZWIFt0TrkNovzMCzhBOM81uDmnLDR9vLoeyqQ3iLSX3QXjeKcqnk2tGmJqEUBFu5vLOBYJcckm2yaz7dNxmdtSDQeMuMYXo_yC6pgOPdZoMBeDmXKoacXhOrMTtF4iwZfGPXQ3xXbzesyL5pTv_x0KV0i9mwgkKXRwYqF7T2ZwFsPeEll0Pr7Xvl6qG6MFTvUtel99J.m_bhKO_J8C52Fx2M2HbXgiyzTo7MrvhxYl6s7hpK1MGbb.UR2_U.HECVBBOHMbR7dBFeLfS4CMKRX6dYswJJNMF7lhgq3BJcKd_oRm4BEsqGgALc9L9G3TgpA_mcD8Ahpg_xuva3ATemnmvcZUN_A5bkHobkqYkXyJ6RWY_lTZjMt2y_TwLD3rLekZYL56DzgsCRN7t5IdEmffngcSr29MCcquRmZTBMxnrC2Ty7geuqVL1_9_OVxsuUOpog0XbJE6OcwpPSCVNNrrzeiWgSHqR5SsEMCy6bVSBS.pLhp0l.3Coe2aQc8wQELhmrbuGbuV_HspcEc0PoZ6L287rmE6vD4O8Wl1wg_wHz79urk0GylSHrpVS3WoZp7ZM9fwcxPbu_QsFfPWqbad4LWFre.7HkEEz7MsAXuIWYOuBKNt4Frmkjru0Vo5vrhn73thqWcZz2MUzBpG1PlGt0mnTtT20xsHOe5BFVay_6qGu3gKmxqLQ__RSYaWnDotS3bgTEowjhDiLx2mBD9vxynjqu6iwRceTdohbaCtNiqmsGeQvPpDZsDs8y_srbfSi5KYt8T2VP6D89raHO79X6kE3pO6p30uNAwg8ofqVFXxagLX1C0ttLi7npJdPH6OCZfGZWyVv19fQU4QJXKcXQbw',};var a = document.createElement('script');a.src = '/cdn-cgi/challenge-platform/h/g/orchestrate/chl_page/v1?ray=98143685bdc1b213';window._cf_chl_opt.cOgUHash = location.hash === '' && location.href.indexOf('#') !== -1 ? '#' : location.hash;window._cf_chl_opt.cOgUQuery = location.search === '' && location.href.slice(0, location.href.length - window._cf_chl_opt.cOgUHash.length).indexOf('?') !== -1 ? '?' : location.search;if (window.history && window.history.replaceState) {var ogU = location.pathname + window._cf_chl_opt.cOgUQuery + window._cf_chl_opt.cOgUHash;history.replaceState(null, null,"\\/api\\/shows.json?daterange%5Bfrom%5D=9-18-2025&daterange%5Buntil%5D=9-25-2025&index=true&per=500&regioned=1&__cf_chl_rt_tk=QjFWdP3_zNShRJXqitJKNRhoY6UdJ480rE9bXUkKyek-1758233841-1.0.1.1-9X9Bp0TSIc_Dc_Csxz2YGhAhBRCHI3iMvEnHV5sBTug"+ window._cf_chl_opt.cOgUHash);a.onload = function() {history.replaceState(null, null, ogU);}}document.getElementsByTagName('head')[0].appendChild(a);}());</script></body></html>`
+  },
+  status: 403
+} <!DOCTYPE html><html lang="en-US"><head><title>Just a moment...</title><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=Edge"><meta name="robots" content="noindex,nofollow"><meta name="viewport" content="width=device-width,initial-scale=1"><style>*{box-sizing:border-box;margin:0;padding:0}html{line-height:1.15;-webkit-text-size-adjust:100%;color:#313131;font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"}body{display:flex;flex-direction:column;height:100vh;min-height:100vh}.main-content{margin:8rem auto;padding-left:1.5rem;max-width:60rem}@media (width <= 720px){.main-content{margin-top:4rem}}.h2{line-height:2.25rem;font-size:1.5rem;font-weight:500}@media (width <= 720px){.h2{line-height:1.5rem;font-size:1.25rem}}#challenge-error-text{background-image:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMiIgaGVpZ2h0PSIzMiIgZmlsbD0ibm9uZSI+PHBhdGggZmlsbD0iI0IyMEYwMyIgZD0iTTE2IDNhMTMgMTMgMCAxIDAgMTMgMTNBMTMuMDE1IDEzLjAxNSAwIDAgMCAxNiAzbTAgMjRhMTEgMTEgMCAxIDEgMTEtMTEgMTEuMDEgMTEuMDEgMCAwIDEtMTEgMTEiLz48cGF0aCBmaWxsPSIjQjIwRjAzIiBkPSJNMTcuMDM4IDE4LjYxNUgxNC44N0wxNC41NjMgOS41aDIuNzgzem0tMS4wODQgMS40MjdxLjY2IDAgMS4wNTcuMzg4LjQwNy4zODkuNDA3Ljk5NCAwIC41OTYtLjQwNy45ODQtLjM5Ny4zOS0xLjA1Ny4zODktLjY1IDAtMS4wNTYtLjM4OS0uMzk4LS4zODktLjM5OC0uOTg0IDAtLjU5Ny4zOTgtLjk4NS40MDYtLjM5NyAxLjA1Ni0uMzk3Ii8+PC9zdmc+");background-repeat:no-repeat;background-size:contain;padding-left:34px}@media (prefers-color-scheme: dark){body{background-color:#222;color:#d9d9d9}}</style><meta http-equiv="refresh" content="360"></head><body><div class="main-wrapper" role="main"><div class="main-content"><noscript><div class="h2"><span id="challenge-error-text">Enable JavaScript and cookies to continue</span></div></noscript></div></div><script>(function(){window._cf_chl_opt = {cvId: '3',cZone: 'www.ohmyrockness.com',cType: 'managed',cRay: '98143685bdc1b213',cH: 'JHDhILHBV4LfBUNZtEhTNtUoCVTzFDK63HSWBkfGfj0-1758233841-1.2.1.1-LoP6UL6zmZXcmnl_WtTFx07PHSp1ZWhZx18ypXFQLoopcLWp15Ok1ZY6rh6eLbiJ',cUPMDTk:"\/api\/shows.json?daterange%5Bfrom%5D=9-18-2025&daterange%5Buntil%5D=9-25-2025&index=true&per=500&regioned=1&__cf_chl_tk=QjFWdP3_zNShRJXqitJKNRhoY6UdJ480rE9bXUkKyek-1758233841-1.0.1.1-9X9Bp0TSIc_Dc_Csxz2YGhAhBRCHI3iMvEnHV5sBTug",cFPWv: 'g',cITimeS: '1758233841',cTplC:0,cTplV:5,cTplB: 'cf',fa:"\/api\/shows.json?daterange%5Bfrom%5D=9-18-2025&daterange%5Buntil%5D=9-25-2025&index=true&per=500&regioned=1&__cf_chl_f_tk=QjFWdP3_zNShRJXqitJKNRhoY6UdJ480rE9bXUkKyek-1758233841-1.0.1.1-9X9Bp0TSIc_Dc_Csxz2YGhAhBRCHI3iMvEnHV5sBTug",md: 'gB5fGB23C8fXbeVsZ.MckydXILMh3e1AMDKRPfNn0eI-1758233841-1.2.1.1-Aik.Ojhp33KQuZjFejtZAdcWQaHfw0EeBiyfSayBhJ2C7Rejc5wzEdO3R9T8DJ1v2mioacTGButnlFAUBXx9OE58isOhZsaXzfyvknmfzUbNWvGAw.RGehRrtd_bRlbgpmXsyO4GluutRS_7hBYsMAY0nh2Jazy3T2xadzXhN694SPn9Z5xRa0eCVaon2LuLLxSTN.2FpYIFIuppaa21Tk6A_5VR5SLAN6AOTMZl1LGo7cmIgtRkAfFtR_O6SIZCRmJUgy205MDSzARwgutpBi52Jqhk_atMB46UhUrWd3wu2r7wtUF7VpTTxIZXZ4cJts221c77lvfTS1T93PONAyX6T4urdD0cTiXwOI8hP_aTWzbwOSbspCvZJSeKqfY_k9nDQ9dqAz_CWqTWqEFcHoTb5wXJop_NrnpYy112iKGxg0Eix71cAVhQOPd5Nz0eSfxJ9JqNiC_ZK0Uq47SblnDpVzpB3k07TUrlxdXRABM9Fh9eUsLSowu0pqwErIN0mFzXrmxrPKuio.NtVQh.kSpU7AfKplSP5F.gOOFFlsgLOza1744xnfOtj7Xm7TX_yW7.xRuI0Wr9m_mz2AIvt6JFWtIgjKmtlx89CgTpedXV4c1ymfLvZQsIiYRuz0Wj0OVLI0AyRl3yoTZqL7u0B7PDKdwVjLtNFGz.LZvBnRYBDYu4vF9dDTa_9L8sjgHRM0HWe5b96sE.Hv_1FuZrKQaqEFsm53Mmp.wrRtQE5WrIoMNH706Dc4ZmRMJYJxXbfwYo9EQJ5pSiKcEH685uyWVZZsYFnNKZUmqVliiiyDyGkIVbku6TIDWeU3iclf_kRaDbkpcCLGM3pKY6UEseYWA_cjmahKH3hEeCWyHx_uKU2kF18.czb_q1qOcYzLha1g3bWolsGCIDFJkg13HjDuyPVDFp_8iNhqyYPLVWo4zpRbjjDC_TnyN6isGLqkLzhyr_MG8nv7Meb4JKz1SbOg',mdrd: 'D.VG_xy6HI6DCk4GKl7XmGcIbFtFOaoL9yid39F6_Fo-1758233841-1.2.1.1-w2QmQbgwuLVykhQtXe.NKtYjJ_boOzTapDYM6WV_Lg6x_qgCfOcO21R.B46qlpWRbglmro.Zx3NlJVDLK5JhFUaGF6wFBDPsonWvVXPsbQeL0fmigxhLdcQ1Qpt7mh8A2ELJYBMPIF94OndrhdX82wavSl5DXdRFjIlZmZ2Kv6rHAtNfzTN5KC1hSIOdGblkkIx1o54ulGhojAuF_h5MkLPiD_ubkYMBQSDHyL_Mb4EgyM7MzdaUaBf7lGAeRso3_ohmN75Puea9NRL._oa4Q8_xbzcIibZaKD4dQfLGNQcro1yfW_FNnbtSOrITv5f79Ajh1hrF0J5w085TJKkOGk7FnpK2wWku3fu.aWQ6P_U1Bv3A5G0TKWFJ9jIF8M.ICXtyXtu75Ng_l3VmtdmM6pdy0Q73.tx5oC70JeFipYi6VE.V88GyaTqURORxUsXD3UufiTnNZn6WlPe4tY76rOLzVnWVWV3VF7GKsS7.fvcUj623jwO0K5_fDwHlUvbJI0r4Fg5AiU82JvFoxtmkZa73dwKp1anMGObnAHPO3teUY2NAXUa.LqG.xAKau_U5aH5WXnKnhqrqU6ZAsomQisDWy8GD_W21sLCWDlvInce5BVjJc.HpR1iXcn86V_Q1pflYvnafFKd_WwQAUwsMSdlwQfoqYdPe3RCwnBqJ3iszbGLcfeMUufBY_e31_9iRVGHa2nAy.JVIvVykkPD.kwFGGU_G2fRZZEnPpp22B9GiFabWlf5n1fJRZokTU4FK7yhmB8lYcZP.IfubfLqP8Vfk0Ze1_ZY0.3qF1NYy2uCq5GZNe1KB2qDRfA.hop0g70SUU7p8tlZJ0jXRvqqio70coV.n0MJy6wQRgJ_7vIX6S7qbCpIUoLsluwKsFbdGS7H.w8g0purf6I6lHPGoORzi5zwcHdPBIQj7YyA714qEipszxxji0kqsLqR84A5E.N8qKG_JbqmdtQmvnypvT9wl2aoOXVKbwV9A_4IS1VljVZ_okdzLPfj0gl5noM_.FCET..7wd3dEA56yKo0XJWYn1MF6qFdSKCfshtBJyRZNP6fJ61mhl6a8ZB3MZnab0RQ.GfkcBXwD0C1EZ.mopYz6_TiRcw0WpYazEACcYTEqKuAMyL6bkEXXyd9.k8RbHWbcHvFTEIHjy32VaurNzAKabRCF2si8GGna7_w5wGt_dYRAoFV5zSk1_SsJUG7eIRioBZASzZC_c53WqFGW0b4MQTFxWwg6s5EA6xphigObrnPfPgje.N8cqYlLC2Nr53zG3WPm47lKlZDbKgsQwZFP9PwuzQ1vRbTxpg3BmBOLhXIIhDuJuH4zdXNhyj2ZH1FW1XexTtCrx3fpSpmMQiaZAiZ_2NU9fSF3dZfrrQdJ_TTEEva0RG8jfA9xbTvuf82RUa.LsMW0s2aTWQlhb8s7AbmSYGfOg7JngnWLfPmUm1v9HVhpRrvYZG6w8tecglTz9SbAoXyL8PSzqsRROlsVPJlF6HnMOqVmbcvcmGtMPZr_6xjYAAot99J7f82YbhrZlQ7qNJLZOxxcIVt5T.DEp6147j4HkYJAuISLugGyIE0eLifJotemhsu8GTomrGpLPwYL4rbNw9vfAXhcgdxIt1e61loDSGiE3.QpXngunwk0yejJWozxtPNBZWIFt0TrkNovzMCzhBOM81uDmnLDR9vLoeyqQ3iLSX3QXjeKcqnk2tGmJqEUBFu5vLOBYJcckm2yaz7dNxmdtSDQeMuMYXo_yC6pgOPdZoMBeDmXKoacXhOrMTtF4iwZfGPXQ3xXbzesyL5pTv_x0KV0i9mwgkKXRwYqF7T2ZwFsPeEll0Pr7Xvl6qG6MFTvUtel99J.m_bhKO_J8C52Fx2M2HbXgiyzTo7MrvhxYl6s7hpK1MGbb.UR2_U.HECVBBOHMbR7dBFeLfS4CMKRX6dYswJJNMF7lhgq3BJcKd_oRm4BEsqGgALc9L9G3TgpA_mcD8Ahpg_xuva3ATemnmvcZUN_A5bkHobkqYkXyJ6RWY_lTZjMt2y_TwLD3rLekZYL56DzgsCRN7t5IdEmffngcSr29MCcquRmZTBMxnrC2Ty7geuqVL1_9_OVxsuUOpog0XbJE6OcwpPSCVNNrrzeiWgSHqR5SsEMCy6bVSBS.pLhp0l.3Coe2aQc8wQELhmrbuGbuV_HspcEc0PoZ6L287rmE6vD4O8Wl1wg_wHz79urk0GylSHrpVS3WoZp7ZM9fwcxPbu_QsFfPWqbad4LWFre.7HkEEz7MsAXuIWYOuBKNt4Frmkjru0Vo5vrhn73thqWcZz2MUzBpG1PlGt0mnTtT20xsHOe5BFVay_6qGu3gKmxqLQ__RSYaWnDotS3bgTEowjhDiLx2mBD9vxynjqu6iwRceTdohbaCtNiqmsGeQvPpDZsDs8y_srbfSi5KYt8T2VP6D89raHO79X6kE3pO6p30uNAwg8ofqVFXxagLX1C0ttLi7npJdPH6OCZfGZWyVv19fQU4QJXKcXQbw',};var a = document.createElement('script');a.src = '/cdn-cgi/challenge-platform/h/g/orchestrate/chl_page/v1?ray=98143685bdc1b213';window._cf_chl_opt.cOgUHash = location.hash === '' && location.href.indexOf('#') !== -1 ? '#' : location.hash;window._cf_chl_opt.cOgUQuery = location.search === '' && location.href.slice(0, location.href.length - window._cf_chl_opt.cOgUHash.length).indexOf('?') !== -1 ? '?' : location.search;if (window.history && window.history.replaceState) {var ogU = location.pathname + window._cf_chl_opt.cOgUQuery + window._cf_chl_opt.cOgUHash;history.replaceState(null, null,"\/api\/shows.json?daterange%5Bfrom%5D=9-18-2025&daterange%5Buntil%5D=9-25-2025&index=true&per=500&regioned=1&__cf_chl_rt_tk=QjFWdP3_zNShRJXqitJKNRhoY6UdJ480rE9bXUkKyek-1758233841-1.0.1.1-9X9Bp0TSIc_Dc_Csxz2YGhAhBRCHI3iMvEnHV5sBTug"+ window._cf_chl_opt.cOgUHash);a.onload = function() {history.replaceState(null, null, ogU);}}document.getElementsByTagName('head')[0].appendChild(a);}());</script></body></html>
+Done pulling shows
+All tasks completed successfully!

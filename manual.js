@@ -2,30 +2,39 @@ const pullShows = require('./pullShows.js');
 const { getTokenFromRefresh, updateTracksDb, clearPlaylist, updatePlaylist } = require('./spotify.js');
 const prisma = require('./prisma/prismaClient.js');
 
+const main = async () => {
+    try {
+        // // Pull upcoming shows from OMR and insert into DB
+        // console.log(`Pulling shows`);
+        // await pullShows();
+        // console.log('Done pulling shows');
 
-// Pull upcoming shows from OMR and insert into DB
-console.log(`Pulling shows`);
-await pullShows();
-console.log('Done pulling shows');
+        // Refresh Spotify token
+        console.log('Refreshing Spotify token');
+        const token = await getTokenFromRefresh();
+        console.log('Done refreshing Spotify token');
 
-// // Refresh playlist
+        // // Get artists' top tracks + insert into DB
+        // console.log(`Updating tracks db`);
+        // await updateTracksDb(token);
+        // console.log('Done updating tracks db');
 
-// // Refresh Spotify token
-// console.log('Refreshing Spotify token');
-// const token = await getTokenFromRefresh();
-// console.log('Done refreshing Spotify token');
+        // Clear playlist
+        console.log(`Clearing playlist`);
+        await clearPlaylist(token);
+        console.log('Done clearing playlist');
 
-// // Get artists' top tracks + insert into DB
-// console.log(`Updating tracks db`);
-// await updateTracksDb(token);
-// console.log('Done updating tracks db');
+        // Update playlist
+        console.log(`Updating playlist`);
+        await updatePlaylist(token);
+        console.log('Done updating playlist');
 
-// // Clear playlist
-// console.log(`Clearing playlist`);
-// await clearPlaylist(token);
-// console.log('Done clearing playlist');
+        console.log('All tasks completed successfully!');
+    } catch (error) {
+        console.error('Error in main function:', error);
+        console.error('Stack trace:', error.stack);
+        process.exit(1);
+    }
+};
 
-// // Update playlist
-// console.log(`Updating playlist`);
-// await updatePlaylist(token);
-// console.log('Done updating playlist');
+main().catch(console.error);
