@@ -40,6 +40,11 @@ echo "Display: $DISPLAY"
 echo "Node version: $(node --version)"
 echo "Chrome/Chromium path: $PUPPETEER_EXECUTABLE_PATH"
 
+# Debug Chrome connection first
+echo "Running Chrome debug test..."
+node debug-chrome.js
+
+echo "Starting main application..."
 # Run the server-optimized application with timeout (15 minutes max for slower server)
 timeout 900 node manual.server.js
 
