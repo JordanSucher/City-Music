@@ -24,11 +24,11 @@ const getOmrToken = async () => {
 
     console.log('📡 Making Web Unlocker API request...');
 
-    // Try simpler request first to test basic connectivity
+    // Web Unlocker API request with required parameters
     const requestPayload = {
       zone: UNLOCKER_CONFIG.zoneName,
-      url: targetUrl
-      // Remove optional parameters that might cause 400 error
+      url: targetUrl,
+      format: 'raw' // REQUIRED parameter
     };
 
     console.log('🔧 Request payload:', JSON.stringify(requestPayload, null, 2));
@@ -118,8 +118,7 @@ const getOmrToken = async () => {
         const apiResponse = await axios.post(UNLOCKER_CONFIG.apiUrl, {
           zone: UNLOCKER_CONFIG.zoneName,
           url: apiUrl,
-          format: 'raw',
-          country: 'US'
+          format: 'raw'
         }, {
           headers: {
             'Content-Type': 'application/json',
@@ -180,7 +179,6 @@ const getOmrToken = async () => {
           zone: UNLOCKER_CONFIG.zoneName,
           url: apiUrl,
           format: 'raw',
-          country: 'US',
           headers: {
             'Authorization': auth,
             'Referer': 'https://www.ohmyrockness.com/shows',
