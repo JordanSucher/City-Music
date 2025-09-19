@@ -3,34 +3,44 @@ const axios = require('axios');
 
 let auth = null;
 
-// Bright Data Unlocker API Configuration
+// Bright Data API Configuration - try multiple endpoints
+const PROXY_ENDPOINTS = [
+  // Try Unlocker endpoint first
+  process.env.BRIGHTDATA_HOST + ':' + (process.env.BRIGHTDATA_PORT || '22225'),
+  // Fallback to standard residential proxy endpoints
+  'brd.superproxy.io:22225',
+  'brd.superproxy.io:33335'
+];
+
 const UNLOCKER_CONFIG = {
-  username: process.env.BRIGHTDATA_USER || 'brd-customer-hl_xxxxx-zone-unlocker',
+  username: process.env.BRIGHTDATA_USER || 'brd-customer-hl_xxxxx-zone-residential',
   password: process.env.BRIGHTDATA_PASS || 'your_password_here',
-  endpoint: process.env.BRIGHTDATA_HOST + ':' + (process.env.BRIGHTDATA_PORT || '22225')
+  endpoints: PROXY_ENDPOINTS
 };
 
 const getOmrToken = async () => {
   auth = null;
 
-  try {
-    console.log('🚀 Using Bright Data Unlocker API...');
-    console.log(`🌐 Endpoint: ${UNLOCKER_CONFIG.endpoint}`);
+  // Try each endpoint until one works
+  for (const endpoint of UNLOCKER_CONFIG.endpoints) {
+    try {
+      console.log('🚀 Using Bright Data API...');
+      console.log(`🌐 Trying endpoint: ${endpoint}`);
 
-    // First request - get the main page and extract token
-    const targetUrl = 'https://www.ohmyrockness.com/shows?all=true';
+      // First request - get the main page and extract token
+      const targetUrl = 'https://www.ohmyrockness.com/shows?all=true';
 
-    console.log('📡 Making Unlocker API request...');
-    const response = await axios.get(targetUrl, {
-      proxy: {
-        protocol: 'http',
-        host: UNLOCKER_CONFIG.endpoint.split(':')[0],
-        port: parseInt(UNLOCKER_CONFIG.endpoint.split(':')[1]),
-        auth: {
-          username: UNLOCKER_CONFIG.username,
-          password: UNLOCKER_CONFIG.password
-        }
-      },
+      console.log('📡 Making API request...');
+      const response = await axios.get(targetUrl, {
+        proxy: {
+          protocol: 'http',
+          host: endpoint.split(':')[0],
+          port: parseInt(endpoint.split(':')[1]),
+          auth: {
+            username: UNLOCKER_CONFIG.username,
+            password: UNLOCKER_CONFIG.password
+          }
+        },
       headers: {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
@@ -200,19 +210,25 @@ const getOmrToken = async () => {
       }
     }
 
-    console.log('🔐 Final auth token:', auth || 'Not found');
-    return {
-      token: auth,
-      apiData: auth ? { success: false, error: 'Token found but API call failed' } : null
-    };
+      console.log('🔐 Final auth token:', auth || 'Not found');
+      return {
+        token: auth,
+        apiData: auth ? { success: false, error: 'Token found but API call failed' } : null
+      };
 
-  } catch (error) {
-    console.log('💥 Unlocker API error:', error.response?.status || error.message);
-    if (error.response?.data) {
-      console.log('📄 Error response:', error.response.data.substring(0, 500));
+    } catch (error) {
+      console.log(`💥 Endpoint ${endpoint} failed:`, error.response?.status || error.message);
+      if (error.response?.data) {
+        console.log('📄 Error response:', error.response.data.substring(0, 200));
+      }
+      // Continue to next endpoint
+      continue;
     }
-    return null;
   }
+
+  // All endpoints failed
+  console.log('❌ All endpoints failed');
+  return null;
 };
 
 if (require.main === module) {
