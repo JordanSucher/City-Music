@@ -26,11 +26,11 @@ const getOmrToken = async () => {
 
     console.log('📡 Making Web Unlocker API request...');
 
-    // Web Unlocker API request with HAR format to capture network requests
+    // Web Unlocker API request with JSON format
     const requestPayload = {
       zone: UNLOCKER_CONFIG.zoneName,
       url: targetUrl,
-      format: 'har' // HAR format captures all network requests including auth tokens
+      format: 'json' // JSON format might provide structured response with more metadata
     };
 
     console.log('🔧 Request payload:', JSON.stringify(requestPayload, null, 2));
@@ -45,66 +45,58 @@ const getOmrToken = async () => {
       timeout: 180000 // 3 minutes - Web Unlocker can take time for complex Cloudflare challenges
     });
 
-    console.log('✅ Web Unlocker HAR response received');
+    console.log('✅ Web Unlocker JSON response received');
     console.log(`📊 Status: ${response.status}`);
     console.log(`🔍 Response type: ${typeof response.data}`);
 
-    // HAR format returns JSON with log.entries containing all network requests
-    let harData = null;
+    // JSON format returns structured data
+    let jsonData = null;
     let htmlContent = '';
 
     try {
-      harData = typeof response.data === 'string' ? JSON.parse(response.data) : response.data;
-      console.log('📋 HAR structure:', Object.keys(harData || {}));
+      jsonData = typeof response.data === 'string' ? JSON.parse(response.data) : response.data;
+      console.log('📋 JSON structure:', Object.keys(jsonData || {}));
+      console.log('🔍 JSON response preview:', JSON.stringify(jsonData, null, 2).substring(0, 1000));
 
-      if (harData && harData.log && harData.log.entries) {
-        console.log(`🌐 Network requests captured: ${harData.log.entries.length}`);
-
-        // Find the main page response for HTML content
-        const mainPage = harData.log.entries.find(entry =>
-          entry.request.url === targetUrl ||
-          entry.request.url.includes('ohmyrockness.com/shows')
-        );
-
-        if (mainPage && mainPage.response && mainPage.response.content) {
-          htmlContent = mainPage.response.content.text || '';
-          console.log(`📏 HTML Content length: ${htmlContent.length}`);
+      // Different possible structures for JSON format
+      if (jsonData) {
+        // Try to find HTML content in various JSON fields
+        if (jsonData.body) {
+          htmlContent = jsonData.body;
+          console.log(`📏 HTML Content from body: ${htmlContent.length}`);
+        } else if (jsonData.content) {
+          htmlContent = jsonData.content;
+          console.log(`📏 HTML Content from content: ${htmlContent.length}`);
+        } else if (jsonData.html) {
+          htmlContent = jsonData.html;
+          console.log(`📏 HTML Content from html: ${htmlContent.length}`);
+        } else if (jsonData.response) {
+          htmlContent = jsonData.response;
+          console.log(`📏 HTML Content from response: ${htmlContent.length}`);
+        } else {
+          // Maybe the whole response is HTML
+          htmlContent = JSON.stringify(jsonData);
+          console.log(`📏 HTML Content from full JSON: ${htmlContent.length}`);
         }
 
-        // Look for API calls in network requests
-        const apiRequests = harData.log.entries.filter(entry =>
-          entry.request.url.includes('/api/') ||
-          entry.request.url.includes('shows.json')
-        );
-
-        console.log(`📡 API requests found: ${apiRequests.length}`);
-
-        // Extract auth tokens from request headers
-        for (const apiReq of apiRequests) {
-          console.log(`🔍 API Request: ${apiReq.request.method} ${apiReq.request.url}`);
-
-          const headers = apiReq.request.headers || [];
-          for (const header of headers) {
-            if (header.name.toLowerCase().includes('authorization') ||
-                header.name.toLowerCase().includes('auth') ||
-                header.name.toLowerCase().includes('token')) {
-              auth = header.value;
-              console.log(`🔑 Found auth header '${header.name}': ${auth.substring(0, 30)}...`);
-              break;
-            }
-          }
-
-          if (auth) break;
+        // Look for any network/request data in JSON
+        if (jsonData.requests || jsonData.network || jsonData.calls) {
+          console.log('🌐 Found network data in JSON response');
+          console.log('📡 Network data:', jsonData.requests || jsonData.network || jsonData.calls);
         }
 
-      } else {
-        console.log('⚠️ Invalid HAR format - missing log.entries');
-        console.log('📋 Response structure:', JSON.stringify(harData, null, 2).substring(0, 500));
+        // Look for any auth/token data directly in JSON
+        if (jsonData.auth || jsonData.token || jsonData.authorization) {
+          auth = jsonData.auth || jsonData.token || jsonData.authorization;
+          console.log(`🔑 Found auth in JSON: ${auth.substring(0, 30)}...`);
+        }
       }
 
     } catch (parseError) {
-      console.log('❌ Failed to parse HAR response:', parseError.message);
+      console.log('❌ Failed to parse JSON response:', parseError.message);
       console.log('📄 Raw response preview:', JSON.stringify(response.data).substring(0, 500));
+      // Try treating it as raw HTML
+      htmlContent = response.data;
     }
 
     // Try to extract auth token from HTML/scripts with better patterns
@@ -193,7 +185,7 @@ const getOmrToken = async () => {
         const apiResponse = await axios.post(UNLOCKER_CONFIG.apiUrl, {
           zone: UNLOCKER_CONFIG.zoneName,
           url: apiUrl,
-          format: 'har'
+          format: 'json'
         }, {
           headers: {
             'Content-Type': 'application/json',
@@ -270,7 +262,7 @@ const getOmrToken = async () => {
         const apiResponse = await axios.post(UNLOCKER_CONFIG.apiUrl, {
           zone: UNLOCKER_CONFIG.zoneName,
           url: apiUrl,
-          format: 'har',
+          format: 'json',
           headers: {
             'Authorization': auth,
             'Referer': 'https://www.ohmyrockness.com/shows',
