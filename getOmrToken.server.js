@@ -1,48 +1,52 @@
-const { connect } = require("puppeteer-real-browser");
+const puppeteerCore = require('puppeteer-core');
+const { spawn } = require('child_process');
 
 let auth;
+let chromeProcess = null;
 
 const getOmrToken = async () => {
   auth = null;
 
   try {
-    console.log('Launching headless browser optimized for server environment...');
+    console.log('Starting Chrome with debugging port...');
 
-    const { browser, page } = await connect({
-      headless: "new", // Use new headless mode for better Docker compatibility
-      args: [
-        '--no-sandbox',
-        '--disable-setuid-sandbox',
-        '--disable-dev-shm-usage',
-        '--disable-gpu',
-        '--disable-blink-features=AutomationControlled',
-        '--disable-features=VizDisplayCompositor',
-        '--disable-extensions',
-        '--no-first-run',
-        '--disable-web-security',
-        '--disable-features=site-per-process',
-        '--remote-debugging-address=0.0.0.0', // Critical: bind to all interfaces
-        '--remote-debugging-port=9222',
-        '--window-size=1366,768',
-        '--disable-background-timer-throttling',
-        '--disable-backgrounding-occluded-windows',
-        '--disable-renderer-backgrounding',
-        '--no-zygote', // Important for Docker
-        '--single-process', // May help with connection issues
-        '--disable-default-apps',
-        '--disable-features=TranslateUI',
-        '--disable-ipc-flooding-protection'
-      ],
-      turnstile: true,
-      fingerprint: true,
-      connectOption: {
-        defaultViewport: { width: 1366, height: 768 },
-        userAgent: 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
-      },
-      disableXvfb: false, // Keep Xvfb enabled for Docker
-      ignoreAllFlags: false,
-      executablePath: '/usr/bin/google-chrome-stable' // Explicit path
+    // Start Chrome manually with proper settings
+    chromeProcess = spawn('/usr/bin/google-chrome-stable', [
+      '--headless=new',
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+      '--disable-dev-shm-usage',
+      '--disable-gpu',
+      '--disable-blink-features=AutomationControlled',
+      '--disable-features=VizDisplayCompositor',
+      '--disable-extensions',
+      '--no-first-run',
+      '--disable-web-security',
+      '--disable-features=site-per-process',
+      '--remote-debugging-address=0.0.0.0',
+      '--remote-debugging-port=9222',
+      '--window-size=1366,768',
+      '--disable-default-apps',
+      '--user-data-dir=/tmp/chrome-user-data-main'
+    ], {
+      stdio: ['ignore', 'pipe', 'pipe']
     });
+
+    // Wait for Chrome to start
+    await new Promise(resolve => setTimeout(resolve, 3000));
+
+    console.log('Connecting to Chrome via puppeteer...');
+
+    // Connect to the existing Chrome instance
+    const browser = await puppeteerCore.connect({
+      browserWSEndpoint: 'ws://127.0.0.1:9222',
+      defaultViewport: { width: 1366, height: 768 }
+    });
+
+    const page = await browser.newPage();
+
+    // Set user agent for better fingerprinting
+    await page.setUserAgent('Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36');
 
     // Set up request interception to capture auth tokens
     await page.setRequestInterception(true);
@@ -307,12 +311,24 @@ const getOmrToken = async () => {
       }
     }
 
-    await browser.close();
+    await browser.disconnect(); // Use disconnect instead of close for external Chrome
+
+    // Clean up Chrome process
+    if (chromeProcess) {
+      chromeProcess.kill();
+    }
+
     return { token: auth, apiData: apiResponse };
 
   } catch (error) {
     console.log('Error:', error.message);
     console.error('Full error:', error);
+
+    // Clean up Chrome process on error
+    if (chromeProcess) {
+      chromeProcess.kill();
+    }
+
     return null;
   }
 };
