@@ -84,7 +84,7 @@ const getOmrToken = async () => {
     console.log('🎉 Cloudflare challenges bypassed!');
 
     // Wait a bit more for API calls to trigger
-    await page.waitForTimeout(5000);
+    await new Promise(resolve => setTimeout(resolve, 5000));
 
     // Trigger some interactions to ensure API calls are made
     console.log('🔄 Triggering page interactions...');
@@ -99,7 +99,7 @@ const getOmrToken = async () => {
       const showLinks = await page.$$('a[href*="show"]');
       if (showLinks.length > 0) {
         await showLinks[0].click();
-        await page.waitForTimeout(3000);
+        await new Promise(resolve => setTimeout(resolve, 3000));
       }
     } catch (interactionError) {
       console.log('⚠️ Interaction error (continuing):', interactionError.message);
