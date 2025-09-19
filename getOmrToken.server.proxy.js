@@ -188,61 +188,87 @@ const proxyOptimizedBypass = async (page) => {
   let challengeStartTime = Date.now();
 
   while (attempts < maxAttempts) {
-    const pageInfo = await page.evaluate(() => {
-      const title = document.title;
-      const bodyText = document.body ? document.body.innerText : '';
-      const elementCount = document.querySelectorAll('*').length;
-
-      // Check for challenges
-      const hasChallenge = bodyText.includes('Just a moment') ||
-                          bodyText.includes('Verifying you are human') ||
-                          bodyText.includes('Checking your browser') ||
-                          title.includes('Just a moment');
-
-      // Check for real content
-      const hasRealContent = elementCount > 200 &&
-                           !hasChallenge &&
-                           (bodyText.toLowerCase().includes('shows') ||
-                            bodyText.toLowerCase().includes('concerts') ||
-                            bodyText.toLowerCase().includes('events'));
-
-      return {
-        title,
-        bodyText: bodyText.substring(0, 200),
-        elementCount,
-        hasChallenge,
-        hasRealContent,
-        url: window.location.href
-      };
-    });
-
-    const elapsed = Math.floor((Date.now() - challengeStartTime) / 1000);
-    console.log(`🏠 Proxy Attempt ${attempts + 1}/${maxAttempts} (${elapsed}s): ${pageInfo.title} (${pageInfo.elementCount} elements)`);
-
-    // Success!
-    if (!pageInfo.hasChallenge && pageInfo.hasRealContent) {
-      console.log('🎉 RESIDENTIAL PROXY SUCCESS! Cloudflare bypassed!');
-      console.log(`⚡ Bypassed in ${elapsed} seconds via residential IP`);
-      return true;
-    }
-
-    // Challenge detected
-    if (pageInfo.hasChallenge) {
-      console.log('🔄 Residential IP handling challenge...');
-
-      // Residential IPs usually pass challenges faster
-      await new Promise(resolve => setTimeout(resolve, 3000));
-
-      // Refresh occasionally for residential IPs
-      if (attempts > 0 && attempts % 10 === 0) {
-        console.log('🔄 Refreshing with new residential session...');
-        await page.reload({ waitUntil: 'domcontentloaded', timeout: 30000 });
-        await new Promise(resolve => setTimeout(resolve, 3000));
+    try {
+      // Check if page is still valid
+      if (page.isClosed()) {
+        console.log('⚠️ Page was closed, cannot continue');
+        return false;
       }
-    }
 
-    attempts++;
-    await new Promise(resolve => setTimeout(resolve, 2000)); // Faster attempts with residential
+      const pageInfo = await page.evaluate(() => {
+        const title = document.title;
+        const bodyText = document.body ? document.body.innerText : '';
+        const elementCount = document.querySelectorAll('*').length;
+
+        // Check for challenges
+        const hasChallenge = bodyText.includes('Just a moment') ||
+                            bodyText.includes('Verifying you are human') ||
+                            bodyText.includes('Checking your browser') ||
+                            title.includes('Just a moment');
+
+        // Check for real content
+        const hasRealContent = elementCount > 200 &&
+                             !hasChallenge &&
+                             (bodyText.toLowerCase().includes('shows') ||
+                              bodyText.toLowerCase().includes('concerts') ||
+                              bodyText.toLowerCase().includes('events'));
+
+        return {
+          title,
+          bodyText: bodyText.substring(0, 200),
+          elementCount,
+          hasChallenge,
+          hasRealContent,
+          url: window.location.href
+        };
+      }).catch((err) => {
+        console.log('🔄 Page context lost, attempting recovery...');
+        return null;
+      });
+
+      if (!pageInfo) {
+        // Page context was destroyed, wait and retry
+        await new Promise(resolve => setTimeout(resolve, 5000));
+        attempts++;
+        continue;
+      }
+
+      const elapsed = Math.floor((Date.now() - challengeStartTime) / 1000);
+      console.log(`🏠 Proxy Attempt ${attempts + 1}/${maxAttempts} (${elapsed}s): ${pageInfo.title} (${pageInfo.elementCount} elements)`);
+
+      // Success!
+      if (!pageInfo.hasChallenge && pageInfo.hasRealContent) {
+        console.log('🎉 RESIDENTIAL PROXY SUCCESS! Cloudflare bypassed!');
+        console.log(`⚡ Bypassed in ${elapsed} seconds via residential IP`);
+        return true;
+      }
+
+      // Challenge detected
+      if (pageInfo.hasChallenge) {
+        console.log('🔄 Residential IP handling challenge...');
+
+        // Residential IPs usually pass challenges faster
+        await new Promise(resolve => setTimeout(resolve, 5000)); // Longer wait
+
+        // Refresh occasionally for residential IPs
+        if (attempts > 0 && attempts % 15 === 0) {
+          console.log('🔄 Refreshing with new residential session...');
+          try {
+            await page.reload({ waitUntil: 'domcontentloaded', timeout: 45000 });
+            await new Promise(resolve => setTimeout(resolve, 5000));
+          } catch (reloadErr) {
+            console.log('⚠️ Reload failed, continuing...');
+          }
+        }
+      }
+
+      attempts++;
+      await new Promise(resolve => setTimeout(resolve, 3000)); // Slower, more patient attempts
+    } catch (err) {
+      console.log(`🔄 Bypass error on attempt ${attempts + 1}:`, err.message);
+      attempts++;
+      await new Promise(resolve => setTimeout(resolve, 5000));
+    }
   }
 
   console.log('❌ Residential proxy timeout');
