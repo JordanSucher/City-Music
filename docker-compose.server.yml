@@ -1,0 +1,38 @@
+services:
+  shit-patrol-server:
+    build:
+      context: .
+      dockerfile: dockerfile.server
+    container_name: shit-patrol-server
+    restart: "no"
+    environment:
+      - NODE_ENV=production
+      # Database
+      - TURSO_DATABASE_URL=${TURSO_DATABASE_URL}
+      - TURSO_AUTH_TOKEN=${TURSO_AUTH_TOKEN}
+      # Spotify
+      - SPOTIFY_CLIENT=${SPOTIFY_CLIENT}
+      - SPOTIFY_SECRET=${SPOTIFY_SECRET}
+      - SPOTIFY_REFRESH=${SPOTIFY_REFRESH}
+      - PLAYLIST_ID=${PLAYLIST_ID}
+      # Display for headless browser
+      - DISPLAY=:99
+      # Server optimization
+      - DEBIAN_FRONTEND=noninteractive
+    volumes:
+      # Optional: Mount logs or data directory
+      - ./logs:/app/logs
+    # Add security options for browser in server environment
+    security_opt:
+      - seccomp:unconfined
+    # Add shared memory for Chrome - critical for server stability
+    shm_size: '4g'
+    # Memory limits optimized for server
+    mem_limit: 4g
+    # CPU limits
+    cpus: '2.0'
+    # Add capabilities needed for Chrome on server
+    cap_add:
+      - SYS_ADMIN
+    # Disable OOM killer for this container
+    oom_kill_disable: true
