@@ -3,7 +3,7 @@ require('dotenv').config();
 let axios = require('axios');
 const prisma = require('./prisma/prismaClient.js');
 
-const getOmrToken = require('./getOmrToken.server.proxy');
+const getOmrToken = require('./getOmrToken.server.unlocker');
 
 let startDate = new Date();
 startDate = startDate.toLocaleDateString();
