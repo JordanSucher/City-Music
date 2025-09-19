@@ -89,23 +89,23 @@ RUN chmod +x /app/start.server.sh
 # Generate Prisma client
 RUN npx prisma generate
 
-# Create non-root user with proper permissions for server environment
+# Create non-root user with expanded permissions for Chrome
 RUN groupadd -r appuser && useradd -r -g appuser -G audio,video appuser && \
     mkdir -p /home/appuser/Downloads \
+               /home/appuser/.cache \
+               /home/appuser/.config \
                /tmp/chrome-user-data \
                /tmp/chrome-data \
                /tmp/.chromium \
                /tmp/chrome-crashpad \
-               /run/dbus \
-               /var/run/dbus && \
+               /dev/shm && \
     chown -R appuser:appuser /home/appuser && \
     chown -R appuser:appuser /app && \
     chown -R appuser:appuser /tmp/chrome-user-data && \
     chown -R appuser:appuser /tmp/chrome-data && \
     chown -R appuser:appuser /tmp/.chromium && \
     chown -R appuser:appuser /tmp/chrome-crashpad && \
-    chmod 755 /tmp/chrome-user-data /tmp/chrome-data /tmp/.chromium /tmp/chrome-crashpad && \
-    chmod 755 /run/dbus /var/run/dbus
+    chmod 755 /tmp/chrome-user-data /tmp/chrome-data /tmp/.chromium /tmp/chrome-crashpad
 
 # Switch to non-root user
 USER appuser
@@ -113,12 +113,12 @@ USER appuser
 # Set environment variables for Chrome in server environment
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/google-chrome-stable
-ENV XDG_CONFIG_HOME=/tmp/.chromium
-ENV XDG_CACHE_HOME=/tmp/.chromium
 ENV CHROME_BIN=/usr/bin/google-chrome-stable
-ENV CHROME_DEVEL_SANDBOX=/usr/lib/chromium-browser/chrome-sandbox
-ENV DEBIAN_FRONTEND=noninteractive
 ENV DISPLAY=:99
+ENV XDG_CONFIG_HOME=/home/appuser/.config
+ENV XDG_CACHE_HOME=/home/appuser/.cache
+ENV HOME=/home/appuser
+ENV DBUS_SESSION_BUS_ADDRESS=/dev/null
 ENV NODE_ENV=production
 
 # Expose Chrome debugging port for puppeteer-real-browser

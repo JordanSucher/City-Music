@@ -9,45 +9,39 @@ const getOmrToken = async () => {
     console.log('Launching headless browser optimized for server environment...');
 
     const { browser, page } = await connect({
-      headless: true, // CRITICAL: Must be true for server environments
+      headless: "new", // Use new headless mode for better Docker compatibility
       args: [
         '--no-sandbox',
         '--disable-setuid-sandbox',
         '--disable-dev-shm-usage',
         '--disable-gpu',
-        '--remote-debugging-port=9222',
-        '--remote-debugging-address=127.0.0.1', // Use 127.0.0.1 instead of 0.0.0.0 for better Docker compatibility
         '--disable-blink-features=AutomationControlled',
         '--disable-features=VizDisplayCompositor',
         '--disable-extensions',
         '--no-first-run',
+        '--disable-web-security',
+        '--disable-features=site-per-process',
+        '--remote-debugging-address=0.0.0.0', // Critical: bind to all interfaces
+        '--remote-debugging-port=9222',
+        '--window-size=1366,768',
         '--disable-background-timer-throttling',
         '--disable-backgrounding-occluded-windows',
         '--disable-renderer-backgrounding',
-        '--disable-field-trial-config',
-        '--disable-ipc-flooding-protection',
-        '--enable-features=NetworkService,NetworkServiceLogging',
-        '--force-color-profile=srgb',
-        '--metrics-recording-only',
-        '--no-default-browser-check',
-        '--no-zygote',
-        '--use-mock-keychain',
-        '--user-data-dir=/tmp/chrome-user-data',
-        '--disable-web-security',
-        '--disable-features=VizDisplayCompositor',
-        '--enable-logging',
-        '--log-level=0',
-        '--v=1'
+        '--no-zygote', // Important for Docker
+        '--single-process', // May help with connection issues
+        '--disable-default-apps',
+        '--disable-features=TranslateUI',
+        '--disable-ipc-flooding-protection'
       ],
-      turnstile: true, // Enable automatic Cloudflare Turnstile bypass
-      fingerprint: true, // Enable unique fingerprint injection
+      turnstile: true,
+      fingerprint: true,
       connectOption: {
-        defaultViewport: { width: 1920, height: 1080 },
-        // Use a more generic server-friendly user agent
+        defaultViewport: { width: 1366, height: 768 },
         userAgent: 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
       },
-      disableXvfb: false, // Let puppeteer-real-browser handle Xvfb properly
-      ignoreAllFlags: false
+      disableXvfb: false, // Keep Xvfb enabled for Docker
+      ignoreAllFlags: false,
+      executablePath: '/usr/bin/google-chrome-stable' // Explicit path
     });
 
     // Set up request interception to capture auth tokens
