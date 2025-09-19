@@ -19,8 +19,10 @@ const getOmrToken = async () => {
     console.log(`🌐 API Endpoint: ${UNLOCKER_CONFIG.apiUrl}`);
     console.log(`🏷️ Zone Name: ${UNLOCKER_CONFIG.zoneName}`);
 
-    // Web Unlocker API request - CORRECT format
+    // Web Unlocker API request - Start with simpler URL
     const targetUrl = 'https://www.ohmyrockness.com/shows?all=true';
+
+    console.log('🎯 Target URL:', targetUrl);
 
     console.log('📡 Making Web Unlocker API request...');
 
@@ -33,12 +35,14 @@ const getOmrToken = async () => {
 
     console.log('🔧 Request payload:', JSON.stringify(requestPayload, null, 2));
 
+    console.log('⏱️ Web Unlocker processing (may take up to 3 minutes for complex challenges)...');
+
     const response = await axios.post(UNLOCKER_CONFIG.apiUrl, requestPayload, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${UNLOCKER_CONFIG.apiToken}`
       },
-      timeout: 60000
+      timeout: 180000 // 3 minutes - Web Unlocker can take time for complex Cloudflare challenges
     });
 
     console.log('✅ Web Unlocker API response received');
@@ -124,7 +128,7 @@ const getOmrToken = async () => {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${UNLOCKER_CONFIG.apiToken}`
           },
-          timeout: 30000
+          timeout: 120000
         });
 
         console.log('🎉 Direct API call through Web Unlocker successful!');
@@ -189,7 +193,7 @@ const getOmrToken = async () => {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${UNLOCKER_CONFIG.apiToken}`
           },
-          timeout: 30000
+          timeout: 120000
         });
 
         console.log('🎉 Authenticated API call through Web Unlocker successful!');
