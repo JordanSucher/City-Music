@@ -14,6 +14,9 @@ const getOmrToken = async () => {
         '--no-sandbox',
         '--disable-setuid-sandbox',
         '--disable-dev-shm-usage',
+        '--disable-gpu',
+        '--remote-debugging-port=9222', // Critical for Docker containers
+        '--remote-debugging-address=0.0.0.0', // Critical for Docker network access
         '--disable-blink-features=AutomationControlled',
         '--disable-features=VizDisplayCompositor',
         '--disable-extensions',
@@ -29,8 +32,9 @@ const getOmrToken = async () => {
         '--no-default-browser-check',
         '--no-zygote',
         '--use-mock-keychain',
-        '--disable-gpu',
-        '--single-process'
+        '--user-data-dir=/tmp/chrome-user-data', // Explicit user data directory
+        '--disable-web-security',
+        '--disable-features=VizDisplayCompositor'
       ],
       turnstile: true, // Enable automatic Cloudflare Turnstile bypass
       fingerprint: true, // Enable unique fingerprint injection
@@ -39,7 +43,7 @@ const getOmrToken = async () => {
         // Use a more generic server-friendly user agent
         userAgent: 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
       },
-      disableXvfb: true, // We're using Xvfb from start.sh, don't double-wrap
+      disableXvfb: false, // Let puppeteer-real-browser handle Xvfb properly
       ignoreAllFlags: false
     });
 

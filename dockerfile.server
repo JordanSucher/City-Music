@@ -1,4 +1,4 @@
-FROM node:18-bullseye-slim
+FROM node:20-bullseye-slim
 
 # Install Chrome, dependencies and additional tools for server environment
 RUN apt-get update && apt-get install -y \
@@ -75,10 +75,13 @@ ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/google-chrome-stable
 ENV XDG_CONFIG_HOME=/tmp/.chromium
 ENV XDG_CACHE_HOME=/tmp/.chromium
 ENV CHROME_BIN=/usr/bin/google-chrome-stable
+ENV CHROME_DEVEL_SANDBOX=/usr/lib/chromium-browser/chrome-sandbox
 ENV DEBIAN_FRONTEND=noninteractive
 ENV DISPLAY=:99
 ENV NODE_ENV=production
 
+# Expose Chrome debugging port for puppeteer-real-browser
+EXPOSE 9222
 # Expose port (optional, adjust as needed)
 EXPOSE 3000
 

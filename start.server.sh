@@ -1,11 +1,13 @@
 #!/bin/bash
 
-# Start Xvfb
-Xvfb :99 -screen 0 1920x1080x24 -ac +extension GLX +render -noreset &
+# Export display (puppeteer-real-browser will handle Xvfb)
 export DISPLAY=:99
 
-# Wait for Xvfb to start
-sleep 3
+# Ensure no existing Xvfb processes conflict
+pkill -f Xvfb || echo "No existing Xvfb processes to kill"
+
+# Give the environment a moment to settle
+sleep 2
 
 # Install any missing system dependencies for server environment
 # These are sometimes needed for puppeteer-real-browser on servers

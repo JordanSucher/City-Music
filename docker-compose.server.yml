@@ -19,6 +19,9 @@ services:
       - DISPLAY=:99
       # Server optimization
       - DEBIAN_FRONTEND=noninteractive
+    ports:
+      # Expose Chrome debugging port for puppeteer-real-browser
+      - "9222:9222"
     volumes:
       # Optional: Mount logs or data directory
       - ./logs:/app/logs
