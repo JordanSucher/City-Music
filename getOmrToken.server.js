@@ -35,11 +35,40 @@ const getOmrToken = async () => {
     // Wait for Chrome to start
     await new Promise(resolve => setTimeout(resolve, 3000));
 
+    console.log('Getting Chrome WebSocket endpoint...');
+
+    // Get the correct WebSocket endpoint from Chrome
+    const http = require('http');
+    const wsEndpoint = await new Promise((resolve, reject) => {
+      const req = http.get('http://127.0.0.1:9222/json/version', (res) => {
+        let data = '';
+        res.on('data', (chunk) => data += chunk);
+        res.on('end', () => {
+          try {
+            const info = JSON.parse(data);
+            console.log('Chrome WebSocket URL:', info.webSocketDebuggerUrl);
+            resolve(info.webSocketDebuggerUrl);
+          } catch (e) {
+            reject(new Error('Failed to parse Chrome info: ' + e.message));
+          }
+        });
+      });
+
+      req.on('error', (err) => {
+        reject(new Error('Failed to get Chrome WebSocket endpoint: ' + err.message));
+      });
+
+      req.setTimeout(5000, () => {
+        req.destroy();
+        reject(new Error('Timeout getting Chrome WebSocket endpoint'));
+      });
+    });
+
     console.log('Connecting to Chrome via puppeteer...');
 
-    // Connect to the existing Chrome instance
+    // Connect to the existing Chrome instance using the correct WebSocket endpoint
     const browser = await puppeteerCore.connect({
-      browserWSEndpoint: 'ws://127.0.0.1:9222',
+      browserWSEndpoint: wsEndpoint,
       defaultViewport: { width: 1366, height: 768 }
     });
 
