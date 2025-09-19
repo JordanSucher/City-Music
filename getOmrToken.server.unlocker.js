@@ -3,63 +3,41 @@ const axios = require('axios');
 
 let auth = null;
 
-// Bright Data API Configuration - try multiple endpoints
-const PROXY_ENDPOINTS = [
-  // Try Unlocker endpoint first
-  process.env.BRIGHTDATA_HOST + ':' + (process.env.BRIGHTDATA_PORT || '22225'),
-  // Fallback to standard residential proxy endpoints
-  'brd.superproxy.io:22225',
-  'brd.superproxy.io:33335'
-];
-
+// Bright Data Web Unlocker API Configuration - CORRECT implementation
 const UNLOCKER_CONFIG = {
-  username: process.env.BRIGHTDATA_USER || 'brd-customer-hl_xxxxx-zone-residential',
-  password: process.env.BRIGHTDATA_PASS || 'your_password_here',
-  endpoints: PROXY_ENDPOINTS
+  apiUrl: 'https://api.brightdata.com/request',
+  // Web Unlocker uses API token, not proxy credentials
+  apiToken: process.env.BRIGHTDATA_API_TOKEN || process.env.BRIGHTDATA_PASS, // fallback to existing creds for now
+  zoneName: process.env.BRIGHTDATA_ZONE_NAME || 'web-unlocker' // Web Unlocker zone name
 };
 
 const getOmrToken = async () => {
   auth = null;
 
-  // Try each endpoint until one works
-  for (const endpoint of UNLOCKER_CONFIG.endpoints) {
-    try {
-      console.log('🚀 Using Bright Data API...');
-      console.log(`🌐 Trying endpoint: ${endpoint}`);
+  try {
+    console.log('🚀 Using Bright Data Web Unlocker API (CORRECT)...');
+    console.log(`🌐 API Endpoint: ${UNLOCKER_CONFIG.apiUrl}`);
+    console.log(`🏷️ Zone Name: ${UNLOCKER_CONFIG.zoneName}`);
 
-      // First request - get the main page and extract token
-      const targetUrl = 'https://www.ohmyrockness.com/shows?all=true';
+    // Web Unlocker API request - CORRECT format
+    const targetUrl = 'https://www.ohmyrockness.com/shows?all=true';
 
-      console.log('📡 Making API request...');
-      const response = await axios.get(targetUrl, {
-        proxy: {
-          protocol: 'http',
-          host: endpoint.split(':')[0],
-          port: parseInt(endpoint.split(':')[1]),
-          auth: {
-            username: UNLOCKER_CONFIG.username,
-            password: UNLOCKER_CONFIG.password
-          }
-        },
+    console.log('📡 Making Web Unlocker API request...');
+    const response = await axios.post(UNLOCKER_CONFIG.apiUrl, {
+      zone: UNLOCKER_CONFIG.zoneName,
+      url: targetUrl,
+      format: 'raw', // Get raw HTML content
+      country: 'US', // Use US residential IPs
+      render: true   // Enable JavaScript rendering
+    }, {
       headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
-        'Accept-Language': 'en-US,en;q=0.9',
-        'Accept-Encoding': 'gzip, deflate, br',
-        'DNT': '1',
-        'Connection': 'keep-alive',
-        'Upgrade-Insecure-Requests': '1',
-        'Sec-Fetch-Dest': 'document',
-        'Sec-Fetch-Mode': 'navigate',
-        'Sec-Fetch-Site': 'none',
-        'Sec-Fetch-User': '?1',
-        'Cache-Control': 'max-age=0'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${UNLOCKER_CONFIG.apiToken}`
       },
-      timeout: 60000,
-      maxRedirects: 5
+      timeout: 60000
     });
 
-    console.log('✅ Unlocker API response received');
+    console.log('✅ Web Unlocker API response received');
     console.log(`📊 Status: ${response.status}`);
     console.log(`📏 Content length: ${response.data.length}`);
 
@@ -87,9 +65,9 @@ const getOmrToken = async () => {
       }
     }
 
-    // If no token found, try making API call directly through Unlocker
+    // If no token found, try making API call directly through Web Unlocker
     if (!auth) {
-      console.log('🔍 No token in HTML, trying direct API call...');
+      console.log('🔍 No token in HTML, trying direct API call through Web Unlocker...');
 
       const today = new Date();
       const nextWeek = new Date();
@@ -107,50 +85,50 @@ const getOmrToken = async () => {
       const apiUrl = `https://www.ohmyrockness.com/api/shows.json?daterange%5Bfrom%5D=${startDate}&daterange%5Buntil%5D=${endDate}&index=true&per=500&regioned=1`;
 
       try {
-        const apiResponse = await axios.get(apiUrl, {
-          proxy: {
-            protocol: 'http',
-            host: UNLOCKER_CONFIG.endpoint.split(':')[0],
-            port: parseInt(UNLOCKER_CONFIG.endpoint.split(':')[1]),
-            auth: {
-              username: UNLOCKER_CONFIG.username,
-              password: UNLOCKER_CONFIG.password
-            }
-          },
+        const apiResponse = await axios.post(UNLOCKER_CONFIG.apiUrl, {
+          zone: UNLOCKER_CONFIG.zoneName,
+          url: apiUrl,
+          format: 'raw',
+          country: 'US'
+        }, {
           headers: {
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-            'Accept': 'application/json, text/javascript, */*; q=0.01',
-            'Accept-Language': 'en-US,en;q=0.9',
-            'Referer': 'https://www.ohmyrockness.com/shows',
-            'X-Requested-With': 'XMLHttpRequest',
-            'DNT': '1',
-            'Connection': 'keep-alive',
-            'Sec-Fetch-Dest': 'empty',
-            'Sec-Fetch-Mode': 'cors',
-            'Sec-Fetch-Site': 'same-origin'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${UNLOCKER_CONFIG.apiToken}`
           },
           timeout: 30000
         });
 
-        console.log('🎉 Direct API call successful!');
-        console.log(`📊 Got ${apiResponse.data.length} shows`);
+        console.log('🎉 Direct API call through Web Unlocker successful!');
 
-        return {
-          token: 'direct-api-access',
-          apiData: {
-            success: true,
-            data: apiResponse.data
-          }
-        };
+        // Web Unlocker returns raw response, try to parse as JSON
+        let apiData;
+        try {
+          apiData = JSON.parse(apiResponse.data);
+          console.log(`📊 Got ${apiData.length} shows`);
+        } catch (parseError) {
+          console.log('📄 Response is not JSON, might be HTML with error');
+          console.log('First 200 chars:', apiResponse.data.substring(0, 200));
+          apiData = null;
+        }
+
+        if (apiData && Array.isArray(apiData)) {
+          return {
+            token: 'web-unlocker-direct',
+            apiData: {
+              success: true,
+              data: apiData
+            }
+          };
+        }
 
       } catch (apiError) {
         console.log('❌ Direct API call failed:', apiError.response?.status || apiError.message);
       }
     }
 
-    // If we found a token, try using it for API call
+    // If we found a token, try using it for API call through Web Unlocker
     if (auth) {
-      console.log('🔑 Testing extracted token...');
+      console.log('🔑 Testing extracted token with Web Unlocker...');
 
       const today = new Date();
       const nextWeek = new Date();
@@ -168,67 +146,69 @@ const getOmrToken = async () => {
       const apiUrl = `https://www.ohmyrockness.com/api/shows.json?daterange%5Bfrom%5D=${startDate}&daterange%5Buntil%5D=${endDate}&index=true&per=500&regioned=1`;
 
       try {
-        const apiResponse = await axios.get(apiUrl, {
-          proxy: {
-            protocol: 'http',
-            host: UNLOCKER_CONFIG.endpoint.split(':')[0],
-            port: parseInt(UNLOCKER_CONFIG.endpoint.split(':')[1]),
-            auth: {
-              username: UNLOCKER_CONFIG.username,
-              password: UNLOCKER_CONFIG.password
-            }
-          },
+        const apiResponse = await axios.post(UNLOCKER_CONFIG.apiUrl, {
+          zone: UNLOCKER_CONFIG.zoneName,
+          url: apiUrl,
+          format: 'raw',
+          country: 'US',
           headers: {
             'Authorization': auth,
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-            'Accept': 'application/json, text/javascript, */*; q=0.01',
-            'Accept-Language': 'en-US,en;q=0.9',
             'Referer': 'https://www.ohmyrockness.com/shows',
-            'X-Requested-With': 'XMLHttpRequest',
-            'DNT': '1',
-            'Connection': 'keep-alive',
-            'Sec-Fetch-Dest': 'empty',
-            'Sec-Fetch-Mode': 'cors',
-            'Sec-Fetch-Site': 'same-origin'
+            'X-Requested-With': 'XMLHttpRequest'
+          }
+        }, {
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${UNLOCKER_CONFIG.apiToken}`
           },
           timeout: 30000
         });
 
-        console.log('🎉 Authenticated API call successful!');
-        console.log(`📊 Got ${apiResponse.data.length} shows`);
+        console.log('🎉 Authenticated API call through Web Unlocker successful!');
 
-        return {
-          token: auth,
-          apiData: {
-            success: true,
-            data: apiResponse.data
-          }
-        };
+        // Parse the API response
+        let apiData;
+        try {
+          apiData = JSON.parse(apiResponse.data);
+          console.log(`📊 Got ${apiData.length} shows`);
+        } catch (parseError) {
+          console.log('📄 Response is not JSON');
+          apiData = null;
+        }
+
+        if (apiData && Array.isArray(apiData)) {
+          return {
+            token: auth,
+            apiData: {
+              success: true,
+              data: apiData
+            }
+          };
+        }
 
       } catch (authApiError) {
         console.log('❌ Authenticated API call failed:', authApiError.response?.status || authApiError.message);
       }
     }
 
-      console.log('🔐 Final auth token:', auth || 'Not found');
-      return {
-        token: auth,
-        apiData: auth ? { success: false, error: 'Token found but API call failed' } : null
-      };
+    console.log('🔐 Final auth token:', auth || 'Not found');
+    return {
+      token: auth,
+      apiData: auth ? { success: false, error: 'Token found but API call failed' } : null
+    };
 
-    } catch (error) {
-      console.log(`💥 Endpoint ${endpoint} failed:`, error.response?.status || error.message);
-      if (error.response?.data) {
-        console.log('📄 Error response:', error.response.data.substring(0, 200));
-      }
-      // Continue to next endpoint
-      continue;
+  } catch (error) {
+    console.log('💥 Web Unlocker API error:', error.response?.status || error.message);
+    if (error.response?.data) {
+      console.log('📄 Error response:', error.response.data.substring(0, 200));
     }
+    console.log('🔧 Config used:', {
+      apiUrl: UNLOCKER_CONFIG.apiUrl,
+      zoneName: UNLOCKER_CONFIG.zoneName,
+      apiToken: UNLOCKER_CONFIG.apiToken ? UNLOCKER_CONFIG.apiToken.substring(0, 10) + '...' : 'undefined'
+    });
+    return null;
   }
-
-  // All endpoints failed
-  console.log('❌ All endpoints failed');
-  return null;
 };
 
 if (require.main === module) {

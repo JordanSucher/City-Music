@@ -184,7 +184,7 @@ const proxyOptimizedBypass = async (page) => {
   console.log('🌐 Residential proxy Cloudflare bypass...');
 
   let attempts = 0;
-  const maxAttempts = 60; // Residential IPs should be faster
+  const maxAttempts = 30; // Shorter timeout - residential IPs should be faster
   let challengeStartTime = Date.now();
 
   while (attempts < maxAttempts) {
@@ -250,12 +250,12 @@ const proxyOptimizedBypass = async (page) => {
         // Residential IPs usually pass challenges faster
         await new Promise(resolve => setTimeout(resolve, 5000)); // Longer wait
 
-        // Refresh occasionally for residential IPs
-        if (attempts > 0 && attempts % 15 === 0) {
+        // Refresh more frequently for residential IPs
+        if (attempts > 0 && attempts % 8 === 0) {
           console.log('🔄 Refreshing with new residential session...');
           try {
-            await page.reload({ waitUntil: 'domcontentloaded', timeout: 45000 });
-            await new Promise(resolve => setTimeout(resolve, 5000));
+            await page.reload({ waitUntil: 'domcontentloaded', timeout: 30000 });
+            await new Promise(resolve => setTimeout(resolve, 3000));
           } catch (reloadErr) {
             console.log('⚠️ Reload failed, continuing...');
           }
