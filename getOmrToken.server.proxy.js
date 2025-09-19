@@ -24,6 +24,14 @@ const getProxyChromeArgs = () => {
     '--disable-gpu',
     '--disable-web-security',
 
+    // SSL/TLS fixes for proxy
+    '--ignore-ssl-errors',
+    '--ignore-certificate-errors',
+    '--ignore-certificate-errors-spki-list',
+    '--disable-ssl-version-fallback-min',
+    '--allow-running-insecure-content',
+    '--disable-certificate-transparency',
+
     // PROXY CONFIGURATION - CRITICAL
     `--proxy-server=http://${proxyString}`,
     '--proxy-bypass-list=127.0.0.1,localhost',
