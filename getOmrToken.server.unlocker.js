@@ -23,19 +23,22 @@ const getOmrToken = async () => {
     const targetUrl = 'https://www.ohmyrockness.com/shows?all=true';
 
     console.log('📡 Making Web Unlocker API request...');
-    const response = await axios.post(UNLOCKER_CONFIG.apiUrl, {
+
+    // Try simpler request first to test basic connectivity
+    const requestPayload = {
       zone: UNLOCKER_CONFIG.zoneName,
-      url: targetUrl,
-      format: 'raw', // Get raw HTML content
-      country: 'US', // Use US residential IPs
-      render: true,   // Enable JavaScript rendering
-      wait: 5000     // Wait for JavaScript to load (5 seconds)
-    }, {
+      url: targetUrl
+      // Remove optional parameters that might cause 400 error
+    };
+
+    console.log('🔧 Request payload:', JSON.stringify(requestPayload, null, 2));
+
+    const response = await axios.post(UNLOCKER_CONFIG.apiUrl, requestPayload, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${UNLOCKER_CONFIG.apiToken}`
       },
-      timeout: 120000 // Longer timeout for JavaScript rendering
+      timeout: 60000
     });
 
     console.log('✅ Web Unlocker API response received');
@@ -227,13 +230,26 @@ const getOmrToken = async () => {
   } catch (error) {
     console.log('💥 Web Unlocker API error:', error.response?.status || error.message);
     if (error.response?.data) {
-      console.log('📄 Error response:', error.response.data.substring(0, 200));
+      const errorData = typeof error.response.data === 'string'
+        ? error.response.data
+        : JSON.stringify(error.response.data);
+      console.log('📄 Error response:', errorData.substring(0, 500));
     }
     console.log('🔧 Config used:', {
       apiUrl: UNLOCKER_CONFIG.apiUrl,
       zoneName: UNLOCKER_CONFIG.zoneName,
       apiToken: UNLOCKER_CONFIG.apiToken ? UNLOCKER_CONFIG.apiToken.substring(0, 10) + '...' : 'undefined'
     });
+
+    // 400 errors usually indicate invalid request format
+    if (error.response?.status === 400) {
+      console.log('🚨 400 Bad Request - This usually means:');
+      console.log('  - Invalid zone name (should match your Web Unlocker zone exactly)');
+      console.log('  - Wrong API token format');
+      console.log('  - Missing required parameters');
+      console.log('  - Zone type is not Web Unlocker (might be Residential Proxy instead)');
+    }
+
     return null;
   }
 };
