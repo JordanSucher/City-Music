@@ -1,4 +1,4 @@
-const { connect } = require("puppeteer-real-browser");
+const puppeteer = require('puppeteer-core');
 
 let auth;
 
@@ -13,30 +13,21 @@ const getOmrToken = async () => {
   auth = null;
 
   try {
-    console.log('🚀 Connecting puppeteer-real-browser to Bright Data Browser API...');
+    console.log('🚀 Connecting puppeteer-core to Bright Data Browser API...');
     console.log(`🌐 WebSocket Endpoint: ${BROWSER_API_CONFIG.wsEndpoint.replace(/:[^:@]*@/, ':***@')}`); // Hide password in logs
 
-    // Connect puppeteer to Bright Data Browser API endpoint
-    const { browser, page } = await connect({
-      // Connect to Bright Data's browser service via WebSocket
+    // Connect puppeteer directly to Bright Data Browser WebSocket endpoint
+    const browser = await puppeteer.connect({
       browserWSEndpoint: BROWSER_API_CONFIG.wsEndpoint,
-
-      turnstile: true, // Enable automatic Cloudflare Turnstile bypass
-      fingerprint: true, // Enable unique fingerprint injection
-
-      connectOption: {
-        defaultViewport: { width: 1920, height: 1080 },
-        userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
-      },
-
-      // Disable local browser args since we're connecting to remote
-      args: [],
-      headless: false, // Remote browser handles this
-      disableXvfb: true, // No need for local display
-      ignoreAllFlags: true // Use remote browser settings
+      defaultViewport: { width: 1920, height: 1080 }
     });
 
     console.log('✅ Connected to Bright Data Browser API successfully');
+
+    const page = await browser.newPage();
+
+    // Set user agent for better stealth
+    await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36');
 
     // Set up request interception to capture auth tokens
     await page.setRequestInterception(true);
