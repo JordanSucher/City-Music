@@ -3,7 +3,7 @@ require('dotenv').config();
 let axios = require('axios');
 const prisma = require('./prisma/prismaClient.js');
 
-const getOmrToken = require('./getOmrToken.server');
+const getOmrToken = require('./getOmrToken.server.enhanced');
 
 let startDate = new Date();
 startDate = startDate.toLocaleDateString();
@@ -20,7 +20,7 @@ const url = `https://www.ohmyrockness.com/api/shows.json?daterange%5Bfrom%5D=${s
 
 const pullShows = async function() {
   try {
-    console.log("getting omr token and fetching shows (server version)");
+    console.log("getting omr token and fetching shows (enhanced server version)");
     const result = await getOmrToken();
 
     if (!result || !result.apiData || !result.apiData.success) {

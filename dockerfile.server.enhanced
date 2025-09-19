@@ -1,0 +1,281 @@
+FROM node:20-bullseye-slim
+
+# Set environment variables early for consistent behavior
+ENV DEBIAN_FRONTEND=noninteractive
+ENV TZ=America/New_York
+ENV LANG=en_US.UTF-8
+ENV LANGUAGE=en_US:en
+ENV LC_ALL=en_US.UTF-8
+
+# Fix GPG and install base dependencies with locale support
+RUN apt-get update --allow-releaseinfo-change && \
+    apt-get install -y \
+    wget \
+    gnupg \
+    ca-certificates \
+    apt-transport-https \
+    locales \
+    tzdata \
+    --no-install-recommends && \
+    # Generate locale
+    sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && \
+    locale-gen && \
+    # Set timezone
+    ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone && \
+    rm -rf /var/lib/apt/lists/*
+
+# Add Google Chrome repository with better error handling
+RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | \
+    gpg --dearmor -o /usr/share/keyrings/googlechrome-linux-keyring.gpg && \
+    echo "deb [arch=amd64 signed-by=/usr/share/keyrings/googlechrome-linux-keyring.gpg] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google.list
+
+# Install Chrome and comprehensive dependencies for advanced fingerprinting protection
+RUN apt-get update --allow-releaseinfo-change && \
+    apt-get install -y \
+    google-chrome-stable \
+    xvfb \
+    # Core Chrome dependencies
+    fonts-liberation \
+    fonts-dejavu-core \
+    fonts-dejavu-extra \
+    fonts-liberation2 \
+    fonts-noto-color-emoji \
+    fonts-noto-cjk \
+    fonts-opensymbol \
+    fontconfig \
+    gconf-service \
+    libasound2 \
+    libasound2-dev \
+    libatk1.0-0 \
+    libatk-bridge2.0-0 \
+    libc6 \
+    libcairo2 \
+    libcairo-gobject2 \
+    libcups2 \
+    libdbus-1-3 \
+    libdrm2 \
+    libexpat1 \
+    libfontconfig1 \
+    libgcc1 \
+    libgconf-2-4 \
+    libgdk-pixbuf2.0-0 \
+    libglib2.0-0 \
+    libgtk-3-0 \
+    libnspr4 \
+    libnss3 \
+    libpango-1.0-0 \
+    libpangocairo-1.0-0 \
+    libstdc++6 \
+    libx11-6 \
+    libx11-xcb1 \
+    libxcb1 \
+    libxcomposite1 \
+    libxcursor1 \
+    libxdamage1 \
+    libxext6 \
+    libxfixes3 \
+    libxi6 \
+    libxrandr2 \
+    libxrender1 \
+    libxss1 \
+    libxtst6 \
+    # Additional dependencies for advanced fingerprinting protection
+    libappindicator1 \
+    libappindicator3-1 \
+    libnss3 \
+    lsb-release \
+    xdg-utils \
+    wget \
+    procps \
+    dbus \
+    dbus-x11 \
+    # Audio support for audio fingerprinting protection
+    pulseaudio \
+    alsa-utils \
+    # Additional libraries for enhanced stealth
+    libxkbcommon0 \
+    libxkbfile1 \
+    libxmu6 \
+    libxpm4 \
+    libxaw7 \
+    libxft2 \
+    libxinerama1 \
+    libxv1 \
+    libxxf86dga1 \
+    libxxf86vm1 \
+    # GPU and hardware acceleration support
+    mesa-utils \
+    libgl1-mesa-dri \
+    libgl1-mesa-glx \
+    libglu1-mesa \
+    libegl1-mesa \
+    libgbm1 \
+    # Additional multimedia codecs
+    gstreamer1.0-plugins-base \
+    gstreamer1.0-plugins-good \
+    gstreamer1.0-plugins-bad \
+    gstreamer1.0-plugins-ugly \
+    --no-install-recommends && \
+    rm -rf /var/lib/apt/lists/*
+
+# Set working directory
+WORKDIR /app
+
+# Copy package files first for better Docker layer caching
+COPY package.json package-lock.json ./
+
+# Install Node.js dependencies
+RUN npm install
+
+# Copy application code
+COPY . .
+
+# Make start scripts executable
+RUN chmod +x /app/start.server.sh
+RUN chmod +x /app/start.sh 2>/dev/null || true
+
+# Generate Prisma client
+RUN npx prisma generate
+
+# Create comprehensive user setup with expanded permissions for advanced Chrome features
+RUN groupadd -r appuser && \
+    useradd -r -g appuser -G audio,video,pulse,pulse-access appuser && \
+    # Create comprehensive directory structure
+    mkdir -p /home/appuser/Downloads \
+             /home/appuser/.cache \
+             /home/appuser/.config \
+             /home/appuser/.local \
+             /home/appuser/.local/share \
+             /tmp/chrome-user-data \
+             /tmp/chrome-user-data-enhanced \
+             /tmp/chrome-data \
+             /tmp/.chromium \
+             /tmp/chrome-crashpad \
+             /tmp/.X11-unix \
+             /tmp/pulseaudio \
+             /dev/shm && \
+    # Set comprehensive ownership
+    chown -R appuser:appuser /home/appuser && \
+    chown -R appuser:appuser /app && \
+    chown -R appuser:appuser /tmp/chrome-user-data && \
+    chown -R appuser:appuser /tmp/chrome-user-data-enhanced && \
+    chown -R appuser:appuser /tmp/chrome-data && \
+    chown -R appuser:appuser /tmp/.chromium && \
+    chown -R appuser:appuser /tmp/chrome-crashpad && \
+    chown -R appuser:appuser /tmp/.X11-unix && \
+    chown -R appuser:appuser /tmp/pulseaudio && \
+    # Set proper permissions
+    chmod 755 /tmp/chrome-user-data /tmp/chrome-user-data-enhanced /tmp/chrome-data /tmp/.chromium /tmp/chrome-crashpad && \
+    chmod 1777 /tmp/.X11-unix && \
+    chmod 755 /tmp/pulseaudio
+
+# Configure PulseAudio for audio fingerprinting protection
+RUN echo "load-module module-null-sink sink_name=virtual-audio-device" > /home/appuser/.config/pulse/default.pa && \
+    echo "set-default-sink virtual-audio-device" >> /home/appuser/.config/pulse/default.pa && \
+    chown -R appuser:appuser /home/appuser/.config
+
+# Switch to non-root user
+USER appuser
+
+# Set comprehensive environment variables for advanced Chrome features
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/google-chrome-stable
+ENV CHROME_BIN=/usr/bin/google-chrome-stable
+ENV DISPLAY=:99
+ENV XDG_CONFIG_HOME=/home/appuser/.config
+ENV XDG_CACHE_HOME=/home/appuser/.cache
+ENV XDG_DATA_HOME=/home/appuser/.local/share
+ENV HOME=/home/appuser
+ENV DBUS_SESSION_BUS_ADDRESS=/dev/null
+ENV NODE_ENV=production
+
+# Audio environment for fingerprinting protection
+ENV PULSE_SERVER=tcp:localhost:4713
+ENV PULSE_RUNTIME_PATH=/tmp/pulseaudio
+
+# Timezone and locale (already set above but reinforcing for user)
+ENV TZ=America/New_York
+ENV LANG=en_US.UTF-8
+ENV LANGUAGE=en_US:en
+ENV LC_ALL=en_US.UTF-8
+
+# Chrome-specific environment variables for advanced fingerprinting protection
+ENV CHROME_NO_SANDBOX=1
+ENV CHROME_DISABLE_GPU=0
+ENV CHROME_HEADLESS=1
+
+# Memory optimization
+ENV NODE_OPTIONS="--max-old-space-size=4096"
+
+# Expose Chrome debugging port
+EXPOSE 9222
+# Expose application port (optional)
+EXPOSE 3000
+
+# Health check for container monitoring
+HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
+    CMD curl -f http://localhost:9222/json/version || exit 1
+
+# Create startup script that initializes all services
+RUN echo '#!/bin/bash\n\
+# Enhanced startup script for advanced Cloudflare bypass\n\
+\n\
+# Cleanup any existing processes\n\
+pkill -f chrome || echo "No existing Chrome processes"\n\
+pkill -f Chrome || echo "No existing Chrome processes"\n\
+pkill -f Xvfb || echo "No existing Xvfb processes"\n\
+pkill -f pulseaudio || echo "No existing PulseAudio processes"\n\
+\n\
+# Clean up directories\n\
+rm -rf /tmp/.X99-lock /tmp/chrome-user-data/* /tmp/chrome-user-data-enhanced/* /tmp/chrome-data/* 2>/dev/null || echo "Directories cleaned"\n\
+\n\
+# Start PulseAudio for audio fingerprinting protection\n\
+pulseaudio --start --log-target=syslog --system=false &\n\
+sleep 2\n\
+\n\
+# Start Xvfb with comprehensive configuration\n\
+Xvfb :99 -screen 0 1366x768x24 -ac +extension GLX +render -noreset -dpi 96 &\n\
+export DISPLAY=:99\n\
+sleep 5\n\
+\n\
+# Verify services\n\
+if ! pgrep -x "Xvfb" > /dev/null; then\n\
+    echo "ERROR: Xvfb failed to start"\n\
+    exit 1\n\
+fi\n\
+\n\
+echo "Services started successfully"\n\
+echo "Display: $DISPLAY"\n\
+echo "Node version: $(node --version)"\n\
+echo "Chrome version: $(google-chrome-stable --version)"\n\
+echo "Timezone: $(date +%Z)"\n\
+echo "Locale: $LANG"\n\
+\n\
+# Test Chrome with advanced flags\n\
+echo "Testing Chrome startup with advanced configuration..."\n\
+timeout 15 google-chrome-stable --version --no-sandbox || {\n\
+    echo "ERROR: Chrome failed advanced startup test"\n\
+    exit 1\n\
+}\n\
+\n\
+echo "Starting enhanced Cloudflare bypass application..."\n\
+# Run the enhanced server application with extended timeout\n\
+timeout 1800 node getOmrToken.server.enhanced.js || timeout 1800 node manual.server.js\n\
+\n\
+# Cleanup\n\
+pkill -f Xvfb || echo "Xvfb stopped"\n\
+pkill -f chrome || echo "Chrome stopped"\n\
+pkill -f pulseaudio || echo "PulseAudio stopped"\n\
+' > /home/appuser/enhanced-startup.sh && \
+chmod +x /home/appuser/enhanced-startup.sh
+
+# Default command - use enhanced startup script
+CMD ["/home/appuser/enhanced-startup.sh"]
+
+# Build-time metadata
+LABEL maintainer="Advanced Cloudflare Bypass System"
+LABEL description="Enhanced Docker container with 15 advanced Cloudflare bypass techniques"
+LABEL version="2.0.0"
+LABEL chrome.version="120+"
+LABEL node.version="20"
+LABEL features="TLS-bypass,Canvas-protection,WebGL-spoofing,Audio-fingerprinting,Font-evasion,WebRTC-blocking,Behavioral-simulation,Turnstile-bypass"

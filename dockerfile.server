@@ -15,16 +15,19 @@ RUN wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | \
     gpg --dearmor -o /usr/share/keyrings/googlechrome-linux-keyring.gpg && \
     echo "deb [arch=amd64 signed-by=/usr/share/keyrings/googlechrome-linux-keyring.gpg] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google.list
 
-# Install Chrome and all required dependencies for puppeteer-real-browser
+# Install Chrome and all required dependencies for enhanced stealth mode
 RUN apt-get update --allow-releaseinfo-change && \
     apt-get install -y \
     google-chrome-stable \
     xvfb \
     fonts-liberation \
     fonts-dejavu-core \
+    fonts-noto-cjk \
+    fonts-noto-color-emoji \
     fontconfig \
     gconf-service \
     libasound2 \
+    libasound2-plugins \
     libatk1.0-0 \
     libatk-bridge2.0-0 \
     libc6 \
@@ -68,8 +71,13 @@ RUN apt-get update --allow-releaseinfo-change && \
     procps \
     dbus \
     dbus-x11 \
+    pulseaudio \
+    alsa-utils \
     --no-install-recommends && \
     rm -rf /var/lib/apt/lists/*
+
+# Add machine ID for Chrome (prevents errors)
+RUN echo "$(openssl rand -hex 16)" > /etc/machine-id
 
 # Set working directory
 WORKDIR /app
@@ -120,6 +128,10 @@ ENV XDG_CACHE_HOME=/home/appuser/.cache
 ENV HOME=/home/appuser
 ENV DBUS_SESSION_BUS_ADDRESS=/dev/null
 ENV NODE_ENV=production
+ENV TZ=America/New_York
+ENV LANG=en_US.UTF-8
+ENV LC_ALL=en_US.UTF-8
+ENV PULSE_SERVER=unix:/run/user/1000/pulse/native
 
 # Expose Chrome debugging port for puppeteer-real-browser
 EXPOSE 9222
