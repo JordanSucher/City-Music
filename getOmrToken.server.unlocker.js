@@ -28,39 +28,66 @@ const getOmrToken = async () => {
       url: targetUrl,
       format: 'raw', // Get raw HTML content
       country: 'US', // Use US residential IPs
-      render: true   // Enable JavaScript rendering
+      render: true,   // Enable JavaScript rendering
+      wait: 5000     // Wait for JavaScript to load (5 seconds)
     }, {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${UNLOCKER_CONFIG.apiToken}`
       },
-      timeout: 60000
+      timeout: 120000 // Longer timeout for JavaScript rendering
     });
 
     console.log('✅ Web Unlocker API response received');
     console.log(`📊 Status: ${response.status}`);
-    console.log(`📏 Content length: ${response.data.length}`);
+    console.log(`📏 Content length: ${response.data ? response.data.length : 0}`);
+    console.log(`🔍 Response type: ${typeof response.data}`);
 
-    // Look for API calls in the HTML or make direct API call
-    const htmlContent = response.data;
+    // Debug: Show response structure
+    if (response.data) {
+      console.log('📋 Response keys:', Object.keys(response.data || {}));
+      console.log('🔍 First 500 chars of response:', JSON.stringify(response.data).substring(0, 500));
+    }
+
+    // Handle different Web Unlocker response formats
+    let htmlContent = '';
+
+    if (typeof response.data === 'string') {
+      htmlContent = response.data;
+    } else if (response.data && response.data.body) {
+      // Some Web Unlocker responses have a 'body' field
+      htmlContent = response.data.body;
+    } else if (response.data && response.data.content) {
+      // Or 'content' field
+      htmlContent = response.data.content;
+    } else {
+      console.log('⚠️ Unexpected response format from Web Unlocker');
+    }
+
+    if (!htmlContent) {
+      console.log('❌ No HTML content received from Web Unlocker');
+      console.log('📋 Full response:', JSON.stringify(response.data, null, 2));
+    }
 
     // Try to extract auth token from HTML/scripts
-    const tokenPatterns = [
-      /authorization['":\s]*["']([^"']+)["']/gi,
-      /x-auth-token['":\s]*["']([^"']+)["']/gi,
-      /bearer['":\s]*["']([^"']+)["']/gi,
-      /token['":\s]*["']([^"']+)["']/gi
-    ];
+    if (htmlContent) {
+      const tokenPatterns = [
+        /authorization['":\s]*["']([^"']+)["']/gi,
+        /x-auth-token['":\s]*["']([^"']+)["']/gi,
+        /bearer['":\s]*["']([^"']+)["']/gi,
+        /token['":\s]*["']([^"']+)["']/gi
+      ];
 
-    for (const pattern of tokenPatterns) {
-      const matches = htmlContent.match(pattern);
-      if (matches && matches.length > 0) {
-        // Extract the actual token value
-        const tokenMatch = matches[0].match(/["']([^"']+)["']/);
-        if (tokenMatch && tokenMatch[1] && tokenMatch[1].length > 10) {
-          auth = tokenMatch[1];
-          console.log('🔑 Token found in HTML:', auth.substring(0, 20) + '...');
-          break;
+      for (const pattern of tokenPatterns) {
+        const matches = htmlContent.match(pattern);
+        if (matches && matches.length > 0) {
+          // Extract the actual token value
+          const tokenMatch = matches[0].match(/["']([^"']+)["']/);
+          if (tokenMatch && tokenMatch[1] && tokenMatch[1].length > 10) {
+            auth = tokenMatch[1];
+            console.log('🔑 Token found in HTML:', auth.substring(0, 20) + '...');
+            break;
+          }
         }
       }
     }
