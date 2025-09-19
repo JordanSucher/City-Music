@@ -15,8 +15,8 @@ const getOmrToken = async () => {
         '--disable-setuid-sandbox',
         '--disable-dev-shm-usage',
         '--disable-gpu',
-        '--remote-debugging-port=9222', // Critical for Docker containers
-        '--remote-debugging-address=0.0.0.0', // Critical for Docker network access
+        '--remote-debugging-port=9222',
+        '--remote-debugging-address=127.0.0.1', // Use 127.0.0.1 instead of 0.0.0.0 for better Docker compatibility
         '--disable-blink-features=AutomationControlled',
         '--disable-features=VizDisplayCompositor',
         '--disable-extensions',
@@ -32,9 +32,12 @@ const getOmrToken = async () => {
         '--no-default-browser-check',
         '--no-zygote',
         '--use-mock-keychain',
-        '--user-data-dir=/tmp/chrome-user-data', // Explicit user data directory
+        '--user-data-dir=/tmp/chrome-user-data',
         '--disable-web-security',
-        '--disable-features=VizDisplayCompositor'
+        '--disable-features=VizDisplayCompositor',
+        '--enable-logging',
+        '--log-level=0',
+        '--v=1'
       ],
       turnstile: true, // Enable automatic Cloudflare Turnstile bypass
       fingerprint: true, // Enable unique fingerprint injection
