@@ -341,7 +341,7 @@
                     className: 'venue-popup',
                     maxWidth: 320,
                     autoPanPadding: [5, 5],
-                    offset: [0, -10]
+                    offset: [0, -5]
                 });
 
                 // Show popup on hover and highlight marker (desktop)
@@ -355,6 +355,11 @@
                     activeMarker = this;
                     this.setIcon(highlightedIcon);
                     this.openPopup();
+
+                    // Load show details if not already loaded
+                    if (venue.show && venue.show.id) {
+                        loadShowDetails(venue.show.id, venue.venue_id);
+                    }
                 });
 
                 // Handle click for mobile and desktop
@@ -371,6 +376,11 @@
                     activeMarker = this;
                     this.setIcon(highlightedIcon);
                     this.openPopup();
+
+                    // Load show details if not already loaded
+                    if (venue.show && venue.show.id) {
+                        loadShowDetails(venue.show.id, venue.venue_id);
+                    }
                 });
 
                 // Reset marker when popup closes
@@ -386,39 +396,22 @@
             }
         }
 
-        // Create popup HTML content
+        // Create initial popup HTML content (before loading show details)
         function createPopupContent(venue) {
-            const nextShow = venue.shows && venue.shows[0];
+            const show = venue.show;
 
             let content = `<div class="venue-popup">
                 <div class="venue-name">
-                    ${nextShow && nextShow.ticket_url ?
-                        `<a href="${nextShow.ticket_url}" target="_blank" class="venue-link" title="Show Details">${venue.venue_name}</a>` :
+                    ${show && show.ticket_url ?
+                        `<a href="${show.ticket_url}" target="_blank" class="venue-link" title="Show Details">${venue.venue_name}</a>` :
                         venue.venue_name
                     }
                 </div>`;
 
-            if (nextShow) {
+            if (show) {
                 content += `
-                    <div class="show-info">
-                        <div class="bands">`;
-
-                if (nextShow.bands && nextShow.bands.length > 0) {
-                    nextShow.bands.forEach(band => {
-                        // Only add hover events on desktop devices
-                        const hoverEvents = isMobile() ? '' :
-                            `onmouseenter="checkPreviewAndPlay('${band.name}', ${venue.venue_id}, this)" onmouseleave="stopMusicOnHover()"`;
-
-                        content += `<a href="#" onclick="openSpotifyArtist('${band.name}'); return false;" class="band" ${hoverEvents}>
-                            <span class="band-name">${band.name}</span>
-                            <span class="preview-indicator" style="display: none;">📢</span>
-                        </a>`;
-                    });
-                } else {
-                    content += '<span class="band">TBA</span>';
-                }
-
-                content += `</div>
+                    <div class="show-info" id="show-info-${venue.venue_id}">
+                        <div class="loading-bands">Loading bands...</div>
                     </div>
                     <div class="music-player">
                         <div class="now-playing" id="now-playing-${venue.venue_id}"></div>
@@ -429,6 +422,44 @@
 
             content += '</div>';
             return content;
+        }
+
+        // Load and display detailed show info
+        async function loadShowDetails(showId, venueId) {
+            try {
+                const response = await fetch(`/api/show/${showId}`);
+                const showDetails = await response.json();
+
+                const showInfoElement = document.getElementById(`show-info-${venueId}`);
+                if (!showInfoElement) return;
+
+                let bandsHtml = '<div class="bands">';
+
+                if (showDetails.bands && showDetails.bands.length > 0) {
+                    showDetails.bands.forEach(band => {
+                        // Only add hover events on desktop devices
+                        const hoverEvents = isMobile() ? '' :
+                            `onmouseenter="checkPreviewAndPlay('${band.name}', ${venueId}, this)" onmouseleave="stopMusicOnHover()"`;
+
+                        bandsHtml += `<a href="#" onclick="openSpotifyArtist('${band.name}'); return false;" class="band" ${hoverEvents}>
+                            <span class="band-name">${band.name}</span>
+                            <span class="preview-indicator" style="display: none;">📢</span>
+                        </a>`;
+                    });
+                } else {
+                    bandsHtml += '<span class="band">TBA</span>';
+                }
+
+                bandsHtml += '</div>';
+                showInfoElement.innerHTML = bandsHtml;
+
+            } catch (error) {
+                console.error('Error loading show details:', error);
+                const showInfoElement = document.getElementById(`show-info-${venueId}`);
+                if (showInfoElement) {
+                    showInfoElement.innerHTML = '<div class="bands">Error loading bands</div>';
+                }
+            }
         }
 
         let hoverTimeout;

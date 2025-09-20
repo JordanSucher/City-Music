@@ -10,7 +10,7 @@ const PORT = process.env.PORT || 3001;
 // Serve static files
 app.use(express.static(path.join(__dirname, 'public')));
 
-// API endpoint to get venues with upcoming shows
+// API endpoint to get venues (lightweight - no band details)
 app.get('/api/venues', async (req, res) => {
   try {
     const selectedDate = req.query.date;
@@ -35,54 +35,40 @@ app.get('/api/venues', async (req, res) => {
 
     console.log('Fetching venues with shows for date filter:', dateFilter);
 
-    // Get shows with band data, filtered by date
+    // Get shows without band data for faster loading
     const upcomingShows = await prisma.show.findMany({
       where: {
         date: dateFilter
       },
-      include: {
-        bandShows: {
-          include: {
-            band: {
-              select: {
-                id: true,
-                name: true
-              }
-            }
-          },
-          take: 5 // Limit bands per show
-        }
+      select: {
+        id: true,
+        venue_name: true,
+        latlong: true,
+        date: true,
+        ticket_url: true
       },
       orderBy: {
         date: 'asc'
       },
-      take: 30 // Back to original working limit
+      take: 75 // Increased from 50 to 75
     });
 
     console.log(`Found ${upcomingShows.length} upcoming shows`);
-
-    // Debug: Log first few show dates to understand timezone storage
-    upcomingShows.slice(0, 3).forEach(show => {
-      console.log(`Show date in DB: ${show.date} (UTC: ${show.date.toISOString()})`);
-    });
 
     // Filter out shows without venue info and group by venue
     const venueMap = new Map();
 
     upcomingShows.forEach(show => {
       if (show.venue_name && show.latlong && !venueMap.has(show.venue_name)) {
-        const bands = show.bandShows.map(bs => bs.band).filter(band => band);
-
         venueMap.set(show.venue_name, {
           venue_name: show.venue_name,
           latlong: show.latlong,
           venue_id: show.id,
-          shows: [{
+          show: {
             id: show.id,
             date: show.date,
-            ticket_url: show.ticket_url,
-            bands: bands
-          }]
+            ticket_url: show.ticket_url
+          }
         });
       }
     });
@@ -94,6 +80,49 @@ app.get('/api/venues', async (req, res) => {
   } catch (error) {
     console.error('Error fetching venues:', error);
     res.status(500).json({ error: 'Failed to fetch venues' });
+  }
+});
+
+// API endpoint to get detailed show info for a specific show
+app.get('/api/show/:showId', async (req, res) => {
+  try {
+    const { showId } = req.params;
+    console.log(`Fetching show details for show ID: ${showId}`);
+
+    const show = await prisma.show.findUnique({
+      where: {
+        id: parseInt(showId)
+      },
+      include: {
+        bandShows: {
+          include: {
+            band: {
+              select: {
+                id: true,
+                name: true
+              }
+            }
+          },
+          take: 10 // More bands since we're only loading one show
+        }
+      }
+    });
+
+    if (!show) {
+      return res.status(404).json({ error: 'Show not found' });
+    }
+
+    const bands = show.bandShows.map(bs => bs.band).filter(band => band);
+
+    res.json({
+      id: show.id,
+      date: show.date,
+      ticket_url: show.ticket_url,
+      bands: bands
+    });
+  } catch (error) {
+    console.error('Error fetching show details:', error);
+    res.status(500).json({ error: 'Failed to fetch show details' });
   }
 });
 
