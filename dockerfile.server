@@ -20,6 +20,7 @@ RUN apt-get update --allow-releaseinfo-change && \
     apt-get install -y \
     google-chrome-stable \
     xvfb \
+    cron \
     fonts-liberation \
     fonts-dejavu-core \
     fonts-noto-cjk \
@@ -91,8 +92,14 @@ RUN npm install
 # Copy application code
 COPY . .
 
-# Make start script executable
-RUN chmod +x /app/start.server.sh
+# Make scripts executable
+RUN chmod +x /app/start.server.sh /app/start.server.cron.sh /app/cron.sh
+
+# Set up cron job
+RUN crontab /app/crontab
+
+# Create log directory for cron
+RUN mkdir -p /var/log && touch /var/log/shit-patrol-cron.log
 
 # Generate Prisma client
 RUN npx prisma generate

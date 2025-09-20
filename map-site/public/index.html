@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NYC Music Venues</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #1a1a1a;
+            color: #fff;
+        }
+
+        #map {
+            height: 100vh;
+            width: 100%;
+        }
+
+        .venue-popup {
+            background: #2a2a2a;
+            border-radius: 8px;
+            padding: 15px;
+            min-width: 280px;
+            color: #fff;
+        }
+
+        .leaflet-popup-content-wrapper {
+            transform-origin: center top !important;
+            border: none !important;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3) !important;
+        }
+
+        .leaflet-popup-tip {
+            display: none !important;
+        }
+
+        .venue-name {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #1db954;
+        }
+
+        .show-info {
+            margin-bottom: 10px;
+        }
+
+        .show-date {
+            font-weight: 600;
+            color: #ff6b6b;
+        }
+
+        .bands {
+            margin-top: 8px;
+        }
+
+        .band {
+            display: inline-block;
+            background: #333;
+            padding: 4px 8px;
+            margin: 2px;
+            border-radius: 12px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .band:hover {
+            background: #1db954;
+            color: white;
+            text-decoration: none;
+        }
+
+        .music-player {
+            display: none;
+        }
+
+        .play-button {
+            background: #1db954;
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-right: 8px;
+        }
+
+        .play-button:hover {
+            background: #1ed760;
+        }
+
+        .now-playing {
+            font-size: 11px;
+            color: #888;
+            margin-top: 8px;
+            pointer-events: none;
+        }
+
+        .loading {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #333;
+            padding: 10px 15px;
+            border-radius: 5px;
+            z-index: 1000;
+        }
+
+        .start-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+
+        .start-content {
+            text-align: center;
+            color: white;
+        }
+
+        .start-content h1 {
+            font-size: 3em;
+            margin-bottom: 0.5em;
+            color: #1db954;
+        }
+
+        .start-content p {
+            font-size: 1.2em;
+            margin-bottom: 2em;
+            color: #aaa;
+        }
+
+        .start-button {
+            background: #1db954;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1em;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .start-button:hover {
+            background: #1ed760;
+        }
+
+        .date-selector {
+            position: fixed;
+            top: 20px;
+            left: 120px;
+            background: rgba(42, 42, 42, 0.9);
+            padding: 10px 15px;
+            border-radius: 5px;
+            z-index: 1001;
+            color: white;
+        }
+
+        .date-selector select {
+            margin-left: 10px;
+            background: #333;
+            color: white;
+            border: 1px solid #555;
+            border-radius: 3px;
+            padding: 5px;
+        }
+
+        .venue-link {
+            color: #1db954;
+            text-decoration: none;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .venue-link:hover {
+            color: #1ed760;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div id="start-screen" class="start-screen">
+        <div class="start-content">
+            <h1>🗺️ NYC Music Venues</h1>
+            <p>Interactive map with music previews</p>
+            <button id="start-button" class="start-button">🎵 Start Exploring</button>
+        </div>
+    </div>
+    <div id="date-selector" class="date-selector" style="display: none;">
+        <label for="date-select">Show date:</label>
+        <select id="date-select">
+        </select>
+    </div>
+    <div id="map" style="display: none;"></div>
+    <div id="loading" class="loading" style="display: none;">Loading venues...</div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        let map;
+        let currentAudio = null;
+        let activeMarker = null;
+
+        // Initialize map centered on NYC
+        function initMap() {
+            map = L.map('map').setView([40.7128, -74.0060], 12);
+
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+                attribution: '© OpenStreetMap contributors © CARTO',
+                subdomains: 'abcd',
+                maxZoom: 19
+            }).addTo(map);
+        }
+
+        // Load venues and add markers
+        async function loadVenues() {
+            const loading = document.getElementById('loading');
+            loading.style.display = 'block';
+
+            // Reset active marker reference
+            activeMarker = null;
+
+            // Clear existing markers
+            if (map) {
+                map.eachLayer(function(layer) {
+                    if (layer instanceof L.Marker) {
+                        map.removeLayer(layer);
+                    }
+                });
+            }
+
+            try {
+                const dateParam = selectedDateString ? `?date=${selectedDateString}` : '';
+                console.log('Fetching venues with URL:', `/api/venues${dateParam}`);
+                const response = await fetch(`/api/venues${dateParam}`);
+                const venues = await response.json();
+
+                venues.forEach(venue => {
+                    addVenueMarker(venue);
+                });
+
+                loading.style.display = 'none';
+            } catch (error) {
+                console.error('Error loading venues:', error);
+                loading.textContent = 'Error loading venues';
+            }
+        }
+
+        // Add marker for each venue
+        function addVenueMarker(venue) {
+            if (!venue.latlong) return;
+
+            try {
+                const coords = JSON.parse(venue.latlong);
+                const lat = parseFloat(coords[0]);
+                const lng = parseFloat(coords[1]);
+
+                if (isNaN(lat) || isNaN(lng)) return;
+
+                // Create custom icon for highlighting
+                const defaultIcon = new L.Icon.Default();
+                const highlightedIcon = new L.Icon({
+                    iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png',
+                    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+                    iconSize: [25, 41],
+                    iconAnchor: [12, 41],
+                    popupAnchor: [1, -34],
+                    shadowSize: [41, 41]
+                });
+
+                const marker = L.marker([lat, lng], { icon: defaultIcon }).addTo(map);
+
+                // Create popup content
+                const popupContent = createPopupContent(venue);
+                marker.bindPopup(popupContent, {
+                    className: 'venue-popup',
+                    maxWidth: 320,
+                    autoPanPadding: [5, 5],
+                    offset: [0, -10]
+                });
+
+                // Show popup on hover and highlight marker
+                marker.on('mouseover', function() {
+                    // Reset previous active marker
+                    if (activeMarker && activeMarker !== this) {
+                        activeMarker.setIcon(defaultIcon);
+                    }
+
+                    // Set this as active marker and highlight
+                    activeMarker = this;
+                    this.setIcon(highlightedIcon);
+                    this.openPopup();
+                });
+
+                // Reset marker when popup closes
+                marker.on('popupclose', function() {
+                    this.setIcon(defaultIcon);
+                    if (activeMarker === this) {
+                        activeMarker = null;
+                    }
+                });
+
+            } catch (error) {
+                console.error('Error parsing coordinates for venue:', venue.venue_name, error);
+            }
+        }
+
+        // Create popup HTML content
+        function createPopupContent(venue) {
+            const nextShow = venue.shows && venue.shows[0];
+
+            let content = `<div class="venue-popup">
+                <div class="venue-name">
+                    ${nextShow && nextShow.ticket_url ?
+                        `<a href="${nextShow.ticket_url}" target="_blank" class="venue-link" title="Show Details">${venue.venue_name}</a>` :
+                        venue.venue_name
+                    }
+                </div>`;
+
+            if (nextShow) {
+                content += `
+                    <div class="show-info">
+                        <div class="bands">`;
+
+                if (nextShow.bands && nextShow.bands.length > 0) {
+                    nextShow.bands.forEach(band => {
+                        content += `<a href="#" onclick="openSpotifyArtist('${band.name}'); return false;" class="band" onmouseenter="checkPreviewAndPlay('${band.name}', ${venue.venue_id}, this)" onmouseleave="stopMusicOnHover()">
+                            <span class="band-name">${band.name}</span>
+                            <span class="preview-indicator" style="display: none;">📢</span>
+                        </a>`;
+                    });
+                } else {
+                    content += '<span class="band">TBA</span>';
+                }
+
+                content += `</div>
+                    </div>
+                    <div class="music-player">
+                        <div class="now-playing" id="now-playing-${venue.venue_id}"></div>
+                    </div>`;
+            } else {
+                content += '<div class="show-info">No upcoming shows</div>';
+            }
+
+            content += '</div>';
+            return content;
+        }
+
+        let hoverTimeout;
+
+        // Check for preview and play music on hover
+        async function checkPreviewAndPlay(bandName, venueId, element) {
+            // Clear any existing timeout
+            if (hoverTimeout) {
+                clearTimeout(hoverTimeout);
+            }
+
+            // Add small delay to prevent accidental triggers
+            hoverTimeout = setTimeout(async () => {
+                // Check if preview is available first
+                try {
+                    const response = await fetch(`/api/music/${encodeURIComponent(bandName)}`);
+                    const musicData = await response.json();
+
+                    if (musicData.preview_url) {
+                        // Show megaphone emoji
+                        const indicator = element.querySelector('.preview-indicator');
+                        if (indicator) {
+                            indicator.style.display = 'inline';
+                        }
+
+                        // Play music
+                        playMusic(bandName, venueId, musicData);
+                    }
+                } catch (error) {
+                    console.error('Error checking preview:', error);
+                }
+            }, 300);
+        }
+
+        // Stop music when hover ends
+        function stopMusicOnHover() {
+            if (hoverTimeout) {
+                clearTimeout(hoverTimeout);
+                hoverTimeout = null;
+            }
+
+            // Stop current audio if playing
+            if (currentAudio) {
+                currentAudio.pause();
+                currentAudio = null;
+                console.log('Audio stopped on mouse leave');
+            }
+
+            // Hide all megaphone indicators
+            document.querySelectorAll('.preview-indicator').forEach(indicator => {
+                indicator.style.display = 'none';
+            });
+        }
+
+        // Play music preview using Spotify tracks from database
+        async function playMusic(bandName, venueId, musicData = null) {
+            if (!bandName || !audioEnabled) return;
+
+            // Stop current audio if playing
+            if (currentAudio) {
+                currentAudio.pause();
+                currentAudio = null;
+            }
+
+            try {
+                // Use provided musicData or fetch it
+                if (!musicData) {
+                    const response = await fetch(`/api/music/${encodeURIComponent(bandName)}`);
+                    musicData = await response.json();
+                }
+
+                console.log('Music API response:', musicData);
+
+                if (musicData.preview_url) {
+                    // Create and play audio silently (no text display)
+                    currentAudio = new Audio(musicData.preview_url);
+                    currentAudio.volume = 0.6;
+
+                    currentAudio.play().then(() => {
+                        console.log('Audio started playing successfully');
+                    }).catch(error => {
+                        console.error('Audio play failed:', error);
+                    });
+
+                    // Clear when audio ends
+                    currentAudio.addEventListener('ended', () => {
+                        currentAudio = null;
+                    });
+
+                    // Auto-clear after 30 seconds
+                    setTimeout(() => {
+                        if (currentAudio) {
+                            currentAudio.pause();
+                            currentAudio = null;
+                        }
+                    }, 32000);
+                }
+
+            } catch (error) {
+                console.error('Error playing music:', error);
+            }
+        }
+
+        let audioEnabled = false;
+        let selectedDateString = null;
+
+        // Open Spotify artist page
+        async function openSpotifyArtist(bandName) {
+            try {
+                // Try to get the Spotify artist ID first
+                const response = await fetch(`/api/spotify-artist/${encodeURIComponent(bandName)}`);
+                const data = await response.json();
+
+                if (data.success && data.artist_id) {
+                    // Open direct artist page
+                    window.open(`https://open.spotify.com/artist/${data.artist_id}`, '_blank');
+                } else {
+                    // Fallback to search
+                    window.open(`https://open.spotify.com/search/${encodeURIComponent(bandName)}`, '_blank');
+                }
+            } catch (error) {
+                console.error('Error getting Spotify artist:', error);
+                // Fallback to search
+                window.open(`https://open.spotify.com/search/${encodeURIComponent(bandName)}`, '_blank');
+            }
+        }
+
+        // Initialize date selector
+        function initDateSelector() {
+            const dateSelect = document.getElementById('date-select');
+
+            // Get current date in Eastern Time (where the shows are happening)
+            const now = new Date();
+            const easternTime = new Date(now.toLocaleString("en-US", {timeZone: "America/New_York"}));
+
+            console.log('System time:', now.toISOString());
+            console.log('Eastern time:', easternTime);
+            console.log('System timezone offset:', now.getTimezoneOffset());
+
+            // Create date string manually to avoid timezone issues
+            const todayString = easternTime.getFullYear() + '-' +
+                               String(easternTime.getMonth() + 1).padStart(2, '0') + '-' +
+                               String(easternTime.getDate()).padStart(2, '0');
+
+            console.log('Today string calculated:', todayString);
+
+            // Generate date options starting from Eastern "today"
+            for (let i = 0; i < 8; i++) {
+                const futureDate = new Date(easternTime);
+                futureDate.setDate(easternTime.getDate() + i);
+
+                const dateString = futureDate.getFullYear() + '-' +
+                                  String(futureDate.getMonth() + 1).padStart(2, '0') + '-' +
+                                  String(futureDate.getDate()).padStart(2, '0');
+
+                const option = document.createElement('option');
+                option.value = dateString;
+                option.textContent = i === 0 ? 'Today' :
+                                   i === 1 ? 'Tomorrow' :
+                                   futureDate.toLocaleDateString('en-US', {
+                                       weekday: 'short',
+                                       month: 'short',
+                                       day: 'numeric',
+                                       timeZone: 'America/New_York'
+                                   });
+
+                if (i === 0) {
+                    option.selected = true;
+                    selectedDateString = option.value;
+                    console.log('Initial selectedDateString set to:', selectedDateString);
+                }
+                dateSelect.appendChild(option);
+            }
+
+            dateSelect.addEventListener('change', function() {
+                selectedDateString = this.value; // Keep as string (YYYY-MM-DD)
+                console.log('Date picker changed to:', selectedDateString);
+                loadVenues(); // Reload venues for selected date
+            });
+        }
+
+        // Initialize everything when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Handle start button click
+            document.getElementById('start-button').addEventListener('click', function() {
+                audioEnabled = true;
+
+                // Hide start screen
+                document.getElementById('start-screen').style.display = 'none';
+                document.getElementById('map').style.display = 'block';
+                document.getElementById('date-selector').style.display = 'block';
+
+                // Initialize date selector, map and load venues
+                initDateSelector();
+                initMap();
+                loadVenues();
+            });
+        });
+    </script>
+</body>
+</html>

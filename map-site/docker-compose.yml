@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  map-site:
+    build: .
+    container_name: shit-patrol-map-site
+    ports:
+      - "3001:3001"
+    environment:
+      - NODE_ENV=production
+      - PORT=3001
+    volumes:
+      # Share the prisma client and database access with the main app
+      - ../prisma:/app/prisma
+      - ../spotify.js:/app/spotify.js
+      - ../.env:/app/.env
+    restart: unless-stopped
