@@ -246,6 +246,13 @@
         let currentAudio = null;
         let activeMarker = null;
 
+        // Detect mobile devices
+        function isMobile() {
+            return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
+                   ('ontouchstart' in window) ||
+                   (window.innerWidth <= 768);
+        }
+
         // Initialize map centered on NYC
         function initMap() {
             map = L.map('map', {
@@ -397,7 +404,11 @@
 
                 if (nextShow.bands && nextShow.bands.length > 0) {
                     nextShow.bands.forEach(band => {
-                        content += `<a href="#" onclick="openSpotifyArtist('${band.name}'); return false;" class="band" onmouseenter="checkPreviewAndPlay('${band.name}', ${venue.venue_id}, this)" onmouseleave="stopMusicOnHover()">
+                        // Only add hover events on desktop devices
+                        const hoverEvents = isMobile() ? '' :
+                            `onmouseenter="checkPreviewAndPlay('${band.name}', ${venue.venue_id}, this)" onmouseleave="stopMusicOnHover()"`;
+
+                        content += `<a href="#" onclick="openSpotifyArtist('${band.name}'); return false;" class="band" ${hoverEvents}>
                             <span class="band-name">${band.name}</span>
                             <span class="preview-indicator" style="display: none;">📢</span>
                         </a>`;
