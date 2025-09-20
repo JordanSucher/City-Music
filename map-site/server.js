@@ -56,7 +56,7 @@ app.get('/api/venues', async (req, res) => {
       orderBy: {
         date: 'asc'
       },
-      take: 150 // Increased to show more venues per day
+      take: 75 // Moderate increase from 30
     });
 
     console.log(`Found ${upcomingShows.length} upcoming shows`);
