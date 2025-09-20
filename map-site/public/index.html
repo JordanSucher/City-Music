@@ -188,6 +188,40 @@
             color: #1ed760;
             text-decoration: underline;
         }
+
+        /* Mobile optimizations */
+        @media (max-width: 768px) {
+            .venue-popup {
+                min-width: 250px;
+                font-size: 14px;
+            }
+
+            .date-selector {
+                left: 10px;
+                top: 10px;
+                font-size: 14px;
+                padding: 8px 12px;
+            }
+
+            .date-selector select {
+                padding: 6px;
+                font-size: 14px;
+            }
+
+            .band {
+                padding: 6px 10px;
+                margin: 3px;
+                font-size: 13px;
+                min-height: 44px; /* Better touch target */
+                display: inline-flex;
+                align-items: center;
+            }
+
+            .venue-name {
+                font-size: 16px;
+                line-height: 1.4;
+            }
+        }
     </style>
 </head>
 <body>
@@ -214,13 +248,25 @@
 
         // Initialize map centered on NYC
         function initMap() {
-            map = L.map('map').setView([40.7128, -74.0060], 12);
+            map = L.map('map', {
+                tap: true,  // Enable tap for mobile
+                tapTolerance: 15  // Increase touch tolerance
+            }).setView([40.7128, -74.0060], 12);
 
             L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
                 attribution: '© OpenStreetMap contributors © CARTO',
                 subdomains: 'abcd',
                 maxZoom: 19
             }).addTo(map);
+
+            // Close popups when clicking on map (mobile friendly)
+            map.on('click', function() {
+                if (activeMarker) {
+                    activeMarker.setIcon(new L.Icon.Default());
+                    activeMarker = null;
+                }
+                map.closePopup();
+            });
         }
 
         // Load venues and add markers
@@ -290,8 +336,24 @@
                     offset: [0, -10]
                 });
 
-                // Show popup on hover and highlight marker
+                // Show popup on hover and highlight marker (desktop)
                 marker.on('mouseover', function() {
+                    // Reset previous active marker
+                    if (activeMarker && activeMarker !== this) {
+                        activeMarker.setIcon(defaultIcon);
+                    }
+
+                    // Set this as active marker and highlight
+                    activeMarker = this;
+                    this.setIcon(highlightedIcon);
+                    this.openPopup();
+                });
+
+                // Handle click for mobile and desktop
+                marker.on('click', function(e) {
+                    // Prevent map click event
+                    L.DomEvent.stopPropagation(e);
+
                     // Reset previous active marker
                     if (activeMarker && activeMarker !== this) {
                         activeMarker.setIcon(defaultIcon);
