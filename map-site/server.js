@@ -56,7 +56,7 @@ app.get('/api/venues', async (req, res) => {
       orderBy: {
         date: 'asc'
       },
-      take: 75 // Moderate increase from 30
+      take: 30 // Back to original working limit
     });
 
     console.log(`Found ${upcomingShows.length} upcoming shows`);
