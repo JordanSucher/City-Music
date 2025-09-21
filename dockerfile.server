@@ -93,10 +93,7 @@ RUN npm install
 COPY . .
 
 # Make scripts executable
-RUN chmod +x /app/start.server.sh /app/start.server.cron.sh /app/cron.sh
-
-# Set up cron job
-RUN crontab /app/crontab
+RUN chmod +x /app/start.server.sh
 
 # Create log directory for cron
 RUN mkdir -p /var/log && touch /var/log/shit-patrol-cron.log
