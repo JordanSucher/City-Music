@@ -1,5 +1,7 @@
 services:
   shit-patrol-server:
+    env_file:
+      - .env
     build:
       context: .
       dockerfile: dockerfile.server
