@@ -1,5 +1,3 @@
-require('dotenv').config();
-
 let axios = require('axios');
 const prisma = require('./prisma/prismaClient.js');
 
