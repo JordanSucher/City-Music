@@ -311,6 +311,22 @@
             color: #fff;
         }
 
+        .user-location {
+            width: 16px;
+            height: 16px;
+            background: #4285f4;
+            border: 3px solid #ffffff;
+            border-radius: 50%;
+            box-shadow: 0 2px 8px rgba(66, 133, 244, 0.3);
+            animation: pulse-location 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-location {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
         /* Mobile optimizations */
         @media (max-width: 768px) {
             .venue-popup {
@@ -387,6 +403,7 @@
         let map;
         let currentAudio = null;
         let activeMarker = null;
+        let userLocationMarker = null;
 
         // Detect mobile devices
         function isMobile() {
@@ -418,6 +435,51 @@
             map.on('click', function() {
                 closeFooterAndResetMarker();
             });
+
+            // Add user location
+            addUserLocation();
+        }
+
+        // Add user's current location as a blue dot
+        function addUserLocation() {
+            if (!navigator.geolocation) {
+                console.log('Geolocation not supported');
+                return;
+            }
+
+            navigator.geolocation.getCurrentPosition(
+                function(position) {
+                    const lat = position.coords.latitude;
+                    const lng = position.coords.longitude;
+
+                    console.log('User location:', lat, lng);
+
+                    // Create custom blue dot icon
+                    const userIcon = L.divIcon({
+                        className: 'user-location',
+                        iconSize: [16, 16],
+                        iconAnchor: [8, 8]
+                    });
+
+                    // Add marker without centering map
+                    userLocationMarker = L.marker([lat, lng], { icon: userIcon })
+                        .addTo(map)
+                        .bindPopup('Your location', {
+                            className: 'venue-popup',
+                            offset: [0, -5]
+                        });
+
+                    console.log('User location marker added');
+                },
+                function(error) {
+                    console.log('Geolocation error:', error.message);
+                },
+                {
+                    enableHighAccuracy: true,
+                    timeout: 10000,
+                    maximumAge: 300000 // 5 minutes
+                }
+            );
         }
 
         // Add Google Maps-style double-tap drag zoom functionality
