@@ -536,12 +536,14 @@
             }
         }
 
-        // Create initial popup HTML content (before loading show details)
-        function createPopupContent(venue) {
+        // Show venue details in footer
+        async function showVenueInFooter(venue) {
+            const footer = document.getElementById('show-footer');
+            const footerContent = document.getElementById('footer-content');
             const show = venue.show;
 
-            let content = `<div class="venue-popup">
-                <div class="venue-name">
+            let content = `
+                <div class="footer-venue-name">
                     ${show && show.ticket_url ?
                         `<a href="${show.ticket_url}" target="_blank" class="venue-link" title="Show Details">${venue.venue_name}</a>` :
                         venue.venue_name
@@ -549,37 +551,45 @@
                 </div>`;
 
             if (show) {
-                content += `
-                    <div class="show-info" id="show-info-${venue.venue_id}">
-                        <div class="loading-bands">Loading bands...</div>
-                    </div>
-                    <div class="music-player">
-                        <div class="now-playing" id="now-playing-${venue.venue_id}"></div>
-                    </div>`;
+                const showDate = new Date(show.date).toLocaleDateString('en-US', {
+                    weekday: 'long',
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric',
+                    timeZone: 'America/New_York'
+                });
+
+                content += `<div class="footer-show-date">${showDate}</div>`;
+                content += `<div class="footer-bands" id="footer-bands-loading">Loading bands...</div>`;
             } else {
-                content += '<div class="show-info">No upcoming shows</div>';
+                content += '<div class="footer-show-date">No upcoming shows</div>';
             }
 
-            content += '</div>';
-            return content;
+            footerContent.innerHTML = content;
+            footer.classList.add('visible');
+
+            // Load band details if show exists
+            if (show && show.id) {
+                loadShowDetailsForFooter(show.id);
+            }
         }
 
-        // Load and display detailed show info
-        async function loadShowDetails(showId, venueId) {
+        // Load and display detailed show info in footer
+        async function loadShowDetailsForFooter(showId) {
             try {
                 const response = await fetch(`/api/show/${showId}`);
                 const showDetails = await response.json();
 
-                const showInfoElement = document.getElementById(`show-info-${venueId}`);
-                if (!showInfoElement) return;
+                const bandsElement = document.getElementById('footer-bands-loading');
+                if (!bandsElement) return;
 
-                let bandsHtml = '<div class="bands">';
+                let bandsHtml = '';
 
                 if (showDetails.bands && showDetails.bands.length > 0) {
                     showDetails.bands.forEach(band => {
                         // Only add hover events on desktop devices
                         const hoverEvents = isMobile() ? '' :
-                            `onmouseenter="checkPreviewAndPlay('${band.name}', ${venueId}, this)" onmouseleave="stopMusicOnHover()"`;
+                            `onmouseenter="checkPreviewAndPlay('${band.name}', 'footer', this)" onmouseleave="stopMusicOnHover()"`;
 
                         bandsHtml += `<a href="#" onclick="openSpotifyArtist('${band.name}'); return false;" class="band" ${hoverEvents}>
                             <span class="band-name">${band.name}</span>
@@ -590,16 +600,22 @@
                     bandsHtml += '<span class="band">TBA</span>';
                 }
 
-                bandsHtml += '</div>';
-                showInfoElement.innerHTML = bandsHtml;
+                bandsElement.innerHTML = bandsHtml;
+                bandsElement.id = 'footer-bands'; // Remove loading id
 
             } catch (error) {
                 console.error('Error loading show details:', error);
-                const showInfoElement = document.getElementById(`show-info-${venueId}`);
-                if (showInfoElement) {
-                    showInfoElement.innerHTML = '<div class="bands">Error loading bands</div>';
+                const bandsElement = document.getElementById('footer-bands-loading');
+                if (bandsElement) {
+                    bandsElement.innerHTML = 'Error loading bands';
                 }
             }
+        }
+
+        // Hide footer
+        function hideFooter() {
+            const footer = document.getElementById('show-footer');
+            footer.classList.remove('visible');
         }
 
         let hoverTimeout;
@@ -843,6 +859,21 @@
                 initDateSelector();
                 initMap();
                 loadVenues();
+            });
+
+            // Handle footer close button
+            document.getElementById('footer-close').addEventListener('click', function() {
+                closeFooterAndResetMarker();
+            });
+
+            // Handle ESC key to close footer
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    const footer = document.getElementById('show-footer');
+                    if (footer.classList.contains('visible')) {
+                        closeFooterAndResetMarker();
+                    }
+                }
             });
         });
     </script>
