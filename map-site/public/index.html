@@ -197,6 +197,11 @@
             display: none;
             z-index: 1001;
             gap: 8px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .date-nav.footer-visible {
+            transform: translateY(-60px);
         }
 
         .date-nav button {
@@ -536,6 +541,7 @@
         async function showVenueInFooter(venue) {
             const footer = document.getElementById('show-footer');
             const footerContent = document.getElementById('footer-content');
+            const dateNav = document.getElementById('date-nav');
             const show = venue.show;
 
             let content = `
@@ -563,6 +569,7 @@
 
             footerContent.innerHTML = content;
             footer.classList.add('visible');
+            dateNav.classList.add('footer-visible');
 
             // Load band details if show exists
             if (show && show.id) {
@@ -617,6 +624,8 @@
         // Close footer and reset active marker
         function closeFooterAndResetMarker() {
             hideFooter();
+            const dateNav = document.getElementById('date-nav');
+            dateNav.classList.remove('footer-visible');
             if (activeMarker) {
                 activeMarker.setIcon(new L.Icon.Default());
                 activeMarker = null;
@@ -815,6 +824,7 @@
             prevButton.addEventListener('click', function() {
                 const currentIndex = dateSelect.selectedIndex;
                 if (currentIndex > 0) {
+                    closeFooterAndResetMarker();
                     dateSelect.selectedIndex = currentIndex - 1;
                     selectedDateString = dateSelect.value;
                     console.log('Prev button - date changed to:', selectedDateString);
@@ -826,6 +836,7 @@
             nextButton.addEventListener('click', function() {
                 const currentIndex = dateSelect.selectedIndex;
                 if (currentIndex < dateSelect.options.length - 1) {
+                    closeFooterAndResetMarker();
                     dateSelect.selectedIndex = currentIndex + 1;
                     selectedDateString = dateSelect.value;
                     console.log('Next button - date changed to:', selectedDateString);
