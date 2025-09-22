@@ -396,11 +396,7 @@
 
             // Close footer when clicking on map (mobile friendly)
             map.on('click', function() {
-                if (activeMarker) {
-                    activeMarker.setIcon(new L.Icon.Default());
-                    activeMarker = null;
-                }
-                hideFooter();
+                closeFooterAndResetMarker();
             });
         }
 
@@ -616,6 +612,15 @@
         function hideFooter() {
             const footer = document.getElementById('show-footer');
             footer.classList.remove('visible');
+        }
+
+        // Close footer and reset active marker
+        function closeFooterAndResetMarker() {
+            hideFooter();
+            if (activeMarker) {
+                activeMarker.setIcon(new L.Icon.Default());
+                activeMarker = null;
+            }
         }
 
         let hoverTimeout;
