@@ -257,6 +257,57 @@
             border-color: #555;
         }
 
+        .location-nav {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none;
+            z-index: 1001;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .location-nav.footer-visible {
+            transform: translateY(-120px);
+        }
+
+        .location-nav button {
+            background: rgba(42, 42, 42, 0.9);
+            border: 1px solid #555;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: normal;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            line-height: 40px;
+            font-family: monospace;
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            vertical-align: middle;
+            outline: none;
+        }
+
+        .location-nav button:hover {
+            background: #1db954;
+            border-color: #1db954;
+        }
+
+        .location-nav button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .location-nav button:disabled:hover {
+            background: rgba(42, 42, 42, 0.9);
+            border-color: #555;
+        }
+
         .show-footer {
             position: fixed;
             bottom: 0;
@@ -388,6 +439,9 @@
         <button id="prev-date" title="Previous day">←</button>
         <button id="next-date" title="Next day">→</button>
     </div>
+    <div id="location-nav" class="location-nav" style="display: none;">
+        <button id="goto-location" title="Go to your location">⊙</button>
+    </div>
     <div id="map"></div>
     <div id="loading" class="loading" style="display: none;">Loading venues...</div>
 
@@ -454,25 +508,28 @@
 
                     console.log('User location:', lat, lng);
 
-                    // Create custom blue dot icon
-                    const userIcon = L.divIcon({
-                        className: 'user-location',
-                        iconSize: [16, 16],
-                        iconAnchor: [8, 8]
-                    });
-
-                    // Add marker without centering map
-                    userLocationMarker = L.marker([lat, lng], { icon: userIcon })
-                        .addTo(map)
-                        .bindPopup('Your location', {
-                            className: 'venue-popup',
-                            offset: [0, -5]
-                        });
+                    // Create blue circle marker that stays properly positioned
+                    userLocationMarker = L.circleMarker([lat, lng], {
+                        radius: 8,
+                        fillColor: '#4285f4',
+                        color: '#ffffff',
+                        weight: 3,
+                        fillOpacity: 1,
+                        opacity: 1
+                    }).addTo(map);
 
                     console.log('User location marker added');
+
+                    // Enable the location button
+                    const locationButton = document.getElementById('goto-location');
+                    locationButton.disabled = false;
                 },
                 function(error) {
                     console.log('Geolocation error:', error.message);
+
+                    // Disable the location button
+                    const locationButton = document.getElementById('goto-location');
+                    locationButton.disabled = true;
                 },
                 {
                     enableHighAccuracy: true,
@@ -480,6 +537,14 @@
                     maximumAge: 300000 // 5 minutes
                 }
             );
+        }
+
+        // Go to user's current location
+        function goToCurrentLocation() {
+            if (userLocationMarker) {
+                const latLng = userLocationMarker.getLatLng();
+                map.setView(latLng, 15); // Zoom to level 15 for street-level view
+            }
         }
 
         // Add Google Maps-style double-tap drag zoom functionality
@@ -619,6 +684,7 @@
             const footer = document.getElementById('show-footer');
             const footerContent = document.getElementById('footer-content');
             const dateNav = document.getElementById('date-nav');
+            const locationNav = document.getElementById('location-nav');
             const show = venue.show;
 
             let content = `
@@ -647,6 +713,7 @@
             footerContent.innerHTML = content;
             footer.classList.add('visible');
             dateNav.classList.add('footer-visible');
+            locationNav.classList.add('footer-visible');
 
             // Load band details if show exists
             if (show && show.id) {
@@ -702,7 +769,9 @@
         function closeFooterAndResetMarker() {
             hideFooter();
             const dateNav = document.getElementById('date-nav');
+            const locationNav = document.getElementById('location-nav');
             dateNav.classList.remove('footer-visible');
+            locationNav.classList.remove('footer-visible');
             if (activeMarker) {
                 activeMarker.setIcon(new L.Icon.Default());
                 activeMarker = null;
@@ -942,6 +1011,7 @@
             document.getElementById('start-screen').style.display = 'none';
             document.getElementById('date-selector').style.display = 'block';
             document.getElementById('date-nav').style.display = 'flex';
+            document.getElementById('location-nav').style.display = 'block';
         }
 
         // Initialize everything when page loads
@@ -959,6 +1029,12 @@
             // Handle footer close button
             document.getElementById('footer-close').addEventListener('click', function() {
                 closeFooterAndResetMarker();
+            });
+
+            // Handle location button click
+            document.getElementById('goto-location').addEventListener('click', function() {
+                closeFooterAndResetMarker();
+                goToCurrentLocation();
             });
 
             // Handle ESC key to close footer
