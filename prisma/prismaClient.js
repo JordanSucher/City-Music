@@ -5,7 +5,6 @@ if (!process.env.TURSO_DATABASE_URL || !process.env.TURSO_AUTH_TOKEN) {
 
 const { PrismaClient } = require('@prisma/client');
 const { PrismaLibSQL } = require('@prisma/adapter-libsql');
-const { createClient } = require('@libsql/client');
 
 console.log('=== Database Environment Debug ===');
 console.log('TURSO_DATABASE_URL:', process.env.TURSO_DATABASE_URL);
@@ -23,32 +22,18 @@ if (!process.env.TURSO_AUTH_TOKEN) {
 }
 
 try {
-    console.log('Creating libsql client with:', {
+    console.log('Creating Turso adapter with direct configuration');
+
+    // Create the adapter with direct configuration (newer Turso setup)
+    const adapter = new PrismaLibSQL({
         url: process.env.TURSO_DATABASE_URL,
-        hasAuthToken: !!process.env.TURSO_AUTH_TOKEN
+        authToken: process.env.TURSO_AUTH_TOKEN,
     });
 
-    // Create the libsql client first
-    const libsqlClient = createClient({
-      url: process.env.TURSO_DATABASE_URL,
-      authToken: process.env.TURSO_AUTH_TOKEN,
-    });
-
-    console.log('libsql client created successfully');
-
-    // Pass the client to the adapter
-    const adapter = new PrismaLibSQL(libsqlClient);
     console.log('PrismaLibSQL adapter created successfully');
 
     const prisma = new PrismaClient({ adapter })
     console.log('PrismaClient created successfully');
-
-    // Test the connection
-    prisma.$connect().then(() => {
-        console.log('Database connection test successful');
-    }).catch((err) => {
-        console.error('Database connection test failed:', err);
-    });
 
     module.exports = prisma;
 } catch (error) {
