@@ -35,6 +35,10 @@ const pullShows = async function() {
     for (const show of shows) {
       try {
         console.log(`Processing show ${show.id} - ${show.venue?.name}`);
+        console.log(`Raw starts_at: ${show.starts_at}`);
+        console.log(`Parsed date: ${new Date(show.starts_at)}`);
+        console.log(`Parsed date ISO: ${new Date(show.starts_at).toISOString()}`);
+
         const result = await prisma.$transaction(async (prisma) => {
           console.log("adding show: " + show.id);
 

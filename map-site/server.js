@@ -17,9 +17,9 @@ app.get('/api/venues', async (req, res) => {
     let dateFilter = { gte: new Date() };
 
     if (selectedDate) {
-      // Parse the date string directly as UTC to match database storage
-      const startOfDay = new Date(selectedDate + 'T00:00:00.000Z');
-      const endOfDay = new Date(selectedDate + 'T23:59:59.999Z');
+      // Parse the date string in EDT to match show local times
+      const startOfDay = new Date(selectedDate + 'T00:00:00-04:00');
+      const endOfDay = new Date(selectedDate + 'T23:59:59-04:00');
 
       console.log(`Selected date: ${selectedDate}`);
       console.log(`UTC range: ${startOfDay.toISOString()} to ${endOfDay.toISOString()}`);
