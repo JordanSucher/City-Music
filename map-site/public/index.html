@@ -167,29 +167,9 @@
 
         .start-instruction {
             font-size: 1.1em;
-            margin-bottom: 2em;
+            margin-bottom: 0;
             color: #ccc;
             font-weight: 300;
-        }
-
-        .start-button {
-            background: #1db954;
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            font-size: 0.9em;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 500;
-        }
-
-        .start-button:hover {
-            background: #1ed760;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(29, 185, 84, 0.3);
         }
 
         .date-selector {
@@ -380,8 +360,7 @@
     <div id="start-screen" class="start-screen">
         <div class="start-content">
             <div class="direction-rose"></div>
-            <div class="start-instruction">Click and drag to explore</div>
-            <button id="start-button" class="start-button">Start</button>
+            <div class="start-instruction">Click anywhere to explore</div>
         </div>
     </div>
     <div id="date-selector" class="date-selector" style="display: none;">
@@ -911,63 +890,9 @@
             loadVenues();
 
             const startScreen = document.getElementById('start-screen');
-            let isDragging = false;
-            let dragStart = null;
 
-            // Handle start button click
-            document.getElementById('start-button').addEventListener('click', enterMainView);
-
-            // Handle click and drag on start screen
-            startScreen.addEventListener('mousedown', function(e) {
-                isDragging = false;
-                dragStart = { x: e.clientX, y: e.clientY };
-            });
-
-            startScreen.addEventListener('mousemove', function(e) {
-                if (dragStart) {
-                    const distance = Math.sqrt(
-                        Math.pow(e.clientX - dragStart.x, 2) +
-                        Math.pow(e.clientY - dragStart.y, 2)
-                    );
-                    if (distance > 10) {
-                        isDragging = true;
-                    }
-                }
-            });
-
-            startScreen.addEventListener('mouseup', function(e) {
-                if (isDragging) {
-                    enterMainView();
-                }
-                dragStart = null;
-                isDragging = false;
-            });
-
-            // Handle touch events for mobile
-            startScreen.addEventListener('touchstart', function(e) {
-                isDragging = false;
-                dragStart = { x: e.touches[0].clientX, y: e.touches[0].clientY };
-            });
-
-            startScreen.addEventListener('touchmove', function(e) {
-                if (dragStart) {
-                    const distance = Math.sqrt(
-                        Math.pow(e.touches[0].clientX - dragStart.x, 2) +
-                        Math.pow(e.touches[0].clientY - dragStart.y, 2)
-                    );
-                    if (distance > 10) {
-                        isDragging = true;
-                    }
-                }
-            });
-
-            startScreen.addEventListener('touchend', function(e) {
-                if (isDragging) {
-                    enterMainView();
-                }
-                dragStart = null;
-                isDragging = false;
-            });
+            // Handle click anywhere on start screen
+            startScreen.addEventListener('click', enterMainView);
 
             // Handle footer close button
             document.getElementById('footer-close').addEventListener('click', function() {
