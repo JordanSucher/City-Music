@@ -175,6 +175,7 @@
             border: 1px solid #555;
             border-radius: 3px;
             padding: 5px;
+            outline: none;
         }
 
         .venue-link {
@@ -187,6 +188,106 @@
         .venue-link:hover {
             color: #1ed760;
             text-decoration: underline;
+        }
+
+        .date-nav {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            display: none;
+            z-index: 1001;
+            gap: 8px;
+        }
+
+        .date-nav button {
+            background: rgba(42, 42, 42, 0.9);
+            border: 1px solid #555;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: normal;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            line-height: 40px;
+            font-family: monospace;
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            vertical-align: middle;
+        }
+
+        .date-nav button:hover {
+            background: #1db954;
+            border-color: #1db954;
+        }
+
+        .date-nav button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .date-nav button:disabled:hover {
+            background: rgba(42, 42, 42, 0.9);
+            border-color: #555;
+        }
+
+        .show-footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #2a2a2a;
+            border-top: 1px solid #555;
+            padding: 15px 20px;
+            z-index: 1000;
+            max-height: 40vh;
+            overflow-y: auto;
+            transform: translateY(100%);
+            transition: transform 0.3s ease-in-out;
+            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .show-footer.visible {
+            transform: translateY(0);
+        }
+
+        .footer-venue-name {
+            font-size: 18px;
+            font-weight: bold;
+            color: #1db954;
+            margin-bottom: 8px;
+        }
+
+        .footer-show-date {
+            font-weight: 600;
+            color: #ff6b6b;
+            margin-bottom: 10px;
+        }
+
+        .footer-bands {
+            margin-top: 10px;
+        }
+
+        .footer-close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: #888;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 5px;
+            line-height: 1;
+        }
+
+        .footer-close:hover {
+            color: #fff;
         }
 
         /* Mobile optimizations */
@@ -206,6 +307,7 @@
             .date-selector select {
                 padding: 6px;
                 font-size: 14px;
+                outline: none;
             }
 
             .band {
@@ -220,6 +322,15 @@
             .venue-name {
                 font-size: 16px;
                 line-height: 1.4;
+            }
+
+            .show-footer {
+                padding: 15px;
+                max-height: 50vh;
+            }
+
+            .date-nav {
+                bottom: 20px;
             }
         }
     </style>
@@ -237,8 +348,19 @@
         <select id="date-select">
         </select>
     </div>
+    <div id="date-nav" class="date-nav" style="display: none;">
+        <button id="prev-date" title="Previous day">←</button>
+        <button id="next-date" title="Next day">→</button>
+    </div>
     <div id="map" style="display: none;"></div>
     <div id="loading" class="loading" style="display: none;">Loading venues...</div>
+
+    <div id="show-footer" class="show-footer">
+        <button id="footer-close" class="footer-close">×</button>
+        <div id="footer-content">
+            <!-- Show details will be loaded here -->
+        </div>
+    </div>
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
@@ -267,6 +389,11 @@
                 maxZoom: 19
             }).addTo(map);
 
+            // Add double-tap drag zoom for mobile
+            if (isMobile()) {
+                addDoubleTapDragZoom();
+            }
+
             // Close popups when clicking on map (mobile friendly)
             map.on('click', function() {
                 if (activeMarker) {
@@ -274,6 +401,57 @@
                     activeMarker = null;
                 }
                 map.closePopup();
+            });
+        }
+
+        // Add Google Maps-style double-tap drag zoom functionality
+        function addDoubleTapDragZoom() {
+            let lastTap = 0;
+            let isDoubleTapDragging = false;
+            let startY = 0;
+            let startZoom = 0;
+
+            const mapContainer = map.getContainer();
+
+            mapContainer.addEventListener('touchstart', function(e) {
+                const currentTime = new Date().getTime();
+                const tapLength = currentTime - lastTap;
+
+                if (tapLength < 500 && tapLength > 0 && e.touches.length === 1) {
+                    // Double tap detected
+                    e.preventDefault();
+                    isDoubleTapDragging = true;
+                    startY = e.touches[0].clientY;
+                    startZoom = map.getZoom();
+                    mapContainer.style.touchAction = 'none';
+                }
+                lastTap = currentTime;
+            });
+
+            mapContainer.addEventListener('touchmove', function(e) {
+                if (isDoubleTapDragging && e.touches.length === 1) {
+                    e.preventDefault();
+
+                    const currentY = e.touches[0].clientY;
+                    const deltaY = startY - currentY;
+                    const zoomDelta = deltaY / 100; // Adjust sensitivity
+
+                    const newZoom = Math.max(1, Math.min(18, startZoom + zoomDelta));
+                    map.setZoom(newZoom);
+                }
+            });
+
+            mapContainer.addEventListener('touchend', function(e) {
+                if (isDoubleTapDragging) {
+                    e.preventDefault();
+                    isDoubleTapDragging = false;
+                    mapContainer.style.touchAction = '';
+                }
+            });
+
+            mapContainer.addEventListener('touchcancel', function(e) {
+                isDoubleTapDragging = false;
+                mapContainer.style.touchAction = '';
             });
         }
 
@@ -335,33 +513,6 @@
 
                 const marker = L.marker([lat, lng], { icon: defaultIcon }).addTo(map);
 
-                // Create popup content
-                const popupContent = createPopupContent(venue);
-                marker.bindPopup(popupContent, {
-                    className: 'venue-popup',
-                    maxWidth: 320,
-                    autoPanPadding: [5, 5],
-                    offset: [0, -5]
-                });
-
-                // Show popup on hover and highlight marker (desktop)
-                marker.on('mouseover', function() {
-                    // Reset previous active marker
-                    if (activeMarker && activeMarker !== this) {
-                        activeMarker.setIcon(defaultIcon);
-                    }
-
-                    // Set this as active marker and highlight
-                    activeMarker = this;
-                    this.setIcon(highlightedIcon);
-                    this.openPopup();
-
-                    // Load show details if not already loaded
-                    if (venue.show && venue.show.id) {
-                        loadShowDetails(venue.show.id, venue.venue_id);
-                    }
-                });
-
                 // Handle click for mobile and desktop
                 marker.on('click', function(e) {
                     // Prevent map click event
@@ -375,20 +526,9 @@
                     // Set this as active marker and highlight
                     activeMarker = this;
                     this.setIcon(highlightedIcon);
-                    this.openPopup();
 
-                    // Load show details if not already loaded
-                    if (venue.show && venue.show.id) {
-                        loadShowDetails(venue.show.id, venue.venue_id);
-                    }
-                });
-
-                // Reset marker when popup closes
-                marker.on('popupclose', function() {
-                    this.setIcon(defaultIcon);
-                    if (activeMarker === this) {
-                        activeMarker = null;
-                    }
+                    // Show venue details in footer
+                    showVenueInFooter(venue);
                 });
 
             } catch (error) {
@@ -637,8 +777,54 @@
             dateSelect.addEventListener('change', function() {
                 selectedDateString = this.value; // Keep as string (YYYY-MM-DD)
                 console.log('Date picker changed to:', selectedDateString);
+                updateNavButtons();
                 loadVenues(); // Reload venues for selected date
             });
+
+            // Initialize navigation buttons
+            initDateNavigation();
+        }
+
+        // Initialize date navigation buttons
+        function initDateNavigation() {
+            const prevButton = document.getElementById('prev-date');
+            const nextButton = document.getElementById('next-date');
+            const dateSelect = document.getElementById('date-select');
+
+            prevButton.addEventListener('click', function() {
+                const currentIndex = dateSelect.selectedIndex;
+                if (currentIndex > 0) {
+                    dateSelect.selectedIndex = currentIndex - 1;
+                    selectedDateString = dateSelect.value;
+                    console.log('Prev button - date changed to:', selectedDateString);
+                    updateNavButtons();
+                    loadVenues();
+                }
+            });
+
+            nextButton.addEventListener('click', function() {
+                const currentIndex = dateSelect.selectedIndex;
+                if (currentIndex < dateSelect.options.length - 1) {
+                    dateSelect.selectedIndex = currentIndex + 1;
+                    selectedDateString = dateSelect.value;
+                    console.log('Next button - date changed to:', selectedDateString);
+                    updateNavButtons();
+                    loadVenues();
+                }
+            });
+
+            updateNavButtons();
+        }
+
+        // Update navigation button states
+        function updateNavButtons() {
+            const prevButton = document.getElementById('prev-date');
+            const nextButton = document.getElementById('next-date');
+            const dateSelect = document.getElementById('date-select');
+            const currentIndex = dateSelect.selectedIndex;
+
+            prevButton.disabled = currentIndex === 0;
+            nextButton.disabled = currentIndex === dateSelect.options.length - 1;
         }
 
         // Initialize everything when page loads
@@ -651,6 +837,7 @@
                 document.getElementById('start-screen').style.display = 'none';
                 document.getElementById('map').style.display = 'block';
                 document.getElementById('date-selector').style.display = 'block';
+                document.getElementById('date-nav').style.display = 'flex';
 
                 // Initialize date selector, map and load venues
                 initDateSelector();
