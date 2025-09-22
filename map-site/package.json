@@ -10,7 +10,7 @@
   "dependencies": {
     "@libsql/client": "^0.15.15",
     "@prisma/adapter-libsql": "^6.16.2",
-    "@prisma/client": "^5.6.0",
+    "@prisma/client": "^6.16.2",
     "axios": "^1.6.0",
     "bottleneck": "^2.19.5",
     "dotenv": "^16.3.1",
@@ -19,7 +19,7 @@
     "qs": "^6.11.2"
   },
   "devDependencies": {
-    "prisma": "^5.6.0"
+    "prisma": "^6.16.2"
   },
   "engines": {
     "node": ">=18.0.0"
