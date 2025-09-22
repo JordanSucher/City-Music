@@ -118,7 +118,9 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            background: rgba(26, 26, 26, 0.8);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -128,33 +130,73 @@
         .start-content {
             text-align: center;
             color: white;
+            position: relative;
         }
 
-        .start-content h1 {
-            font-size: 3em;
-            margin-bottom: 0.5em;
+        .direction-rose {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 30px;
+            position: relative;
+            border: 2px solid #1db954;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(29, 185, 84, 0.1);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        .direction-rose::before {
+            content: '⊕';
+            font-size: 48px;
             color: #1db954;
+            font-weight: bold;
         }
 
-        .start-content p {
-            font-size: 1.2em;
+        .direction-rose::after {
+            content: 'N\A\AW  E\A\AS';
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            bottom: -8px;
+            left: -8px;
+            font-size: 12px;
+            color: #888;
+            white-space: pre;
+            line-height: 1.2;
+        }
+
+        @keyframes glow {
+            from { box-shadow: 0 0 10px rgba(29, 185, 84, 0.3); }
+            to { box-shadow: 0 0 20px rgba(29, 185, 84, 0.6); }
+        }
+
+        .start-instruction {
+            font-size: 1.1em;
             margin-bottom: 2em;
-            color: #aaa;
+            color: #ccc;
+            font-weight: 300;
         }
 
         .start-button {
             background: #1db954;
             color: white;
             border: none;
-            padding: 15px 30px;
-            font-size: 1.1em;
-            border-radius: 25px;
+            padding: 12px 24px;
+            font-size: 0.9em;
+            border-radius: 20px;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 500;
         }
 
         .start-button:hover {
             background: #1ed760;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(29, 185, 84, 0.3);
         }
 
         .date-selector {
@@ -344,9 +386,9 @@
 <body>
     <div id="start-screen" class="start-screen">
         <div class="start-content">
-            <h1>🗺️ NYC Music Venues</h1>
-            <p>Interactive map with music previews</p>
-            <button id="start-button" class="start-button">🎵 Start Exploring</button>
+            <div class="direction-rose"></div>
+            <div class="start-instruction">Click and drag to explore</div>
+            <button id="start-button" class="start-button">Start</button>
         </div>
     </div>
     <div id="date-selector" class="date-selector" style="display: none;">
@@ -358,7 +400,7 @@
         <button id="prev-date" title="Previous day">←</button>
         <button id="next-date" title="Next day">→</button>
     </div>
-    <div id="map" style="display: none;"></div>
+    <div id="map"></div>
     <div id="loading" class="loading" style="display: none;">Loading venues...</div>
 
     <div id="show-footer" class="show-footer">
@@ -862,20 +904,19 @@
 
         // Initialize everything when page loads
         document.addEventListener('DOMContentLoaded', function() {
+            // Initialize map immediately for blur effect
+            initMap();
+            initDateSelector();
+            loadVenues();
+
             // Handle start button click
             document.getElementById('start-button').addEventListener('click', function() {
                 audioEnabled = true;
 
-                // Hide start screen
+                // Hide start screen and show controls
                 document.getElementById('start-screen').style.display = 'none';
-                document.getElementById('map').style.display = 'block';
                 document.getElementById('date-selector').style.display = 'block';
                 document.getElementById('date-nav').style.display = 'flex';
-
-                // Initialize date selector, map and load venues
-                initDateSelector();
-                initMap();
-                loadVenues();
             });
 
             // Handle footer close button
