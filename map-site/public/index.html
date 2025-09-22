@@ -394,13 +394,13 @@
                 addDoubleTapDragZoom();
             }
 
-            // Close popups when clicking on map (mobile friendly)
+            // Close footer when clicking on map (mobile friendly)
             map.on('click', function() {
                 if (activeMarker) {
                     activeMarker.setIcon(new L.Icon.Default());
                     activeMarker = null;
                 }
-                map.closePopup();
+                hideFooter();
             });
         }
 
